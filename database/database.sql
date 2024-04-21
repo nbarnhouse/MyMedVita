@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" bigint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE,
-	"username" text NOT NULL UNIQUE,
+	"username" text UNIQUE,
 	"password" text NOT NULL,
-	"access_level" bigint NOT NULL DEFAULT '30',
+	"access_level" text NOT NULL DEFAULT 'user',
 	"phone" text,
 	"first_name" text,
 	"last_name" text,
@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS "user_searches" (
 	"id" bigint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE,
 	"user_id" bigint NOT NULL,
 	"CPT_Code" bigint NOT NULL,
-	"serach_zip" text NOT NULL,
+	"search_zip" text NOT NULL,
+    "search_distance" bigint NOT NULL,
 	PRIMARY KEY ("id")
 );
 
