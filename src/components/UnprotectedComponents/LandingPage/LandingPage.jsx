@@ -1,7 +1,7 @@
 // Import 3rd Party Libraries
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './LandingPage.css';
+import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 // CUSTOM COMPONENTS
 
@@ -10,6 +10,7 @@ function LandingPage() {
 
   return (
     <>
+      <NavBar />
       <h1>Landing Page</h1>
     </>
   );
