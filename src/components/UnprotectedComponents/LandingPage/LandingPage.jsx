@@ -13,6 +13,7 @@ function LandingPage() {
       <NavBar />
       <div>
         <h1>Landing Page</h1>
+        <p> test</p>
       </div>
     </>
   );
