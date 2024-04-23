@@ -1,3 +1,5 @@
+//page was set up just to test registration routes, feel free to change
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -22,7 +24,6 @@ function RegisterForm() {
 
     const registerUser = (event) => {
         event.preventDefault();
-
         if (password === confirmPassword) {
             dispatch({
             type: 'REGISTER',

@@ -1,3 +1,6 @@
+
+//Page was set up just to test routes, feel free to change set up
+
 import React, {useState} from 'react';
 import LogOutButton from '../../../AccessoryComponents/LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
@@ -7,6 +10,7 @@ import { Button } from '@mui/material';
 function UserEditPage() {
     const user = useSelector((store) => store.user);
 
+    //setting initial values
     const [updating, setUpdating] = useState(false);
     const [firstNameValue, setFirstNameValue] = useState(user.first_name);
     const [lastNameValue, setLastNameValue] = useState(user.last_name);
