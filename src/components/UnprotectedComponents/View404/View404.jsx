@@ -1,12 +1,12 @@
 // Import 3rd Party Libraries
 import React from 'react';
 
-function AboutPage() {
+function View404() {
   return (
     <div>
-      <p>About Page</p>
+      <p>404 Page</p>
     </div>
   );
 }
 
-export default AboutPage;
+export default View404;
