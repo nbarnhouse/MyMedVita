@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 //to import react-leflet use npm install react-leaflet
 
@@ -7,6 +8,7 @@ import './SearchResults.css';
 
 export default function SearchResults() {
   const [zip, setZip] = useState('');
+  const dispatch = useDispatch();
 
   const markers = [
     { geocode: [32.7767, -96.797] },
@@ -15,8 +17,28 @@ export default function SearchResults() {
 
   const handleZipSearch = (event) => {
     event.preventDefault();
+    if (zip.length !== 5 || isNaN(zip)) {
+      alert('Please enter a valid 5-digit zip code.');
+
+      setZip('');
+      return;
+    }
+
+    dispatch({
+      type: 'CONVERT_ZIP',
+      payload: {
+        zip: zip,
+      },
+    });
+
     console.log(`Zip Code: ${zip}`);
     setZip('');
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleZipSearch(event);
+    }
   };
 
   return (
@@ -32,6 +54,7 @@ export default function SearchResults() {
             placeholder="Zip Code"
             value={zip}
             onChange={(event) => setZip(event.target.value)}
+            onKeyDown={handleKeyDown}
           ></input>
           <button>Submit</button>
         </form>
