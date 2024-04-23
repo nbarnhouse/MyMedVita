@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import doctorImage from './images/multipleDoctors.avif';
 
 // Import Material UI
 import { Button } from '@mui/material';
@@ -17,8 +18,8 @@ function LandingPage() {
   return (
     <>
       <NavBar />
-      <div className="main-content-container">
-        <div className="main-left-container">
+      <div className="landing-content-container">
+        <div className="landing-left-container">
           <h1 className="landing-header">MyMedVita</h1>
           <p className="landing-paragraph">
             Your Compass for Healthcare Prices
@@ -43,7 +44,13 @@ function LandingPage() {
             </Button>
           </div>
         </div>
-        <div className="main-right-container"></div>
+        <div className="landing-right-container">
+          <img
+            src={doctorImage}
+            alt="picture of multiple doctors standing in a circle"
+            className="landing-image"
+          />
+        </div>
       </div>
     </>
   );
