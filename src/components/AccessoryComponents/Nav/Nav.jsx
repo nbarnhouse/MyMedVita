@@ -6,9 +6,6 @@ import { useSelector } from 'react-redux';
 // Import Material UI
 import { AppBar, Toolbar, Button, Typography } from '@mui/material';
 
-// Import Custom CSS
-import './Nav.css';
-
 // Logo Image
 import logoImage from './images/logo_heart_only_MMV.png';
 
