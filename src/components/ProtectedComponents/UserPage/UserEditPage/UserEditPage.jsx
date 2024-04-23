@@ -27,11 +27,16 @@ function UserEditPage() {
     async function updateUserInfo() {
         try {
         const updatedUserInfo = {
+            first_name: firstNameValue,
+            last_name: lastNameValue,
+            phone: phoneValue,
+            dob: dobValue,
+            gender: genderValue,
             email: emailValue,
-            streetAddress: streetAddressValue,
+            street_address: streetAddressValue,
             city: cityValue,
             state: stateValue,
-            zipCode: zipCodeValue,
+            zip: zipCodeValue,
         };
 
         await axios.put('/api/user/update', updatedUserInfo);
@@ -70,8 +75,8 @@ function UserEditPage() {
         )}
         {updating &&(
             <>
-            <p>Email: <input value={emailValue} onChange={(e) => setEmailValue(e.target.value)}></input></p>
-            <p>Street Address:<input value={streetAddressValue} onChange={(e) => setStreetAddressValue(e.target.value)}></input></p>
+                <p>Email: <input value={emailValue} onChange={(e) => setEmailValue(e.target.value)}></input></p>
+                <p>Street Address:<input value={streetAddressValue} onChange={(e) => setStreetAddressValue(e.target.value)}></input></p>
                 <p>City:<input value={cityValue} onChange={(e) => setCityValue(e.target.value)}></input></p>
                 <p>State:<input value={stateValue} onChange={(e) => setStateValue(e.target.value)}></input></p>
                 <p>Zip:<input value={zipCodeValue} onChange={(e) => setZipCodeValue(e.target.value)}></input></p>
