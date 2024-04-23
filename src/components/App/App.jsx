@@ -1,3 +1,4 @@
+// Import 3rd Party Libraries
 import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
@@ -5,23 +6,29 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import SearchResults from '../SearchResults/SearchResults';
 import LocationFindTest from '../LocationFindTest/LocationFindTest';
 
+// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
+// Import Unprotected Components
+import AboutPage from '../UnprotectedComponents/AboutPage/AboutPage';
+import CategoryPage from '../UnprotectedComponents/CategoryPage/CategoryPage';
+import ContactPage from '../UnprotectedComponents/ContactPage/ContactPage';
+import FeaturesPage from '../UnprotectedComponents/FeaturesPage/FeaturesPage';
+import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
+import LoginPage from '../UnprotectedComponents/LoginPage/LoginPage';
+import MarketplacePage from '../UnprotectedComponents/MarketplacePage/MarketplacePage';
+import MarketPlaceSearchResults from '../UnprotectedComponents/MarketplaceSearchResults/MarketplaceSearchResults';
+import ProviderDataPage from '../UnprotectedComponents/ProviderDataPage/ProviderDataPage';
+import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
+import View404 from '../UnprotectedComponents/View404/View404';
+
+// Import Protected Components
+import UserPage from '../ProtectedComponents/UserPage/UserPage';
+
+// Custom CSS
 import './App.css';
 
 function App() {
@@ -36,18 +43,26 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
-
-          {/* Visiting localhost:5173/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route exact path="/marketplace">
+            <MarketplacePage />
+          </Route>
+          <Route exact path="/features">
+            <FeaturesPage />
+          </Route>
+          <Route exact path="/about">
             <AboutPage />
+          </Route>
+          <Route exact path="/contact">
+            <ContactPage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
           </Route>
 
           <Route
@@ -63,7 +78,7 @@ function App() {
             Visiting localhost:5173/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
@@ -77,7 +92,7 @@ function App() {
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <Route exact path="/login">
             {user.id ? (
@@ -114,10 +129,9 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <View404 />
           </Route>
         </Switch>
-        <Footer />
       </div>
     </Router>
   );
