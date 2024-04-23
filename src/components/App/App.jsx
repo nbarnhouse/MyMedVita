@@ -11,10 +11,17 @@ import { useDispatch, useSelector } from 'react-redux';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 // Import Unprotected Components
-import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
 import AboutPage from '../UnprotectedComponents/AboutPage/AboutPage';
-import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
+import CategoryPage from '../UnprotectedComponents/CategoryPage/CategoryPage';
+import ContactPage from '../UnprotectedComponents/ContactPage/ContactPage';
+import FeaturesPage from '../UnprotectedComponents/FeaturesPage/FeaturesPage';
+import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
 import LoginPage from '../UnprotectedComponents/LoginPage/LoginPage';
+import MarketplacePage from '../UnprotectedComponents/MarketplacePage/MarketplacePage';
+import MarketPlaceSearchResults from '../UnprotectedComponents/MarketplaceSearchResults/MarketplaceSearchResults';
+import ProviderDataPage from '../UnprotectedComponents/ProviderDataPage/ProviderDataPage';
+import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
+import View404 from '../UnprotectedComponents/View404/View404';
 
 // Import Protected Components
 import UserPage from '../ProtectedComponents/UserPage/UserPage';
@@ -108,7 +115,7 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <View404 />
           </Route>
         </Switch>
       </div>
