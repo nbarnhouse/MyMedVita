@@ -11,7 +11,9 @@ function LandingPage() {
   return (
     <>
       <NavBar />
-      <h1>Landing Page</h1>
+      <div>
+        <h1>Landing Page</h1>
+      </div>
     </>
   );
 }
