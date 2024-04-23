@@ -29,7 +29,7 @@ router.post('/register', (req, res, next) => {
   const state = req.body.state;
   const zip = req.body.zip;
 
-  const queryText = `INSERT INTO "users" (username, password, phone,
+  const queryText = `INSERT INTO "user" (username, password, phone,
                     first_name, last_name, email, dob, gender,
                     street_address, city, state, zip)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id`;
