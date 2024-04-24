@@ -1,0 +1,28 @@
+/* Main Container */
+.login-content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Left Logo Container */
+.login-left-container,
+.login-right-container {
+  margin: 0;
+  padding: 0;
+}
+
+.login-left-container {
+  flex: 1;
+  background-color: #782cf6;
+}
+
+.login-left-container img {
+  height: auto;
+}
+
+.login-right-container {
+  flex: 1;
+}

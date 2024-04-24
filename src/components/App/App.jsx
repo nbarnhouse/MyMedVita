@@ -60,9 +60,6 @@ function App() {
           <Route exact path="/contact">
             <ContactPage />
           </Route>
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}
           {/* For protected routes, the view could show one of several things on the same route.
@@ -89,7 +86,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/marketplace" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
