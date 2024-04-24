@@ -3,15 +3,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 80px;
   width: 80%;
   height: 100%;
-  margin: 0 auto;
+  margin: 80px auto;
 }
 
 /* Left and Right Containers */
+.landing-left-container {
+  text-align: center;
+}
+
+/* Landing Page Headers and  */
+.landing-header {
+  font-size: 60px;
+}
+
+.landing-paragraph {
+  font-size: 30px;
+}
 
 /* Image */
 .landing-image {
-  width: 300px;
+  width: 500px;
   height: auto;
+  border-radius: 20px;
 }

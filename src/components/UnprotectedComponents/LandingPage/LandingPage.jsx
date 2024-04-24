@@ -28,13 +28,20 @@ function LandingPage() {
           <div className="main-button-container">
             <Button
               variant="outlined"
-              sx={{ backgroundColor: '#782cf6', color: 'white' }}
+              sx={{
+                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
+                backgroundColor: '#782cf6',
+                color: 'white',
+              }}
+              size="large"
             >
               Shop
             </Button>
             <Button
               variant="outlined"
+              size="large"
               sx={{
+                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
                 backgroundColor: '#782cf6',
                 color: 'white',
                 margin: '10px 10px',
