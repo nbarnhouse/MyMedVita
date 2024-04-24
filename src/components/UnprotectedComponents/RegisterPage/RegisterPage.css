@@ -12,6 +12,11 @@
   border-radius: 15px;
 }
 
+.register-page-container img {
+  max-width: 150px;
+  height: auto;
+}
+
 .register-form-container {
   width: 100%;
   max-width: 900px;

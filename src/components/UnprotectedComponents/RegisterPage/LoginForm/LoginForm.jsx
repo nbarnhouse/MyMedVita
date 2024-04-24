@@ -149,8 +149,7 @@ function LoginForm() {
             variant="h5"
             style={{
               textAlign: 'center',
-              fontSize: '30px',
-              marginBottom: '5px',
+              fontSize: '24px',
               marginTop: '0px',
             }}
           >

@@ -29,29 +29,12 @@ function RegisterView() {
         <Button
           color="inherit"
           component={RouterLink}
-          to="/home"
+          to="/"
           className="login-logo-button"
         >
-          <img
-            src={purpleLogo}
-            alt="Logo"
-            style={{
-              maxWidth: '100px',
-              maxHeight: '100%',
-            }}
-          />
+          <img src={purpleLogo} alt="Logo" />
         </Button>
         <div className="register-form-container">
-          <Typography
-            variant="h6"
-            style={{
-              textAlign: 'center',
-              fontSize: '30px',
-              fontWeight: 'bolder',
-            }}
-          >
-            Welcome!
-          </Typography>
           <Typography
             variant="h5"
             style={{
