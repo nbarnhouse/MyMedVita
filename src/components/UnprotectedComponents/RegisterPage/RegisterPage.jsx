@@ -1,5 +1,5 @@
 // Import 3rd Party Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 // Import Custom Components
@@ -12,25 +12,19 @@ import { Button, Typography } from '@mui/material';
 import './RegisterPage.css';
 
 function RegisterView() {
+  useEffect(() => {
+    // Change the background color when the component mounts
+    document.body.style.backgroundColor = '#782cf6';
+
+    // Revert the background color back when the component unmounts
+    return () => {
+      document.body.style.backgroundColor = null; // Revert back to original or default
+    };
+  }, []);
+
   return (
     <>
       <div className="register-page-container">
-        <Button
-          color="inherit"
-          component={RouterLink}
-          to="/home"
-          className="login-logo-button"
-        >
-          {/* <img
-            src={logoImage}
-            alt="Logo"
-            style={{
-              maxWidth: '100px',
-              maxHeight: '100%',
-              margin: '3rem auto',
-            }}
-          /> */}
-        </Button>
         <div className="register-form-container">
           <Typography
             variant="h6"

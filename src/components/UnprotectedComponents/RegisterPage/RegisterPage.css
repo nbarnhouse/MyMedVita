@@ -1,5 +1,5 @@
 .register-page-container {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white;
   width: 80%;
   height: 80vh;
   display: flex;
@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   margin: 3rem auto;
-  box-shadow: 10px 10px 20px rgba(255, 255, 255, 0.55);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   padding: 2rem;
   border-radius: 15px;
 }
