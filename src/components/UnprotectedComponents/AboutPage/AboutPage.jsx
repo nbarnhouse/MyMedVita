@@ -3,14 +3,17 @@ import React from 'react';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import './AboutPage.css';
 
 function AboutPage() {
   return (
     <div>
       <NavBar />
-      <div>
-        <h1>About</h1>
-        <img src="" />
+      <div className="AboutPageMainDiv">
+        <div>
+          <h1>About</h1>
+          <img src="" />
+        </div>
         {/* Div for Founders */}
         <div>
           <h2>Founders</h2>
