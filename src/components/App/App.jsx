@@ -61,6 +61,14 @@ function App() {
             <ContactPage />
           </Route>
 
+          <Route exact path="/search">
+            <MarketplacePage />
+          </Route>
+
+          <Route exact path="/results">
+            <MarketPlaceSearchResults />
+          </Route>
+
           {/* -----------------------------------TESTING----------------------------------- */}
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:5173/user will show the UserPage if the user is logged in.
@@ -93,7 +101,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/registration">
+          <Route exact path="/register">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page

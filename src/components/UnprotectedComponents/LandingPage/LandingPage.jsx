@@ -62,8 +62,13 @@ function LandingPage() {
             className="landing-image"
           />
         </div>
-      </div>
-    </>
+
+        </div>
+        </>
+
+
+
+
   );
 }
 
