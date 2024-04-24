@@ -1,6 +1,6 @@
 // Import 3rd Party Libraries
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
@@ -27,6 +27,8 @@ function LandingPage() {
           <p className="landing-paragraph">Shop. Locate. Review. Contact</p>
           <div className="main-button-container">
             <Button
+              component={RouterLink}
+              to="/marketplace"
               variant="outlined"
               sx={{
                 '&:hover': { backgroundColor: 'white', color: '#782cf6' },
@@ -38,6 +40,8 @@ function LandingPage() {
               Shop
             </Button>
             <Button
+              component={RouterLink}
+              to="/features"
               variant="outlined"
               size="large"
               sx={{
