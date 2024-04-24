@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import LocationFindTest from '../LocationFindTest/LocationFindTest';
+
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 // Import Unprotected Components
@@ -56,6 +58,7 @@ function App() {
           <Route exact path="/about">
             <AboutPage />
           </Route>
+<<<<<<< Updated upstream
           <Route exact path="/contact">
             <ContactPage />
           </Route>
@@ -63,6 +66,28 @@ function App() {
             <LoginPage />
           </Route>
 
+=======
+          {/* -----------------------------------TESTING----------------------------------- */}
+>>>>>>> Stashed changes
+          <Route
+            // TESTING ROUTES FOR PAGE FEATURES
+            // shows SearchResult Page at all times (logged in or not)
+            exact
+            path="/search"
+          >
+            <SearchResults />
+          </Route>
+
+          <Route
+            // TESTING ROUTES FOR PAGE FEATURES
+            // shows SearchResult Page at all times (logged in or not)
+            exact
+            path="/location"
+          >
+            <LocationFindTest />
+          </Route>
+
+          {/* -----------------------------------TESTING----------------------------------- */}
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:5173/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
