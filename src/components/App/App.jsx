@@ -8,8 +8,6 @@ import {
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import LocationFindTest from '../LocationFindTest/LocationFindTest';
-
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 // Import Unprotected Components
@@ -58,33 +56,11 @@ function App() {
           <Route exact path="/about">
             <AboutPage />
           </Route>
-<<<<<<< Updated upstream
           <Route exact path="/contact">
             <ContactPage />
           </Route>
           <Route exact path="/login">
             <LoginPage />
-          </Route>
-
-=======
-          {/* -----------------------------------TESTING----------------------------------- */}
->>>>>>> Stashed changes
-          <Route
-            // TESTING ROUTES FOR PAGE FEATURES
-            // shows SearchResult Page at all times (logged in or not)
-            exact
-            path="/search"
-          >
-            <SearchResults />
-          </Route>
-
-          <Route
-            // TESTING ROUTES FOR PAGE FEATURES
-            // shows SearchResult Page at all times (logged in or not)
-            exact
-            path="/location"
-          >
-            <LocationFindTest />
           </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}
