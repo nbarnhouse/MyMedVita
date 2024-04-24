@@ -23,6 +23,7 @@ import MarketplacePage from '../UnprotectedComponents/MarketplacePage/Marketplac
 import MarketPlaceSearchResults from '../UnprotectedComponents/MarketplaceSearchResults/MarketplaceSearchResults';
 import ProviderDataPage from '../UnprotectedComponents/ProviderDataPage/ProviderDataPage';
 import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
+import UserEditPage from '../ProtectedComponents/UserPage/UserEditPage/UserEditPage';
 import View404 from '../UnprotectedComponents/View404/View404';
 
 // Import Protected Components
@@ -135,6 +136,17 @@ function App() {
               // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
+            ) : (
+              // Otherwise, show the Landing page
+              <LandingPage />
+            )}
+          </Route>
+
+          <Route exact path="/userEdit">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <UserEditPage />
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />
