@@ -33,11 +33,6 @@
   border-bottom-left-radius: 30px;
 }
 
-/* Right Container */
-.contact-right-container {
-  /* Styles for the right container, ensure it complements the left */
-}
-
 .contact-button-container {
   display: flex;
   justify-content: center;
