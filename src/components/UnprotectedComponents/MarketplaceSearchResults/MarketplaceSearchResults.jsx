@@ -59,15 +59,29 @@ export default function MarketplaceSearchResults() {
       <div className="container">
         <div className="result-container">
           <h1>MyMedVita Search Results</h1>
-          <h4>Search Parameters: MRI - , 74011, 150 Miles</h4>
+          <h4>Search Parameters: MRI - , 74011, No limit on Miles</h4>
 
           <p>
             NOTE: setting zip as center on map. Test markers are: [36.1539,
             -95.9927] and [33.6609, -95.5555]
           </p>
 
-          <h4>Provider Price Distance</h4>
-          <p>Data Here</p>
+          <table className="centered-table">
+            <thead>
+              <tr>
+                <th>Coordinate</th>
+                <th>Distance (miles)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {points.map((point, index) => (
+                <tr key={index}>
+                  <td>{point.join(', ')}</td>
+                  <td>{distances[index].toFixed(0)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
           <button onClick={handleBack}>Back</button>
         </div>

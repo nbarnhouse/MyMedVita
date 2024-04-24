@@ -10,3 +10,7 @@
   flex-direction: column;
   text-align: center;
 }
+
+.centered-table {
+  margin: 0 auto;
+}
