@@ -39,3 +39,9 @@
   align-items: center;
   margin-top: 20px;
 }
+
+/* Follow Us Container */
+.contact-follow-header {
+  text-align: center;
+  font-size: 30px;
+}

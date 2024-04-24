@@ -7,6 +7,9 @@ import doctorImage from './images/doctor_phone.avif';
 
 // Import Material UI and Custom CSS
 import { TextField, Button, Grid, Typography, Snackbar } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import './ContactPage.css';
 
 function ContactPage() {
@@ -139,6 +142,14 @@ function ContactPage() {
               </Button>
             </div>
           </form>
+        </div>
+      </div>
+      <div className="contact-follow-container">
+        <h2 className="contact-follow-header">Follow Us</h2>
+        <div className="contact-follow-icon-container">
+          <FacebookIcon />
+          <XIcon />
+          <YouTubeIcon />
         </div>
       </div>
     </>
