@@ -96,7 +96,7 @@ ALTER TABLE "user" ADD "provider_lat" VARCHAR(255);
 ALTER TABLE "user" ADD "provider_long" VARCHAR(255);
 
 --CSV Import Order
--- 1. service_types
+-- 1. service_types (import id column)
 -- 2. service_codes
 -- 3. insurance_providers
 -- 4. account_types
