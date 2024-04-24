@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 // Import Custom Components
 import LoginForm from './LoginForm/LoginForm';
+import purpleLogo from './Images/purple_logo.png';
 
 // Import MaterialUI CSS
 import { Button, Typography } from '@mui/material';
@@ -25,6 +26,21 @@ function RegisterView() {
   return (
     <>
       <div className="register-page-container">
+        <Button
+          color="inherit"
+          component={RouterLink}
+          to="/home"
+          className="login-logo-button"
+        >
+          <img
+            src={purpleLogo}
+            alt="Logo"
+            style={{
+              maxWidth: '100px',
+              maxHeight: '100%',
+            }}
+          />
+        </Button>
         <div className="register-form-container">
           <Typography
             variant="h6"
@@ -40,7 +56,7 @@ function RegisterView() {
             variant="h5"
             style={{
               textAlign: 'center',
-              fontSize: '15px',
+              fontSize: '12px',
               marginBottom: '20px',
             }}
           >
