@@ -37,6 +37,7 @@ function RegisterView() {
             style={{
               textAlign: 'center',
               fontSize: '30px',
+              fontWeight: 'bolder',
             }}
           >
             Welcome!

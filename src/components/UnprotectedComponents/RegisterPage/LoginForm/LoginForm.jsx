@@ -30,6 +30,11 @@ function LoginForm() {
     setNewUser({ ...newUser, [name]: value });
   };
 
+  // Handle the back click
+  const handleBackClick = () => {
+    history.push('/login');
+  };
+
   // Handle user form submission
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -198,6 +203,22 @@ function LoginForm() {
         </Grid>
       </Grid>
       <div className="register-button-container">
+        <Button
+          onClick={handleBackClick}
+          variant="contained"
+          size="large"
+          style={{
+            marginTop: '20px',
+            backgroundColor: '#782cf6',
+            color: 'white',
+          }}
+          sx={{
+            transition: 'transform 0.3s',
+            '&:hover': { transform: 'scale(1.1)' },
+          }}
+        >
+          Back
+        </Button>
         <Button
           type="submit"
           variant="contained"
