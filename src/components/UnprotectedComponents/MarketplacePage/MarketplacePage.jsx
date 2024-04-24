@@ -1,6 +1,7 @@
 // Import 3rd Party Libraries
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
@@ -16,8 +17,8 @@ function MarketplacePage() {
 
     try {
       // Make a request to your backend API to fetch suggestions
-      const response = await fetch(`/search?query=${query}`);
-      const data = await response.json();
+      const response = await axios.get(`/api/search/${query}`)
+      const data = await response.data;
       setSuggestions(data);
     } catch (error) {
       console.error('Error fetching suggestions:', error);

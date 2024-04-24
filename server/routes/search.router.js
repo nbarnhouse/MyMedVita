@@ -3,13 +3,13 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 //get codes and descriptions to suggest to user as they type in search bar
-router.get('/search', async (req,res) => {
+router.get('/:query', async (req,res) => {
     try{
-        const { query } =req.query; //get search query from request(what the user is typing)
+        const  query = req.params.query; //get search query from request(what the user is typing)
 
         const client = await pool.connect();
         const result = await client.query(
-            `SELECT * FROM service_codes WHERE primary_code ILIKE $1 OR description ILIKE $1`,
+            `SELECT * FROM service_codes WHERE CAST(primary_code AS TEXT) ILIKE $1 OR description ILIKE $1`,
             [`%${query}%`]
         );
         client.release();
@@ -21,3 +21,5 @@ router.get('/search', async (req,res) => {
             res.status(500).json({ error: 'Internal server error' });
         }   
 });
+
+module.exports = router;
