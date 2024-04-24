@@ -7,6 +7,7 @@ import ProcedureSearchBar from  './ProcedureSearchBar/ProcedureSearchBar';
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 function MarketplacePage() {
+  const history = useHistory();
 
   return (
     <>
