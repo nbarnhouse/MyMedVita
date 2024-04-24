@@ -1,0 +1,43 @@
+/* Main Container */
+.login-content-container {
+  height: 95%;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5% auto;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Left Logo Container */
+.login-left-container,
+.login-right-container {
+  margin: 0;
+  padding: 0;
+}
+
+.login-left-container {
+  flex: 1;
+  background-color: #782cf6;
+}
+
+.login-left-container img {
+  height: 60%;
+  width: auto;
+}
+
+/* Right Form Container */
+.login-right-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
