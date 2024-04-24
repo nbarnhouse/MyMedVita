@@ -62,9 +62,13 @@ function LandingPage() {
             className="landing-image"
           />
         </div>
+
         </div>
         </>
+
+
+
+
   );
 }
-
 export default LandingPage;
