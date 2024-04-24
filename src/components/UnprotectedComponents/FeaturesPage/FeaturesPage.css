@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+}
+
+.featurePageDiv {
+  text-align: center;
+  text-wrap: wrap;
+  margin-left: 800px;
+  margin-right: 750px;
+  padding-block: 75px;
+}
+.featurePageWords {
+  color: #782cf6;
+  text-wrap: wrap;
+}
+
+.featureDetailsDiv {
+  text-align: center;
+  text-wrap: wrap;
+  margin-left: 725px;
+  margin-right: 725px;
+}
+
+.featurePageIcons {
+  color: #782cf6;
+}
+.finePrint {
+  text-align: center;
+  text-wrap: wrap;
+  margin-left: 25px;
+}
