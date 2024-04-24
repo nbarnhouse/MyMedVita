@@ -84,8 +84,11 @@ ALTER TABLE "service_codes" ADD CONSTRAINT "service_codes_fk3" FOREIGN KEY ("typ
 ALTER TABLE "rates" ADD CONSTRAINT "rates_fk1" FOREIGN KEY ("CPT_CODE") REFERENCES "service_codes"("primary_code");
 ALTER TABLE "rates" ADD CONSTRAINT "rates_fk13" FOREIGN KEY ("insurer_id") REFERENCES "insurance_providers"("id");
 ALTER TABLE "user_searches" ADD CONSTRAINT "user_searches_fk1" FOREIGN KEY ("user_id") REFERENCES "user"("id");
+
 ALTER TABLE "user_searches" ADD CONSTRAINT "user_searches_fk2" FOREIGN KEY ("CPT_Code") REFERENCES "service_codes"("primary_code");
+
 ALTER TABLE "user_account_types" ADD CONSTRAINT "user_account_types_fk1" FOREIGN KEY ("user_id") REFERENCES "user"("id");
+
 ALTER TABLE "user_account_types" ADD CONSTRAINT "user_account_types_fk2" FOREIGN KEY ("type_id") REFERENCES "account_types"("id");
 
 -- Add Lat/Long to user table
