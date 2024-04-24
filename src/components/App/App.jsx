@@ -44,20 +44,23 @@ function App() {
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
-
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/"
-          >
+          <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
+          <Route exact path="/marketplace">
+            <MarketplacePage />
+          </Route>
+          <Route exact path="/features">
+            <FeaturesPage />
+          </Route>
+          <Route exact path="/about">
             <AboutPage />
+          </Route>
+          <Route exact path="/contact">
+            <ContactPage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
