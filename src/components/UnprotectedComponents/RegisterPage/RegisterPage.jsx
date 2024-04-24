@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 // Import Custom Components
-import LoginForm from './LoginForm/LoginForm';
+import RegisterForm from './RegisterForm/RegisterForm';
 import purpleLogo from './Images/purple_logo.png';
 
 // Import MaterialUI CSS
@@ -30,9 +30,11 @@ function RegisterView() {
           color="inherit"
           component={RouterLink}
           to="/"
-          className="login-logo-button"
+          className="register-logo-button"
         >
-          <img src={purpleLogo} alt="Logo" />
+          <h1>
+            Welcome to <span className="register-header-span">My</span>MedVita
+          </h1>
         </Button>
         <div className="register-form-container">
           <Typography
@@ -45,7 +47,7 @@ function RegisterView() {
           >
             All Fields Marked * Are Required
           </Typography>
-          <LoginForm />
+          <RegisterForm />
         </div>
       </div>
     </>
