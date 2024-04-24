@@ -23,7 +23,6 @@ import ProviderDataPage from '../UnprotectedComponents/ProviderDataPage/Provider
 import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
 import UserEditPage from '../ProtectedComponents/UserPage/UserEditPage/UserEditPage';
 import View404 from '../UnprotectedComponents/View404/View404';
-import SearchResults from '../SearchResults/SearchResults';
 
 // Import Protected Components
 import UserPage from '../ProtectedComponents/UserPage/UserPage';
@@ -66,7 +65,7 @@ function App() {
           </Route>
 
           <Route exact path="/results">
-            <SearchResults />
+            <MarketPlaceSearchResults />
           </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}
