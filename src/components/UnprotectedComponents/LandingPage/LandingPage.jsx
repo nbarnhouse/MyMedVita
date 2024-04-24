@@ -31,7 +31,11 @@ function LandingPage() {
               to="/marketplace"
               variant="outlined"
               sx={{
-                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
+                transition: 'transform 0.3s',
+                '&:hover': {
+                  backgroundColor: '#782cf6',
+                  transform: 'scale(1.1)',
+                },
                 backgroundColor: '#782cf6',
                 color: 'white',
               }}
@@ -45,7 +49,11 @@ function LandingPage() {
               variant="outlined"
               size="large"
               sx={{
-                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
+                transition: 'transform 0.3s',
+                '&:hover': {
+                  backgroundColor: '#782cf6',
+                  transform: 'scale(1.1)',
+                },
                 backgroundColor: '#782cf6',
                 color: 'white',
                 margin: '10px 10px',
