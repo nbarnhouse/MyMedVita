@@ -1,6 +1,46 @@
 /* Main Container */
 .contact-container {
+  width: 90%;
+  min-height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 3rem auto;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  overflow: hidden;
+}
+
+/* Left and Right Container */
+.contact-left-container,
+.contact-right-container {
+  flex: 1;
+}
+
+/* Left Container */
+.contact-left-container {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-left-container img {
+  object-fit: contain;
+  max-height: 100%;
+  width: 100%;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+/* Right Container */
+.contact-right-container {
+  /* Styles for the right container, ensure it complements the left */
+}
+
+.contact-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
