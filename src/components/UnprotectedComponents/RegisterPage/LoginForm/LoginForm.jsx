@@ -132,9 +132,13 @@ function LoginForm() {
             variant="outlined"
             value={newUser.dob}
             onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
             style={{ backgroundColor: 'white' }}
           />
         </Grid>
+        {/* Address */}
         <Grid item xs={12} sm={12}>
           <Typography
             variant="h5"
