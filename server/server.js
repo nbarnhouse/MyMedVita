@@ -10,6 +10,7 @@ const passport = require('./strategies/user.strategy');
 // Route Includes
 const userRouter = require('./routes/user.router');
 const geoRouter = require('./routes/geocode.router');
+const categoryRouter = require('./routes/category.router');
 
 // Express Middleware
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(passport.session());
 // Routes
 app.use('/api/user', userRouter);
 app.use('/api/location', geoRouter);
+app.use('/api/category', categoryRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {
