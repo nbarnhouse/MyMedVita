@@ -1,0 +1,36 @@
+.register-page-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 80%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem auto;
+  box-shadow: 10px 10px 20px rgba(255, 255, 255, 0.55);
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.register-form-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.MuiTextField-root,
+.MuiFormControl-root {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.fitness-level-select {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.register-button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
