@@ -1,10 +1,13 @@
 /* Main Container */
 .login-content-container {
+  height: 95%;
+  width: 95%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 5% auto;
   padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* Left Logo Container */
@@ -20,9 +23,21 @@
 }
 
 .login-left-container img {
-  height: auto;
+  height: 60%;
+  width: auto;
 }
 
+/* Right Form Container */
 .login-right-container {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

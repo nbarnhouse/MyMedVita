@@ -46,14 +46,14 @@ function LoginPage() {
           </Button>
         </div>
         <div className="login-right-container">
-          <form onSubmit={handleSubmit} style={{ width: '30%' }}>
+          <form onSubmit={handleSubmit} style={{ width: '60%' }}>
             <Grid container spacing={2} direction="column">
               <Grid item xs={12}>
                 <Typography
                   variant="h6"
                   style={{ textAlign: 'center', fontSize: '30px' }}
                 >
-                  Welcome Back
+                  Welcome Back!
                 </Typography>
               </Grid>
               <Grid item>
