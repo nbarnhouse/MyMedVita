@@ -12,13 +12,13 @@ import { Button, Typography } from '@mui/material';
 import './RegisterPage.css';
 
 function RegisterView() {
+  // Change the background color when the component mounts
   useEffect(() => {
-    // Change the background color when the component mounts
     document.body.style.backgroundColor = '#782cf6';
 
     // Revert the background color back when the component unmounts
     return () => {
-      document.body.style.backgroundColor = null; // Revert back to original or default
+      document.body.style.backgroundColor = null;
     };
   }, []);
 
