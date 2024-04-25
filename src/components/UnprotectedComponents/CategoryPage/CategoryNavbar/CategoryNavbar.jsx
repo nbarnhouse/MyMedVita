@@ -42,10 +42,10 @@ function CategoryNavbar() {
             selected={isActive(item.path)}
             sx={{
               color: 'black',
+              backgroundColor: isActive(item.path) ? '#782cf6' : 'transparent',
               marginLeft: '10px',
               marginTop: '5px',
-              '&:hover': { backgroundColor: '#782cf6' },
-              backgroundColor: isActive(item.path) ? '#782cf6' : 'transparent',
+              '&:hover': { backgroundColor: '#782cf6', color: 'white' },
             }}
           >
             <ListItemText primary={item.text} />
