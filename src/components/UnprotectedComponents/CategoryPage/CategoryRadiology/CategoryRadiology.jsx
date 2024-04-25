@@ -1,6 +1,5 @@
 // Import 3rd Party Libraries
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // CUSTOM COMPONENTS
@@ -23,12 +22,11 @@ function CategoryRadiology() {
     (store) => store.categoryReducer.radiologyReducer
   );
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_RADIOLOGY' });
-  });
+  }, [dispatch]);
 
   return (
     <div className="category-container">
@@ -36,7 +34,26 @@ function CategoryRadiology() {
       <div className="category-bottom-container">
         <CategoryNavbar />
         <div className="category-right-container">
-          <h1 className="category-header">CATEGORY RADIOLOGY</h1>
+          <h1 className="category-header">Radiology Codes</h1>
+          <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Primary Code</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {radiologyList &&
+                  radiologyList.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{item.primary_code}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>
