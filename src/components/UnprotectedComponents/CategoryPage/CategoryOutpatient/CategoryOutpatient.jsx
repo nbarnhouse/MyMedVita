@@ -30,7 +30,7 @@ function CategoryOutpatient() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_OUTPATIENT' });
-  });
+  }, [dispatch]);
 
   return (
     <div className="category-container">
@@ -39,6 +39,7 @@ function CategoryOutpatient() {
         <CategoryNavbar />
         <div className="category-right-container">
           <h1 className="category-header">CATEGORY OUTPATIENT</h1>
+          <p>{JSON.stringify(outpatientList)}</p>
         </div>
       </div>
     </div>
