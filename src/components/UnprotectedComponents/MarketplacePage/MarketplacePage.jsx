@@ -49,6 +49,7 @@ function MarketplacePage() {
       return;
     }
 
+    // Dispatch Data
     dispatch({
       type: 'SUBMIT_DISTANCE_DATA',
       payload: {
@@ -63,8 +64,19 @@ function MarketplacePage() {
     <>
       <NavBar />
       <div className="search-container">
-        <h1>MyMedVita Marketplace</h1>
-        <p>Click HERE for a CPT Reference Guide</p>
+        <Typography
+          variant="h3"
+          component="h1"
+          className="search-header"
+          sx={{ fontWeight: 'bold', marginTop: '3rem' }}
+        >
+          <span style={{ color: '#782cf6' }}>My</span>MedVita
+          <span style={{ verticalAlign: 'super', fontSize: '0.5em' }}>
+            ™
+          </span>{' '}
+          Marketplace
+        </Typography>
+        <p className="search-paragraph">Click HERE for a CPT Reference Guide</p>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} wrap="wrap">
             <Grid item xs={12}>
