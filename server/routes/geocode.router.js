@@ -6,7 +6,7 @@ const router = express.Router();
 
 const API_KEY = process.env.GEOCODIO_API_KEY;
 //test zip code
-const zip_code = 74011;
+const zip_code = 74008;
 
 //GET Geocode API Data
 router.get('/', (req, res) => {
