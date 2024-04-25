@@ -1,4 +1,5 @@
 // Import 3rd Party Libraries
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -18,7 +19,10 @@ import {
 } from '@mui/material';
 
 function CategoryOutpatient() {
-  const outpatientList = useSelector((store) => store.outpatient);
+  const outpatientList = useSelector(
+    (store) => store.categoryReducer.outpatientReducer
+  );
+  console.log('OUTPATIENT LIST: ', outpatientList);
   const history = useHistory();
 
   return (
