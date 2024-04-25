@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 // email message to 'support@myMedvita.com'
 // POST route emails support and returns status to client
 router.post('/', (req, res) => {
+  // construct message
   const messageOptions = {
     from: req.body.email,
     to: process.env.CONTACT_EMAIL,
@@ -25,16 +26,23 @@ router.post('/', (req, res) => {
     text: req.body.message,
   };
 
-  try {
-    console.log('Transporter - Service:', process.env.CONTACT_SERVICE);
-    console.log('Transporter - user:', process.env.CONTACT_USER);
-    console.log('Transporter - Service:', process.env.CONTACT_PASSWORD);
-    console.log('Transporter:', transporter.options);
-  } catch (err) {
-    console.error('Send');
-  }
+  // console.log('Transporter - Service:', process.env.CONTACT_SERVICE);
+  // console.log('Transporter - user:', process.env.CONTACT_USER);
+  // console.log('Transporter - Service:', process.env.CONTACT_PASSWORD);
+  // console.log('Transporter:', transporter.options);
+  // console.log('messageOptions:', messageOptions);
 
-  res.sendStatus(200);
+  transporter.sendMail(messageOptions, (error, info) => {
+    if (!error) {
+      console.log('Email sent:', info.response);
+      res.sendStatus(200);
+    } else {
+      console.log('Error sending email:', error);
+      res.sendStatus(500);
+    }
+  });
+
+  // res.sendStatus(200);
 });
 
 module.exports = router;
