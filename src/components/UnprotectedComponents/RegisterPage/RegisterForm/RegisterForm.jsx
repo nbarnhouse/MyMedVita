@@ -8,17 +8,17 @@ import { TextField, Button, Grid, Typography } from '@mui/material';
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
-    plain_password: '',
-    phoneNumber: '',
+    password: '',
+    phone: '',
     gender: '',
     dob: '',
-    address_street: '',
-    address_city: '',
-    address_state: '',
-    address_zip: '',
+    street_address: '',
+    city: '',
+    state: '',
+    zip: '',
   });
 
   const dispatch = useDispatch();
@@ -55,9 +55,9 @@ function LoginForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             label="First Name"
-            name="firstName"
+            name="first_name"
             variant="outlined"
-            value={newUser.firstName}
+            value={newUser.first_name}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
             required
@@ -66,9 +66,9 @@ function LoginForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             label="Last Name"
-            name="lastName"
+            name="last_name"
             variant="outlined"
-            value={newUser.lastName}
+            value={newUser.last_name}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
             required
@@ -88,10 +88,10 @@ function LoginForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             label="Phone Number"
-            name="phoneNumber"
+            name="phone"
             type="text"
             variant="outlined"
-            value={newUser.phoneNumber}
+            value={newUser.phone}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
           />
@@ -99,10 +99,10 @@ function LoginForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             label="Password"
-            name="plain_password"
+            name="password"
             type="password"
             variant="outlined"
-            value={newUser.plain_password}
+            value={newUser.password}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
             required
@@ -159,10 +159,10 @@ function LoginForm() {
         <Grid item xs={12} sm={4}>
           <TextField
             label="Street Address"
-            name="address_street"
+            name="street_address"
             type="text"
             variant="outlined"
-            value={newUser.address_street}
+            value={newUser.street_address}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
           />
@@ -170,10 +170,10 @@ function LoginForm() {
         <Grid item xs={12} sm={4}>
           <TextField
             label="City"
-            name="address_city"
+            name="city"
             type="text"
             variant="outlined"
-            value={newUser.address_city}
+            value={newUser.city}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
           />
@@ -181,10 +181,10 @@ function LoginForm() {
         <Grid item xs={12} sm={2}>
           <TextField
             label="State"
-            name="address_state"
+            name="state"
             type="text"
             variant="outlined"
-            value={newUser.address_state}
+            value={newUser.state}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
           />
@@ -192,10 +192,10 @@ function LoginForm() {
         <Grid item xs={12} sm={2}>
           <TextField
             label="Zip Code"
-            name="address_zip"
+            name="zip"
             type="text"
             variant="outlined"
-            value={newUser.address_zip}
+            value={newUser.zip}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
           />

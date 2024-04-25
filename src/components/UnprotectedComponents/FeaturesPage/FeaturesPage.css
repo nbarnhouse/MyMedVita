@@ -8,9 +8,10 @@ h1 {
   text-wrap: wrap;
   padding-block: 5px;
 }
+
 .featurePageWords {
   color: #782cf6;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
 }
 
 .featureDetailsDiv {
@@ -26,6 +27,7 @@ h1 {
 .featurePageIcons {
   color: #782cf6;
 }
+
 .finePrint {
   text-align: center;
   text-wrap: wrap;

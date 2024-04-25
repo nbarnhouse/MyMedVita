@@ -8,6 +8,7 @@ import './FeaturesPage.css';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import styled from 'styled-components';
 
 function FeaturesPage() {
   const history = useHistory();
