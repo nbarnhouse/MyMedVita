@@ -9,3 +9,10 @@
 .search-paragraph {
   margin-bottom: 0;
 }
+
+/* Button Container */
+.search-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

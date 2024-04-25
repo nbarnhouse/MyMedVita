@@ -43,7 +43,7 @@ function ProcedureSearchBar() {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Search"
+            label="Search for CPT code or Keyword"
             margin="normal"
             variant="outlined"
             value={searchQuery}

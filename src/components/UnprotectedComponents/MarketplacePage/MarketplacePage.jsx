@@ -123,6 +123,19 @@ function MarketplacePage() {
               </TextField>
             </Grid>
           </Grid>
+          <div className="search-button-container">
+            <Button
+              variant="outlined"
+              size="large"
+              sx={{
+                backgroundColor: '#782CF6',
+                color: 'white',
+                margin: '10px auto',
+              }}
+            >
+              Shop Now
+            </Button>
+          </div>
         </form>
       </div>
     </>
