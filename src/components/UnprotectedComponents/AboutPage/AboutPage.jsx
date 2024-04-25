@@ -11,7 +11,7 @@ function AboutPage() {
       <NavBar />
       <div className="AboutPageMainDiv">
         <div>
-          <h1>About</h1>
+          <h1 className="AboutPageHeader">About</h1>
           <img
             className="AboutPageMainImage"
             src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/10/image4-Cropped.jpg"
