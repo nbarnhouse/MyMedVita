@@ -1,9 +1,6 @@
-// Import 3rd Party Libraries
 import React, { useState } from 'react';
 import axios from 'axios';
-
-// Import Material UI
-import { InputAdornment, TextField, Autocomplete } from '@mui/material';
+import { TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 function ProcedureSearchBar() {
@@ -15,10 +12,13 @@ function ProcedureSearchBar() {
     const query = event.target.value;
     setSearchQuery(query);
 
+    console.log('Sending request to:', `/api/search/${encodeURIComponent(query)}`);
+
     try {
       // Make a request to your backend API to fetch suggestions
-      const response = await axios.get(`/api/search/${query}`);
+      const response = await axios.get(`/api/search/${encodeURIComponent(query)}`);
       const data = await response.data;
+      console.log('Data received:', data); // Log the data received from the backend
       setSuggestions(data);
       setOpen(true); // Open the dropdown when there are suggestions
     } catch (error) {
@@ -35,9 +35,7 @@ function ProcedureSearchBar() {
       <Autocomplete
         freeSolo
         options={suggestions}
-        getOptionLabel={(option) =>
-          `${option.primary_code} - ${option.description}`
-        }
+        getOptionLabel={(option) => `${option.primary_code} - ${option.description}`}
         open={open}
         onInputChange={handleInputChange}
         renderInput={(params) => (
@@ -49,6 +47,7 @@ function ProcedureSearchBar() {
             value={searchQuery}
             onChange={handleInputChange}
             InputProps={{
+              ...params.InputProps,
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
