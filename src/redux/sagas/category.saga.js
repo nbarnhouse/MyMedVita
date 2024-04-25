@@ -6,26 +6,42 @@ import axios from 'axios';
 
 // Outpatient
 function* fetchOutpatient() {
-  const response = yield axios.get('/api/category/codes/1');
-  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  try {
+    const response = yield axios.get('/api/category/codes/1');
+    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  } catch (error) {
+    console.log('Error FETCHING OUTPATIENT - SAGA: ', error);
+  }
 }
 
 // Laboratory
 function* fetchLaboratory() {
-  const response = yield axios.get('/api/category/codes/2');
-  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  try {
+    const response = yield axios.get('/api/category/codes/2');
+    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  } catch (error) {
+    console.log('ERROR FETCHING LABORATORY - SAGA: ', error);
+  }
 }
 
 // Radiology
 function* fetchRadiology() {
-  const response = yield axios.get('/api/category/codes/3');
-  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  try {
+    const response = yield axios.get('/api/category/codes/3');
+    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  } catch (error) {
+    console.log('ERROR FETCHING RADIOLOGY - SAGA : ', error);
+  }
 }
 
 // Surgery
 function* fetchSurgery() {
-  const response = yield axios.get('/api/category/codes/4');
-  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  try {
+    const response = yield axios.get('/api/category/codes/4');
+    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+  } catch (error) {
+    console.log('ERROR FETCHING SURGERY - SAGA : ', error);
+  }
 }
 
 // Watcher Sagas
