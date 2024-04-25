@@ -17,7 +17,10 @@ function* fetchLaboratory() {
 }
 
 // Radiology
-function* fetchRadiology() {}
+function* fetchRadiology() {
+  const response = yield axios.get('/api/category/codes/3');
+  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+}
 
 // Surgery
 function* fetchSurgery() {}
