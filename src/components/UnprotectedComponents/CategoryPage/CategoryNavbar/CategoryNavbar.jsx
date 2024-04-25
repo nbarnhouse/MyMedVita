@@ -3,7 +3,7 @@ import React from 'react';
 import { useLocation, Link as RouterLink } from 'react-router-dom';
 
 // Import Material UI and Icons
-import { Box, List, ListItem, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 function CategoryNavbar() {
   const location = useLocation();
@@ -29,6 +29,9 @@ function CategoryNavbar() {
       }}
       role="presentation"
     >
+      <Typography variant="h5" sx={{ textAlign: 'center', marginTop: '20px' }}>
+        Please Select a Category
+      </Typography>
       <List>
         {navItems.map((item, index) => (
           <ListItem
