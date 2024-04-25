@@ -26,7 +26,13 @@ function CategoryOutpatient() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
     dispatch({ type: 'FETCH_OUTPATIENT' });
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [dispatch]);
 
   return (

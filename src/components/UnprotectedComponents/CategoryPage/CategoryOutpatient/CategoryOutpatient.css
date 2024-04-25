@@ -1,6 +1,11 @@
 /* Category Navbar and Table Container */
+.category-container {
+  overflow-y: hidden;
+}
+
 .category-bottom-container {
   display: flex;
+  overflow: hidden;
 }
 
 .category-right-container {
