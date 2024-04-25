@@ -1,6 +1,6 @@
 // Import 3rd Party Libraries
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // CUSTOM COMPONENTS
@@ -76,7 +76,13 @@ function MarketplacePage() {
           </span>{' '}
           Marketplace
         </Typography>
-        <p className="search-paragraph">Click HERE for a CPT Reference Guide</p>
+        <p className="search-paragraph">
+          Click{' '}
+          <Link to="/category" className="search-category-link">
+            HERE
+          </Link>{' '}
+          for a CPT Reference Guide
+        </p>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} wrap="wrap">
             <Grid item xs={12}>
