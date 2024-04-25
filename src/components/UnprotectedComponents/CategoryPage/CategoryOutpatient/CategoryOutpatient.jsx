@@ -38,8 +38,26 @@ function CategoryOutpatient() {
       <div className="category-bottom-container">
         <CategoryNavbar />
         <div className="category-right-container">
-          <h1 className="category-header">CATEGORY OUTPATIENT</h1>
-          <p>{JSON.stringify(outpatientList)}</p>
+          <h1 className="category-header">Outpatient Care Codes</h1>
+          <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Primary Code</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {outpatientList &&
+                  outpatientList.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{item.primary_code}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>
