@@ -12,7 +12,6 @@ import {
   Typography,
   Grid,
   TextField,
-  Select,
   MenuItem,
   InputAdornment,
   Button,
@@ -138,6 +137,11 @@ function MarketplacePage() {
                 backgroundColor: '#782CF6',
                 color: 'white',
                 margin: '10px auto',
+                '&:hover': {
+                  backgroundColor: '#782CF6',
+                  color: 'white',
+                  transform: 'scale(1.05)',
+                },
               }}
             >
               Shop Now
