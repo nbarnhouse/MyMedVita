@@ -1,4 +1,5 @@
 // Import 3rd Party Libraries
+import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 function ProviderDataPage() {
   const history = useHistory();
+  const provider = useSelector((store) => store.provider);
 
   const handleBack = () => {
     history.push('/results');
@@ -16,14 +18,7 @@ function ProviderDataPage() {
     <>
       <NavBar />
       <h1>Provider Details</h1>
-      <div className="left-contianer">
-        <h4>Provider:</h4>
-        <h4>Procedure:</h4>
-        <h4>Address:</h4>
-        <h4>Pricing:</h4>
-        <h4>Phone Number:</h4>
-        <h4>Distance:</h4>
-      </div>
+      <div></div>
 
       <button onClick={handleBack}>Back</button>
     </>
