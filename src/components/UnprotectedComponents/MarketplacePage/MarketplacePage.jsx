@@ -125,6 +125,7 @@ function MarketplacePage() {
           </Grid>
           <div className="search-button-container">
             <Button
+              type="submit"
               variant="outlined"
               size="large"
               sx={{
