@@ -92,8 +92,8 @@ ALTER TABLE "user_account_types" ADD CONSTRAINT "user_account_types_fk1" FOREIGN
 ALTER TABLE "user_account_types" ADD CONSTRAINT "user_account_types_fk2" FOREIGN KEY ("type_id") REFERENCES "account_types"("id");
 
 -- Add Lat/Long to user table
-ALTER TABLE "user" ADD "provider_lat" VARCHAR(255);
-ALTER TABLE "user" ADD "provider_long" VARCHAR(255);
+ALTER TABLE "rates" ADD "provider_lat" VARCHAR(255);
+ALTER TABLE "rates" ADD "provider_long" VARCHAR(255);
 
 --CSV Import Order
 -- 1. service_types (import id column)
