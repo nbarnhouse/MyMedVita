@@ -1,7 +1,7 @@
 // Import 3rd Party Libraries
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // CUSTOM COMPONENTS
 import Navbar from '../../../AccessoryComponents/Nav/Nav';
@@ -23,14 +23,22 @@ function CategoryOutpatient() {
     (store) => store.categoryReducer.outpatientReducer
   );
   console.log('OUTPATIENT LIST: ', outpatientList);
+
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_OUTPATIENT' });
+  });
 
   return (
     <div className="category-container">
       <Navbar />
       <div className="category-bottom-container">
         <CategoryNavbar />
-        <div className="category-right-container"></div>
+        <div className="category-right-container">
+          <h1>CATEGORY OUTPATIENT</h1>
+        </div>
       </div>
     </div>
   );
