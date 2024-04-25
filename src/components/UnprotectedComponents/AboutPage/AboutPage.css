@@ -1,5 +1,9 @@
-h1 {
+.AboutPageHeader {
   text-align: center;
+}
+
+.AboutPageMainImage {
+  border-radius: 25px;
 }
 
 .AboutPageMainDiv {
