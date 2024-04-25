@@ -36,7 +36,7 @@ function FeaturesPage() {
         </p>
       </div>
       <div className="featureDetailsDiv">
-        <h1>How it works</h1>
+        <h2>How it works</h2>
         <p>
           HealthCare services are coded by Current Procedural Terminology or{' '}
           <b className="featurePageWords">CPT codes</b>
@@ -56,7 +56,7 @@ function FeaturesPage() {
       </div>
 
       <div className="featureDetailsDiv">
-        <h1>Disclaimers</h1>
+        <h2>Disclaimers</h2>
         <p>
           <b className="featurePageWords">MyMedVita</b> is independent of
           insurers and providers and believes consumers can be empowered with
@@ -64,7 +64,7 @@ function FeaturesPage() {
         </p>
       </div>
       <div className="featureDetailsDiv">
-        <h1>Insurance</h1>
+        <h2>Insurance</h2>
         <p>
           You can search by{' '}
           <b className="featurePageWords">
@@ -74,7 +74,7 @@ function FeaturesPage() {
         </p>
       </div>
       <div className="featureDetailsDiv">
-        <h1>No Insurance?</h1>
+        <h2>No Insurance?</h2>
         <p>
           It could be possible to negotiate a price with a provider of your
           choosing regardless of what kind of insurance you might have or even
