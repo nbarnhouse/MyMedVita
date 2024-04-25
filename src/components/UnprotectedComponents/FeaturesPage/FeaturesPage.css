@@ -4,9 +4,9 @@ h1 {
 
 .featurePageDiv {
   text-align: center;
-  margin: 0 auto;
-  padding-block: 75px;
-  max-width: 90%;
+  text-size-adjust: 30px;
+  text-wrap: wrap;
+  padding-block: 5px;
 }
 
 .featurePageWords {
@@ -15,9 +15,13 @@ h1 {
 }
 
 .featureDetailsDiv {
+  text-size-adjust: 30px;
   text-align: center;
-  margin: 0 auto;
-  max-width: 90%;
+  max-width: fit-content;
+  margin-right: 28%;
+  margin-left: 28%;
+  line-height: 1.5;
+  padding-block: 5px;
 }
 
 .featurePageIcons {
@@ -26,8 +30,10 @@ h1 {
 
 .finePrint {
   text-align: center;
-  margin-left: 25px;
-  overflow-wrap: break-word;
-  max-width: 95%;
-  margin: 0 auto;
+  text-wrap: wrap;
+  margin-right: 22%;
+  margin-left: 22%;
+  line-height: 1.5;
+  padding-block: 5px;
+  padding-bottom: 5%;
 }
