@@ -63,9 +63,11 @@ function App() {
           <Route exact path="/results">
             <MarketPlaceSearchResults />
           </Route>
-
           <Route exact path="/details">
             <ProviderDataPage />
+          </Route>
+          <Route exact path="/category">
+            <CategoryPage />
           </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}
