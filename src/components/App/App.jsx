@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Import Unprotected Components
 import AboutPage from '../UnprotectedComponents/AboutPage/AboutPage';
 import CategoryOutpatient from '../UnprotectedComponents/CategoryPage/CategoryOutpatient/CategoryOutpatient';
+import CategoryLaboratory from '../UnprotectedComponents/CategoryPage/CategoryLaboratory/CategoryLaboratory';
 import ContactPage from '../UnprotectedComponents/ContactPage/ContactPage';
 import FeaturesPage from '../UnprotectedComponents/FeaturesPage/FeaturesPage';
 import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
@@ -63,9 +64,15 @@ function App() {
           <Route exact path="/results">
             <MarketPlaceSearchResults />
           </Route>
+
+          {/* Categories */}
           <Route exact path="/category/outpatient">
             <CategoryOutpatient />
           </Route>
+          <Route exact path="/category/laboratory">
+            <CategoryLaboratory />
+          </Route>
+
           <Route exact path="/details">
             <ProviderDataPage />
           </Route>
