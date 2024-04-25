@@ -60,11 +60,6 @@ function App() {
           <Route exact path="/contact">
             <ContactPage />
           </Route>
-
-          <Route exact path="/search">
-            <MarketplacePage />
-          </Route>
-
           <Route exact path="/results">
             <MarketPlaceSearchResults />
           </Route>
