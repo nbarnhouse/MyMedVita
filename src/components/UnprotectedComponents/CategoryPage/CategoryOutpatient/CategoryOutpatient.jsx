@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Navbar from '../../../AccessoryComponents/Nav/Nav';
 import CategoryNavbar from '../CategoryNavbar/CategoryNavbar';
 
-// Import Material UI
+// Import Material UI and Custom CSS
 import {
   Table,
   TableBody,
@@ -17,6 +17,7 @@ import {
   TableRow,
   Paper,
 } from '@mui/material';
+import './CategoryOutpatient.css';
 
 function CategoryOutpatient() {
   const outpatientList = useSelector(
@@ -37,7 +38,7 @@ function CategoryOutpatient() {
       <div className="category-bottom-container">
         <CategoryNavbar />
         <div className="category-right-container">
-          <h1>CATEGORY OUTPATIENT</h1>
+          <h1 className="category-header">CATEGORY OUTPATIENT</h1>
         </div>
       </div>
     </div>
