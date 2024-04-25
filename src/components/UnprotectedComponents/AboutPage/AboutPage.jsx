@@ -4,6 +4,7 @@ import React from 'react';
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import './AboutPage.css';
+import '/AboutPage_Image.jpg';
 
 function AboutPage() {
   return (
@@ -12,10 +13,7 @@ function AboutPage() {
       <div className="AboutPageMainDiv">
         <div>
           <h1 className="AboutPageHeader">About</h1>
-          <img
-            className="AboutPageMainImage"
-            src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/10/image4-Cropped.jpg"
-          />
+          <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />
         </div>
         {/* Div for written contents */}
         <div className="AboutPageWrittenSection">
