@@ -78,7 +78,7 @@ function MarketplacePage() {
         </Typography>
         <p className="search-paragraph">
           Click{' '}
-          <Link to="/category" className="search-category-link">
+          <Link to="/category/outpatient" className="search-category-link">
             HERE
           </Link>{' '}
           for a CPT Reference Guide
