@@ -35,7 +35,7 @@ function FeaturesPage() {
           schedule
         </p>
       </div>
-      <div className="featureDetailsDiv">
+      <div className="featurePageDiv">
         <h2>How it works</h2>
         <p>
           HealthCare services are coded by Current Procedural Terminology or{' '}
