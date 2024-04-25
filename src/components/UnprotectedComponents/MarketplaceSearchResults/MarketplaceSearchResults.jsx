@@ -1,5 +1,6 @@
 // Import 3rd Party Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
@@ -11,8 +12,8 @@ import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
   const history = useHistory();
-  const [zip, setZip] = useState('');
-  const [distance, setDistance] = useState('');
+  const data = useSelector((state) => state.distance);
+
   const [filteredPoints, setFilteredPoints] = useState([]);
   const [originalZip, setOriginalZip] = useState('');
   const [originalDistance, setOriginalDistance] = useState('');
@@ -26,18 +27,8 @@ export default function MarketplaceSearchResults() {
     [35.9334, -95.8776],
   ];
 
-  const handleZipSearch = (event) => {
-    event.preventDefault();
-    if (zip.length !== 5 || isNaN(zip)) {
-      alert('Please enter a valid 5-digit zip code.');
-
-      setZip('');
-      setDistance('');
-      return;
-    }
-
-    console.log(`Zip Code: ${zip} and Distance:${distance}`);
-    const maxDistance = parseFloat(distance); // Maximum distance in miles
+  useEffect(() => {
+    const maxDistance = parseFloat(data.searchDistance); // Maximum distance in miles
     const filteredPoints = filterPoints(
       centerLat,
       centerLon,
@@ -45,18 +36,12 @@ export default function MarketplaceSearchResults() {
       maxDistance
     );
     setFilteredPoints(filteredPoints);
+    setOriginalZip(data.zip);
+    setOriginalDistance(data.searchDistance);
+  }, []);
 
-    setOriginalZip(zip);
-    setOriginalDistance(distance);
-
-    setZip('');
-    setDistance('');
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleZipSearch(event);
-    }
+  const handleBack = () => {
+    history.push('/marketplace');
   };
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -83,79 +68,16 @@ export default function MarketplaceSearchResults() {
     return filteredPoints;
   }
 
-  const handleBack = () => {
-    history.push('/search');
-  };
-
   return (
     <>
       <NavBar />
       <div className="container">
-        <div className="input container">
-          <form onSubmit={handleZipSearch}>
-            <label htmlFor="zipSearch">Zip Code:</label>
-            <input
-              type="text"
-              id="zipSearch"
-              name="zipSearch"
-              placeholder="Zip Code"
-              value={zip}
-              onChange={(event) => setZip(event.target.value)}
-              onKeyDown={handleKeyDown}
-            ></input>
-
-            <label htmlFor="distanceSearch">Distance(Miles):</label>
-            <input
-              type="number"
-              id="distanceSearch"
-              name="distanceSearch"
-              placeholder="Distance(Miles)"
-              value={distance}
-              onChange={(event) => setDistance(event.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-
         <div className="result-container">
           <h1>MyMedVita Search Results</h1>
           <h4>
-            Search Parameters: MRI - , Zip: {originalZip}, {originalDistance}{' '}
+            Search Parameters: [CODE HERE] , {originalZip}, {originalDistance}{' '}
             Miles
           </h4>
-
-          <p>
-            NOTE: setting zip 74011 as center on map. (This is hardcoded for
-            now). Test markers are: [36.1539, -95.9927] and [33.6609, -95.5555]
-            within 30 miles. Test marker [33.6609, -95.5555 ] is within 200
-            miles.
-          </p>
-          <h2>Filtered Data</h2>
-          <table className="centered-table">
-            <thead>
-              <tr>
-                <th>Coordinate</th>
-                <th>Distance (miles)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPoints.map((point, index) => (
-                <tr key={index}>
-                  <td>{point.join(', ')}</td>
-                  <td>
-                    {haversine(
-                      centerLat,
-                      centerLon,
-                      point[0],
-                      point[1]
-                    ).toFixed(0)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <button onClick={handleBack}>Back</button>
         </div>
         <div className="map-container">
           <MapContainer
@@ -172,6 +94,38 @@ export default function MarketplaceSearchResults() {
             ))}
           </MapContainer>
         </div>
+        <table className="centered-table">
+          <thead>
+            <tr>
+              <th>
+                <h2>Provider</h2>
+              </th>
+              <th>
+                <h2>Price</h2>
+              </th>
+              <th>
+                <h2>Distance</h2>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredPoints.map((point, index) => (
+              <tr key={index}>
+                <td>[Provider Name Here]</td>
+
+                <td>[Provider Price Here]</td>
+
+                <td>
+                  {/* Calculate distance using haversine formula */}
+                  {haversine(centerLat, centerLon, point[0], point[1]).toFixed(
+                    0
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button onClick={handleBack}>Back</button>
       </div>
     </>
   );
