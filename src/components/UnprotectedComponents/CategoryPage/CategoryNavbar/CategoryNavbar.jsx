@@ -2,9 +2,6 @@
 import React from 'react';
 import { useLocation, Link as RouterLink } from 'react-router-dom';
 
-// Import Custom Components
-import Navbar from '../../../AccessoryComponents/Nav/Nav';
-
 function CategoryNavbar() {
   return (
     <>
