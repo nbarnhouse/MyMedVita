@@ -28,7 +28,10 @@ function LoginPage() {
 
     dispatch({
       type: 'LOGIN',
-      payload: user,
+      payload: {
+        username: user.email,
+        password: user.password,
+      },
     });
   };
 
