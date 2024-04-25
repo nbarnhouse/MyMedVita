@@ -6,10 +6,10 @@ const router = express.Router();
 router.get('/:query', async (req,res) => {
     try{
         const  query = req.params.query; //get search query from request(what the user is typing)
-
+        console.log('Received query:', query);
         const client = await pool.connect();
         const result = await client.query(
-            `SELECT * FROM service_codes WHERE CAST(primary_code AS TEXT) ILIKE $1 OR description ILIKE $1`,
+            `SELECT primary_code, description FROM service_codes WHERE CAST(primary_code AS TEXT) ILIKE $1 OR description ILIKE $1`,
             [`%${query}%`]
         );
         client.release();
