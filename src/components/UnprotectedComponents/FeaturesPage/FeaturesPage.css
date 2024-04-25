@@ -4,28 +4,30 @@ h1 {
 
 .featurePageDiv {
   text-align: center;
-  text-wrap: wrap;
-  margin-left: 800px;
-  margin-right: 750px;
+  margin: 0 auto;
   padding-block: 75px;
+  max-width: 90%;
 }
+
 .featurePageWords {
   color: #782cf6;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
 }
 
 .featureDetailsDiv {
   text-align: center;
-  text-wrap: wrap;
-  margin-left: 725px;
-  margin-right: 725px;
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 .featurePageIcons {
   color: #782cf6;
 }
+
 .finePrint {
   text-align: center;
-  text-wrap: wrap;
   margin-left: 25px;
+  overflow-wrap: break-word;
+  max-width: 95%;
+  margin: 0 auto;
 }
