@@ -1,13 +1,9 @@
-// Import 3rd Party Libraries
+// MarketplacePage.js
+
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
-// CUSTOM COMPONENTS
-import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
-
-// Import Material UI and Custom CSS
 import {
   Typography,
   Grid,
@@ -30,26 +26,19 @@ function MarketplacePage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Function to handle user input change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setQuery((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Function to handle user form submission
   const handleSubmit = (event) => {
-    // Prevent the page from refreshing
     event.preventDefault();
-
-    // Validate Zip Code = 5 digits and is a number
     const { zip, distance } = query;
     if (zip.length !== 5 || isNaN(Number(zip))) {
       alert('Please enter a valid 5-digit zip code.');
       setQuery((prev) => ({ ...prev, zip: '' }));
       return;
     }
-
-    // Dispatch Data
     dispatch({
       type: 'SUBMIT_DISTANCE_DATA',
       payload: {
@@ -60,9 +49,13 @@ function MarketplacePage() {
     history.push('/results');
   };
 
+  const handleSearchQueryChange = (searchQuery) => {
+    console.log('Search query:', searchQuery);
+    // You can do something with the search query here
+  };
+
   return (
     <>
-      <NavBar />
       <div className="search-container">
         <Typography
           variant="h3"
@@ -86,7 +79,7 @@ function MarketplacePage() {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} wrap="wrap">
             <Grid item xs={12}>
-              <ProcedureSearchBar />
+              <ProcedureSearchBar onSearchQueryChange={handleSearchQueryChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField

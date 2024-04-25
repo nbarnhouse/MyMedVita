@@ -3,13 +3,13 @@ import axios from 'axios';
 import { TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-function ProcedureSearchBar() {
+function ProcedureSearchBar({ onSearchQueryChange }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const handleInputChange = async (event) => {
-    const query = event.target.value;
+  const handleInputChange = async (event, newValue) => {
+    const query = newValue || event.target.value; // Use newValue if available (autocomplete selection), otherwise use event.target.value
     setSearchQuery(query);
 
     console.log('Sending request to:', `/api/search/${encodeURIComponent(query)}`);
@@ -28,6 +28,9 @@ function ProcedureSearchBar() {
     if (query === '') {
       setOpen(false); // Close the dropdown when query is empty
     }
+
+    // Invoke the callback function with the search query value
+    onSearchQueryChange(query);
   };
 
   return (
