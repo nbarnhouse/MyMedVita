@@ -23,7 +23,10 @@ function* fetchRadiology() {
 }
 
 // Surgery
-function* fetchSurgery() {}
+function* fetchSurgery() {
+  const response = yield axios.get('/api/category/codes/4');
+  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+}
 
 // Watcher Sagas
 function* categorySaga() {
