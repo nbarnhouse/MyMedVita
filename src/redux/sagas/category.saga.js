@@ -5,7 +5,10 @@ import axios from 'axios';
 //Worker Sagas
 
 // Outpatient
-function* fetchOutpatient() {}
+function* fetchOutpatient() {
+  const response = yield axios.get('/api/category/codes/1');
+  yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+}
 
 // Laboratory
 function* fetchLaboratory() {}
