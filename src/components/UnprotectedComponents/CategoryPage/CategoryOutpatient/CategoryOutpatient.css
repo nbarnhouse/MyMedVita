@@ -2,3 +2,13 @@
 .category-bottom-container {
   display: flex;
 }
+
+.category-right-container {
+  width: 80%;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+}
