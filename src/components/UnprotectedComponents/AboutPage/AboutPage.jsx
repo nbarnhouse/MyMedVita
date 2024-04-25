@@ -11,7 +11,7 @@ function AboutPage() {
     <div>
       <NavBar />
       <div className="AboutPageMainDiv">
-        <div>
+        <div className="AboutPageHeaderAndImageDiv">
           <h1 className="AboutPageHeader">About</h1>
           <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />
         </div>

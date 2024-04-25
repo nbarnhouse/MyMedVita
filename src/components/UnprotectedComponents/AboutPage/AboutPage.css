@@ -1,9 +1,17 @@
+.AboutPageHeaderAndImageDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .AboutPageHeader {
   text-align: center;
 }
 
 .AboutPageMainImage {
   border-radius: 25px;
+  width: 60%;
 }
 
 .AboutPageMainDiv {
