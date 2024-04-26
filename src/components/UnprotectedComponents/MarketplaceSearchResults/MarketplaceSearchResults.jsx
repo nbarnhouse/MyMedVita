@@ -1,10 +1,12 @@
 //import 3rd party libraries
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-//import css files
+
+//import Material UI and css files
+import { Button } from '@mui/material';
 import 'leaflet/dist/leaflet.css';
 import './MarketplaceSearchResults.css';
 
@@ -12,6 +14,7 @@ import './MarketplaceSearchResults.css';
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const {
     procedureCode,
@@ -72,6 +75,15 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(sortedByPrice === null ? true : !sortedByPrice);
     setSortedByDistance(null); // Reset distance sorting
   };
+
+  const handleDetailsClick = (provider) => {
+    console.log('PROVIDER:', provider);
+    history.push({
+      pathname: '/details',
+      state: { provider: provider }
+    });
+  };
+ 
 
   const sortByDistance = () => {
     const sorted = [...providers].sort((a, b) => {
@@ -161,6 +173,9 @@ export default function MarketplaceSearchResults() {
                   </button>
                 </h2>
               </th>
+              <th>
+                <h2>Details</h2>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -183,6 +198,7 @@ export default function MarketplaceSearchResults() {
                       </td>
                       <td>{provider.negotiated_rate}</td>
                       <td>{providerDistance.toFixed(2)} miles</td>
+                      <td><Button onClick={() => handleDetailsClick(provider)}>Details</Button></td>
                     </tr>
                   );
                 }
