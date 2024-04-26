@@ -206,9 +206,11 @@ export default function MarketplaceSearchResults() {
                               {provider.provider_first_name}{' '}
                               {provider.provider_credential}
                             </TableCell>
-                            <TableCell>{provider.negotiated_rate}</TableCell>
                             <TableCell>
-                              {Math.floor(providerDistance.toFixed(2))} miles
+                              ${Math.floor(provider.negotiated_rate)}
+                            </TableCell>
+                            <TableCell>
+                              {Math.floor(providerDistance)} miles
                             </TableCell>
                             <TableCell>
                               <Button
