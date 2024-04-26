@@ -1,27 +1,37 @@
-//import 3rd party libraries
+// Import 3rd party libraries
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-
-//import Material UI and css files
-import { Button } from '@mui/material';
-import 'leaflet/dist/leaflet.css';
-import './MarketplaceSearchResults.css';
-
-//import custom component
+// Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+
+// Import Material UI and CSS files
+import {
+  Button,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
+import './MarketplaceSearchResults.css';
+import 'leaflet/dist/leaflet.css';
 
 export default function MarketplaceSearchResults() {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // Obtain provider data from the database and store in an object
   const {
     procedureCode,
     zip,
     distance,
     providers: initialProviders,
   } = useSelector((state) => state.distance);
+
   const [providers, setProviders] = useState(initialProviders);
   // null: not sorted, true: ascending, false: descending
   const [sortedByPrice, setSortedByPrice] = useState(null);
@@ -31,7 +41,8 @@ export default function MarketplaceSearchResults() {
   const centerLat = 36.1539;
   const centerLon = -95.9927;
 
-  const handleBack = () => {
+  // Function to handle a "back" button click
+  const handleBackClick = () => {
     history.push('/marketplace');
   };
 
@@ -59,10 +70,21 @@ export default function MarketplaceSearchResults() {
     return filteredPoints;
   }
 
+  // Reset providers whenever initialProviders changes
   useEffect(() => {
-    setProviders(initialProviders); // Reset providers whenever initialProviders changes
+    setProviders(initialProviders);
   }, [initialProviders]);
 
+  // Function to route user to Provider Details Page
+  const handleDetailsClick = (provider) => {
+    console.log('PROVIDER:', provider);
+    history.push({
+      pathname: '/details',
+      state: { provider: provider },
+    });
+  };
+
+  // Function to sort by Price
   const sortByPrice = () => {
     const sorted = [...providers].sort((a, b) => {
       if (sortedByPrice === null || sortedByPrice) {
@@ -73,18 +95,11 @@ export default function MarketplaceSearchResults() {
     });
     setProviders(sorted);
     setSortedByPrice(sortedByPrice === null ? true : !sortedByPrice);
-    setSortedByDistance(null); // Reset distance sorting
+    // Reset distance sorting
+    setSortedByDistance(null);
   };
 
-  const handleDetailsClick = (provider) => {
-    console.log('PROVIDER:', provider);
-    history.push({
-      pathname: '/details',
-      state: { provider: provider }
-    });
-  };
- 
-
+  // Function to sort by Distance
   const sortByDistance = () => {
     const sorted = [...providers].sort((a, b) => {
       const distanceA = haversine(
@@ -115,98 +130,104 @@ export default function MarketplaceSearchResults() {
     <>
       <NavBar />
       <div className="container">
+        <div className="result-header-container">
+          <h1 className="result-header-h1">MyMedVita Search Results</h1>
+          <p className="result-header-paragraph">
+            CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
+          </p>
+        </div>
         <div className="result-container">
-          <h1>MyMedVita Search Results</h1>
-          <h4>
-            Search Parameters: CPT Code: {procedureCode}, Zip: {zip}, within{' '}
-            {distance} Miles
-          </h4>
+          <div className="map-container">
+            <MapContainer
+              className="map"
+              center={[centerLat, centerLon]}
+              zoom={6}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {providers &&
+                providers.map((provider, index) => {
+                  // Ensure provider latitude and longitude are defined before rendering the marker
+                  if (provider.provider_lat && provider.provider_long) {
+                    const providerLat = parseFloat(provider.provider_lat);
+                    const providerLon = parseFloat(provider.provider_long);
+                    return (
+                      <Marker key={index} position={[providerLat, providerLon]}>
+                        <Popup>
+                          {provider.provider_last_name},{' '}
+                          {provider.provider_first_name}
+                        </Popup>
+                      </Marker>
+                    );
+                  }
+                  return null;
+                })}
+            </MapContainer>
+          </div>
+          <div className="result-table-container">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Provider</TableCell>
+                    <TableCell>
+                      Price{' '}
+                      <Button onClick={sortByPrice}>
+                        {sortedByPrice ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      Distance{' '}
+                      <Button onClick={sortByDistance}>
+                        {sortedByDistance ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                    <TableCell>Details</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {providers &&
+                    providers.map((provider, index) => {
+                      if (provider.provider_lat && provider.provider_long) {
+                        const providerLat = parseFloat(provider.provider_lat);
+                        const providerLon = parseFloat(provider.provider_long);
+                        const providerDistance = haversine(
+                          centerLat,
+                          centerLon,
+                          providerLat,
+                          providerLon
+                        );
+                        return (
+                          <TableRow key={index}>
+                            <TableCell>
+                              {provider.provider_last_name},{' '}
+                              {provider.provider_first_name}{' '}
+                              {provider.provider_credential}
+                            </TableCell>
+                            <TableCell>{provider.negotiated_rate}</TableCell>
+                            <TableCell>
+                              {providerDistance.toFixed(2)} miles
+                            </TableCell>
+                            <TableCell>
+                              <Button
+                                onClick={() => handleDetailsClick(provider)}
+                              >
+                                Details
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      }
+                      return null;
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
-        <div className="map-container">
-          <MapContainer
-            className="map"
-            center={[centerLat, centerLon]}
-            zoom={6}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {providers &&
-              providers.map((provider, index) => {
-                // Ensure provider latitude and longitude are defined before rendering the marker
-                if (provider.provider_lat && provider.provider_long) {
-                  const providerLat = parseFloat(provider.provider_lat);
-                  const providerLon = parseFloat(provider.provider_long);
-                  return (
-                    <Marker key={index} position={[providerLat, providerLon]}>
-                      <Popup>
-                        {provider.provider_last_name},{' '}
-                        {provider.provider_first_name}
-                      </Popup>
-                    </Marker>
-                  );
-                }
-                return null;
-              })}
-          </MapContainer>
-        </div>
-        <table className="centered-table">
-          <thead>
-            <tr>
-              <th>
-                <h2>Provider</h2>
-              </th>
-              <th>
-                <h2>
-                  Price{' '}
-                  <button onClick={sortByPrice}>
-                    {sortedByPrice ? '↑' : '↓'}
-                  </button>
-                </h2>
-              </th>
-              <th>
-                <h2>
-                  Distance{' '}
-                  <button onClick={sortByDistance}>
-                    {sortedByDistance ? '↑' : '↓'}
-                  </button>
-                </h2>
-              </th>
-              <th>
-                <h2>Details</h2>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {providers &&
-              providers.map((provider, index) => {
-                if (provider.provider_lat && provider.provider_long) {
-                  const providerLat = parseFloat(provider.provider_lat);
-                  const providerLon = parseFloat(provider.provider_long);
-                  const providerDistance = haversine(
-                    centerLat,
-                    centerLon,
-                    providerLat,
-                    providerLon
-                  );
-                  return (
-                    <tr key={index}>
-                      <td>
-                        {provider.provider_last_name},{' '}
-                        {provider.provider_first_name}
-                      </td>
-                      <td>{provider.negotiated_rate}</td>
-                      <td>{providerDistance.toFixed(2)} miles</td>
-                      <td><Button onClick={() => handleDetailsClick(provider)}>Details</Button></td>
-                    </tr>
-                  );
-                }
-                return null;
-              })}
-          </tbody>
-        </table>
-        <button onClick={handleBack}>Back</button>
+        <Button onClick={handleBackClick}>Back</Button>
       </div>
     </>
   );
