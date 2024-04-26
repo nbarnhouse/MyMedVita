@@ -18,7 +18,7 @@ function* fetchOutpatient() {
 function* fetchLaboratory() {
   try {
     const response = yield axios.get('/api/category/codes/2');
-    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+    yield put({ type: 'SET_LABORATORY', payload: response.data });
   } catch (error) {
     console.log('ERROR FETCHING LABORATORY - SAGA: ', error);
   }
@@ -28,7 +28,7 @@ function* fetchLaboratory() {
 function* fetchRadiology() {
   try {
     const response = yield axios.get('/api/category/codes/3');
-    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+    yield put({ type: 'SET_RADIOLOGY', payload: response.data });
   } catch (error) {
     console.log('ERROR FETCHING RADIOLOGY - SAGA : ', error);
   }
@@ -38,7 +38,7 @@ function* fetchRadiology() {
 function* fetchSurgery() {
   try {
     const response = yield axios.get('/api/category/codes/4');
-    yield put({ type: 'SET_OUTPATIENT', payload: response.data });
+    yield put({ type: 'SET_SURGERY', payload: response.data });
   } catch (error) {
     console.log('ERROR FETCHING SURGERY - SAGA : ', error);
   }

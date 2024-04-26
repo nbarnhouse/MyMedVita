@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AboutPage from '../UnprotectedComponents/AboutPage/AboutPage';
 import CategoryOutpatient from '../UnprotectedComponents/CategoryPage/CategoryOutpatient/CategoryOutpatient';
 import CategoryLaboratory from '../UnprotectedComponents/CategoryPage/CategoryLaboratory/CategoryLaboratory';
+import CategoryRadiology from '../UnprotectedComponents/CategoryPage/CategoryRadiology/CategoryRadiology';
+import CategorySurgery from '../UnprotectedComponents/CategoryPage/CategorySurgery/CategorySurgery';
 import ContactPage from '../UnprotectedComponents/ContactPage/ContactPage';
 import FeaturesPage from '../UnprotectedComponents/FeaturesPage/FeaturesPage';
 import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
@@ -71,6 +73,12 @@ function App() {
           </Route>
           <Route exact path="/category/laboratory">
             <CategoryLaboratory />
+          </Route>
+          <Route exact path="/category/radiology">
+            <CategoryRadiology />
+          </Route>
+          <Route exact path="/category/surgery">
+            <CategorySurgery />
           </Route>
 
           <Route exact path="/details">

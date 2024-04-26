@@ -1,6 +1,5 @@
 // Import 3rd Party Libraries
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // CUSTOM COMPONENTS
@@ -23,12 +22,11 @@ function CategoryLaboratory() {
     (store) => store.categoryReducer.laboratoryReducer
   );
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_LABORATORY' });
-  });
+  }, [dispatch]);
 
   return (
     <div className="category-container">
@@ -36,7 +34,26 @@ function CategoryLaboratory() {
       <div className="category-bottom-container">
         <CategoryNavbar />
         <div className="category-right-container">
-          <h1 className="category-header">CATEGORY LABORATORY</h1>
+          <h1 className="category-header">Laboratory & Pathology Codes</h1>
+          <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Primary Code</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {laboratoryList &&
+                  laboratoryList.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{item.primary_code}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>

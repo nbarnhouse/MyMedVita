@@ -1,6 +1,5 @@
 // Import 3rd Party Libraries
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // CUSTOM COMPONENTS
@@ -23,14 +22,18 @@ function CategoryOutpatient() {
   const outpatientList = useSelector(
     (store) => store.categoryReducer.outpatientReducer
   );
-  console.log('OUTPATIENT LIST: ', outpatientList);
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
     dispatch({ type: 'FETCH_OUTPATIENT' });
-  });
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [dispatch]);
 
   return (
     <div className="category-container">
@@ -38,7 +41,26 @@ function CategoryOutpatient() {
       <div className="category-bottom-container">
         <CategoryNavbar />
         <div className="category-right-container">
-          <h1 className="category-header">CATEGORY OUTPATIENT</h1>
+          <h1 className="category-header">Outpatient Care Codes</h1>
+          <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Primary Code</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {outpatientList &&
+                  outpatientList.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{item.primary_code}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>

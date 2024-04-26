@@ -1,4 +1,19 @@
 /* Category Navbar and Table Container */
+.category-container {
+  overflow-y: hidden;
+}
+
 .category-bottom-container {
   display: flex;
+  overflow: hidden;
+}
+
+.category-right-container {
+  width: 80%;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
 }
