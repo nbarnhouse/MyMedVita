@@ -1,11 +1,13 @@
 /* Main Container */
 .container {
-  overflow-y: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Result Header Container */
 .result-header-container {
   text-align: center;
+  flex-shrink: 0;
 }
 
 .result-header-h1 {
@@ -19,19 +21,21 @@
 
 /* Result Container */
 .result-container {
-  width: 80%;
-  height: auto;
+  width: 90%;
+  max-height: 60vh;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
+  align-items: start;
+  gap: 3rem;
   margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid black;
 }
 
 /* Map Container */
-.map-container .map {
-  height: 500px;
-  width: 500px;
+.map-container {
+  border: 1px solid black;
 }
 .map {
   height: 500px;
@@ -40,5 +44,13 @@
 
 /* Table Container */
 .result-table-container {
+  height: 100%;
   overflow-y: scroll;
+}
+
+/* Button Container */
+.result-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -229,7 +229,25 @@ export default function MarketplaceSearchResults() {
             </TableContainer>
           </div>
         </div>
-        <Button onClick={handleBackClick}>Back</Button>
+        <div className="result-button-container">
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={handleBackClick}
+            sx={{
+              backgroundColor: '#782CF6',
+              color: 'white',
+              margin: '10px auto',
+              '&:hover': {
+                backgroundColor: '#782CF6',
+                color: 'white',
+                transform: 'scale(1.05)',
+              },
+            }}
+          >
+            Back
+          </Button>
+        </div>
       </div>
     </>
   );
