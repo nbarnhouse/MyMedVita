@@ -11,7 +11,10 @@ import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
   const history = useHistory();
-  const { procedureCode, zip, distance, providers } = useSelector((state) => state.distance);
+  const { procedureCode, zip, distance, providers: initialProviders } = useSelector((state) => state.distance);
+  const [providers, setProviders] = useState(initialProviders);
+  const [sortedByPrice, setSortedByPrice] = useState(null); // null: not sorted, true: ascending, false: descending
+  const [sortedByDistance, setSortedByDistance] = useState(null); // null: not sorted, true: ascending, false: descending
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
@@ -36,6 +39,46 @@ export default function MarketplaceSearchResults() {
     return distance;
   }
 
+  function filterPoints(centerLat, centerLon, points, maxDistance) {
+    const filteredPoints = points.filter((point) => {
+      const distance = haversine(centerLat, centerLon, point[0], point[1]);
+      return distance <= maxDistance;
+    });
+    return filteredPoints;
+  }
+
+  useEffect(() => {
+    setProviders(initialProviders); // Reset providers whenever initialProviders changes
+  }, [initialProviders]);
+
+  const sortByPrice = () => {
+    const sorted = [...providers].sort((a, b) => {
+      if (sortedByPrice === null || sortedByPrice) {
+        return a.negotiated_rate - b.negotiated_rate;
+      } else {
+        return b.negotiated_rate - a.negotiated_rate;
+      }
+    });
+    setProviders(sorted);
+    setSortedByPrice(sortedByPrice === null ? true : !sortedByPrice);
+    setSortedByDistance(null); // Reset distance sorting
+  };
+
+  const sortByDistance = () => {
+    const sorted = [...providers].sort((a, b) => {
+      const distanceA = haversine(centerLat, centerLon, parseFloat(a.provider_lat), parseFloat(a.provider_long));
+      const distanceB = haversine(centerLat, centerLon, parseFloat(b.provider_lat), parseFloat(b.provider_long));
+      if (sortedByDistance === null || sortedByDistance) {
+        return distanceA - distanceB;
+      } else {
+        return distanceB - distanceA;
+      }
+    });
+    setProviders(sorted);
+    setSortedByDistance(sortedByDistance === null ? true : !sortedByDistance);
+    setSortedByPrice(null); // Reset price sorting
+  };
+
   return (
     <>
       <NavBar />
@@ -57,7 +100,6 @@ export default function MarketplaceSearchResults() {
               if (provider.provider_lat && provider.provider_long) {
                 const providerLat = parseFloat(provider.provider_lat);
                 const providerLon = parseFloat(provider.provider_long);
-                const providerDistance = haversine(centerLat, centerLon, providerLat, providerLon);
                 return (
                   <Marker key={index} position={[providerLat, providerLon]}>
                     <Popup>{provider.provider_last_name}, {provider.provider_first_name}</Popup>
@@ -75,10 +117,10 @@ export default function MarketplaceSearchResults() {
                 <h2>Provider</h2>
               </th>
               <th>
-                <h2>Price</h2>
+                <h2>Price <button onClick={sortByPrice}>{sortedByPrice ? '↑' : '↓'}</button></h2>
               </th>
               <th>
-                <h2>Distance</h2>
+                <h2>Distance <button onClick={sortByDistance}>{sortedByDistance ? '↑' : '↓'}</button></h2>
               </th>
             </tr>
           </thead>
