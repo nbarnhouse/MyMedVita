@@ -13,10 +13,17 @@ import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
   const history = useHistory();
-  const { procedureCode, zip, distance, providers: initialProviders } = useSelector((state) => state.distance);
+  const {
+    procedureCode,
+    zip,
+    distance,
+    providers: initialProviders,
+  } = useSelector((state) => state.distance);
   const [providers, setProviders] = useState(initialProviders);
-  const [sortedByPrice, setSortedByPrice] = useState(null); // null: not sorted, true: ascending, false: descending
-  const [sortedByDistance, setSortedByDistance] = useState(null); // null: not sorted, true: ascending, false: descending
+  // null: not sorted, true: ascending, false: descending
+  const [sortedByPrice, setSortedByPrice] = useState(null);
+  // null: not sorted, true: ascending, false: descending
+  const [sortedByDistance, setSortedByDistance] = useState(null);
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
@@ -68,8 +75,18 @@ export default function MarketplaceSearchResults() {
 
   const sortByDistance = () => {
     const sorted = [...providers].sort((a, b) => {
-      const distanceA = haversine(centerLat, centerLon, parseFloat(a.provider_lat), parseFloat(a.provider_long));
-      const distanceB = haversine(centerLat, centerLon, parseFloat(b.provider_lat), parseFloat(b.provider_long));
+      const distanceA = haversine(
+        centerLat,
+        centerLon,
+        parseFloat(a.provider_lat),
+        parseFloat(a.provider_long)
+      );
+      const distanceB = haversine(
+        centerLat,
+        centerLon,
+        parseFloat(b.provider_lat),
+        parseFloat(b.provider_long)
+      );
       if (sortedByDistance === null || sortedByDistance) {
         return distanceA - distanceB;
       } else {
@@ -78,7 +95,8 @@ export default function MarketplaceSearchResults() {
     });
     setProviders(sorted);
     setSortedByDistance(sortedByDistance === null ? true : !sortedByDistance);
-    setSortedByPrice(null); // Reset price sorting
+    // Reset price sorting
+    setSortedByPrice(null);
   };
 
   return (
@@ -88,28 +106,37 @@ export default function MarketplaceSearchResults() {
         <div className="result-container">
           <h1>MyMedVita Search Results</h1>
           <h4>
-            Search Parameters: CPT Code: {procedureCode}, Zip: {zip}, within {distance} Miles
+            Search Parameters: CPT Code: {procedureCode}, Zip: {zip}, within{' '}
+            {distance} Miles
           </h4>
         </div>
         <div className="map-container">
-          <MapContainer className="map" center={[centerLat, centerLon]} zoom={6}>
+          <MapContainer
+            className="map"
+            center={[centerLat, centerLon]}
+            zoom={6}
+          >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {providers.map((provider, index) => {
-              // Ensure provider latitude and longitude are defined before rendering the marker
-              if (provider.provider_lat && provider.provider_long) {
-                const providerLat = parseFloat(provider.provider_lat);
-                const providerLon = parseFloat(provider.provider_long);
-                return (
-                  <Marker key={index} position={[providerLat, providerLon]}>
-                    <Popup>{provider.provider_last_name}, {provider.provider_first_name}</Popup>
-                  </Marker>
-                );
-              }
-              return null;
-            })}
+            {providers &&
+              providers.map((provider, index) => {
+                // Ensure provider latitude and longitude are defined before rendering the marker
+                if (provider.provider_lat && provider.provider_long) {
+                  const providerLat = parseFloat(provider.provider_lat);
+                  const providerLon = parseFloat(provider.provider_long);
+                  return (
+                    <Marker key={index} position={[providerLat, providerLon]}>
+                      <Popup>
+                        {provider.provider_last_name},{' '}
+                        {provider.provider_first_name}
+                      </Popup>
+                    </Marker>
+                  );
+                }
+                return null;
+              })}
           </MapContainer>
         </div>
         <table className="centered-table">
@@ -119,29 +146,48 @@ export default function MarketplaceSearchResults() {
                 <h2>Provider</h2>
               </th>
               <th>
-                <h2>Price <button onClick={sortByPrice}>{sortedByPrice ? '↑' : '↓'}</button></h2>
+                <h2>
+                  Price{' '}
+                  <button onClick={sortByPrice}>
+                    {sortedByPrice ? '↑' : '↓'}
+                  </button>
+                </h2>
               </th>
               <th>
-                <h2>Distance <button onClick={sortByDistance}>{sortedByDistance ? '↑' : '↓'}</button></h2>
+                <h2>
+                  Distance{' '}
+                  <button onClick={sortByDistance}>
+                    {sortedByDistance ? '↑' : '↓'}
+                  </button>
+                </h2>
               </th>
             </tr>
           </thead>
           <tbody>
-            {providers.map((provider, index) => {
-              if (provider.provider_lat && provider.provider_long) {
-                const providerLat = parseFloat(provider.provider_lat);
-                const providerLon = parseFloat(provider.provider_long);
-                const providerDistance = haversine(centerLat, centerLon, providerLat, providerLon);
-                return (
-                  <tr key={index}>
-                    <td>{provider.provider_last_name}, {provider.provider_first_name}</td>
-                    <td>{provider.negotiated_rate}</td>
-                    <td>{providerDistance.toFixed(2)} miles</td>
-                  </tr>
-                );
-              }
-              return null;
-            })}
+            {providers &&
+              providers.map((provider, index) => {
+                if (provider.provider_lat && provider.provider_long) {
+                  const providerLat = parseFloat(provider.provider_lat);
+                  const providerLon = parseFloat(provider.provider_long);
+                  const providerDistance = haversine(
+                    centerLat,
+                    centerLon,
+                    providerLat,
+                    providerLon
+                  );
+                  return (
+                    <tr key={index}>
+                      <td>
+                        {provider.provider_last_name},{' '}
+                        {provider.provider_first_name}
+                      </td>
+                      <td>{provider.negotiated_rate}</td>
+                      <td>{providerDistance.toFixed(2)} miles</td>
+                    </tr>
+                  );
+                }
+                return null;
+              })}
           </tbody>
         </table>
         <button onClick={handleBack}>Back</button>
