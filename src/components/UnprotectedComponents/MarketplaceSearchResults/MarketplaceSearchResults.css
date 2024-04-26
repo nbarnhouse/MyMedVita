@@ -1,6 +1,8 @@
 /* Main Container */
 .container {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -30,13 +32,10 @@
   gap: 3rem;
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid black;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 /* Map Container */
-.map-container {
-  border: 1px solid black;
-}
 .map {
   height: 500px;
   width: 500px;
@@ -45,7 +44,7 @@
 /* Table Container */
 .result-table-container {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /* Button Container */
@@ -53,4 +52,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
