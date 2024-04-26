@@ -75,6 +75,7 @@ export default function MarketplaceSearchResults() {
     setProviders(initialProviders);
   }, [initialProviders]);
 
+  // Prevent the page from being scrollable
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -140,7 +141,12 @@ export default function MarketplaceSearchResults() {
       <NavBar />
       <div className="container">
         <div className="result-header-container">
-          <h1 className="result-header-h1">MyMedVita Search Results</h1>
+          <h1 className="result-header-h1">
+            <span className="purple-span" style={{ color: '#782cf6' }}>
+              My
+            </span>
+            MedVita Search Results
+          </h1>
           <p className="result-header-paragraph">
             CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
           </p>
