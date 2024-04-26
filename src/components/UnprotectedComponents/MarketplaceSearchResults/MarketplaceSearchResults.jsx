@@ -1,44 +1,22 @@
-// Import 3rd Party Libraries
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import './MarketplaceSearchResults.css';
 
-// CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
   const history = useHistory();
-  const data = useSelector((state) => state.distance);
-
-  const [filteredPoints, setFilteredPoints] = useState([]);
-  const [originalZip, setOriginalZip] = useState('');
-  const [originalDistance, setOriginalDistance] = useState('');
+  const { procedureCode, zip, distance, providers: initialProviders } = useSelector((state) => state.distance);
+  const [providers, setProviders] = useState(initialProviders);
+  const [sortedByPrice, setSortedByPrice] = useState(null); // null: not sorted, true: ascending, false: descending
+  const [sortedByDistance, setSortedByDistance] = useState(null); // null: not sorted, true: ascending, false: descending
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
-
-  const points = [
-    [36.1539, -95.9927],
-    [33.6609, -95.5555],
-    [35.9334, -95.8776],
-  ];
-
-  useEffect(() => {
-    const maxDistance = parseFloat(data.searchDistance); // Maximum distance in miles
-    const filteredPoints = filterPoints(
-      centerLat,
-      centerLon,
-      points,
-      maxDistance
-    );
-    setFilteredPoints(filteredPoints);
-    setOriginalZip(data.zip);
-    setOriginalDistance(data.searchDistance);
-  }, []);
 
   const handleBack = () => {
     history.push('/marketplace');
@@ -68,6 +46,38 @@ export default function MarketplaceSearchResults() {
     return filteredPoints;
   }
 
+  useEffect(() => {
+    setProviders(initialProviders); // Reset providers whenever initialProviders changes
+  }, [initialProviders]);
+
+  const sortByPrice = () => {
+    const sorted = [...providers].sort((a, b) => {
+      if (sortedByPrice === null || sortedByPrice) {
+        return a.negotiated_rate - b.negotiated_rate;
+      } else {
+        return b.negotiated_rate - a.negotiated_rate;
+      }
+    });
+    setProviders(sorted);
+    setSortedByPrice(sortedByPrice === null ? true : !sortedByPrice);
+    setSortedByDistance(null); // Reset distance sorting
+  };
+
+  const sortByDistance = () => {
+    const sorted = [...providers].sort((a, b) => {
+      const distanceA = haversine(centerLat, centerLon, parseFloat(a.provider_lat), parseFloat(a.provider_long));
+      const distanceB = haversine(centerLat, centerLon, parseFloat(b.provider_lat), parseFloat(b.provider_long));
+      if (sortedByDistance === null || sortedByDistance) {
+        return distanceA - distanceB;
+      } else {
+        return distanceB - distanceA;
+      }
+    });
+    setProviders(sorted);
+    setSortedByDistance(sortedByDistance === null ? true : !sortedByDistance);
+    setSortedByPrice(null); // Reset price sorting
+  };
+
   return (
     <>
       <NavBar />
@@ -75,23 +85,28 @@ export default function MarketplaceSearchResults() {
         <div className="result-container">
           <h1>MyMedVita Search Results</h1>
           <h4>
-            Search Parameters: [CODE HERE] , {originalZip}, {originalDistance}{' '}
-            Miles
+            Search Parameters: CPT Code: {procedureCode}, Zip: {zip}, within {distance} Miles
           </h4>
         </div>
         <div className="map-container">
-          <MapContainer
-            className="map"
-            center={[centerLat, centerLon]}
-            zoom={6}
-          >
+          <MapContainer className="map" center={[centerLat, centerLon]} zoom={6}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {filteredPoints.map((point, index) => (
-              <Marker key={index} position={point}></Marker>
-            ))}
+            {providers.map((provider, index) => {
+              // Ensure provider latitude and longitude are defined before rendering the marker
+              if (provider.provider_lat && provider.provider_long) {
+                const providerLat = parseFloat(provider.provider_lat);
+                const providerLon = parseFloat(provider.provider_long);
+                return (
+                  <Marker key={index} position={[providerLat, providerLon]}>
+                    <Popup>{provider.provider_last_name}, {provider.provider_first_name}</Popup>
+                  </Marker>
+                );
+              }
+              return null;
+            })}
           </MapContainer>
         </div>
         <table className="centered-table">
@@ -101,28 +116,29 @@ export default function MarketplaceSearchResults() {
                 <h2>Provider</h2>
               </th>
               <th>
-                <h2>Price</h2>
+                <h2>Price <button onClick={sortByPrice}>{sortedByPrice ? '↑' : '↓'}</button></h2>
               </th>
               <th>
-                <h2>Distance</h2>
+                <h2>Distance <button onClick={sortByDistance}>{sortedByDistance ? '↑' : '↓'}</button></h2>
               </th>
             </tr>
           </thead>
           <tbody>
-            {filteredPoints.map((point, index) => (
-              <tr key={index}>
-                <td>[Provider Name Here]</td>
-
-                <td>[Provider Price Here]</td>
-
-                <td>
-                  {/* Calculate distance using haversine formula */}
-                  {haversine(centerLat, centerLon, point[0], point[1]).toFixed(
-                    0
-                  )}
-                </td>
-              </tr>
-            ))}
+            {providers.map((provider, index) => {
+              if (provider.provider_lat && provider.provider_long) {
+                const providerLat = parseFloat(provider.provider_lat);
+                const providerLon = parseFloat(provider.provider_long);
+                const providerDistance = haversine(centerLat, centerLon, providerLat, providerLon);
+                return (
+                  <tr key={index}>
+                    <td>{provider.provider_last_name}, {provider.provider_first_name}</td>
+                    <td>{provider.negotiated_rate}</td>
+                    <td>{providerDistance.toFixed(2)} miles</td>
+                  </tr>
+                );
+              }
+              return null;
+            })}
           </tbody>
         </table>
         <button onClick={handleBack}>Back</button>

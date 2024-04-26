@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 //get codes and descriptions to suggest to user as they type in search bar
-router.get('/:query', async (req,res) => {
+router.get('/query/:query', async (req,res) => {
     try{
         const  query = req.params.query; //get search query from request(what the user is typing)
         console.log('Received query:', query);
@@ -21,5 +21,27 @@ router.get('/:query', async (req,res) => {
             res.status(500).json({ error: 'Internal server error' });
         }   
 });
+
+//get providers that offer searched for procedure
+router.get('/rates/:procedureCode', async (req, res) => {
+    try {
+        const { procedureCode } = req.params;
+
+        const query = `
+            SELECT *
+            FROM rates
+            WHERE "CPT_CODE" = $1;
+        `;
+
+        const result = await pool.query(query, [procedureCode]);
+        console.log('RESULT', result);
+
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error searching for providers:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 module.exports = router;

@@ -1,13 +1,8 @@
-// Import 3rd Party Libraries
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
-// CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
-
-// Import Material UI and Custom CSS
 import {
   Typography,
   Grid,
@@ -19,44 +14,56 @@ import {
 import MapIcon from '@mui/icons-material/Map';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './MarketplacePage.css';
+import axios from 'axios';
 
 function MarketplacePage() {
   const [query, setQuery] = useState({
-    searchTerm: '',
+    procedureCode: '',
     zip: '',
     distance: 25,
   });
+  const [procedureSearchCode, setProcedureSearchCode] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Function to handle user input change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setQuery((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Function to handle user form submission
-  const handleSubmit = (event) => {
-    // Prevent the page from refreshing
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Validate Zip Code = 5 digits and is a number
     const { zip, distance } = query;
     if (zip.length !== 5 || isNaN(Number(zip))) {
-      alert('Please enter a valid 5-digit zip code.');
-      setQuery((prev) => ({ ...prev, zip: '' }));
-      return;
+        alert('Please enter a valid 5-digit zip code.');
+        setQuery((prev) => ({ ...prev, zip: '' }));
+        return;
     }
 
-    // Dispatch Data
-    dispatch({
-      type: 'SUBMIT_DISTANCE_DATA',
-      payload: {
-        zip,
-        distance,
-      },
-    });
-    history.push('/results');
+    try {
+        const response = await axios.get(`/api/search/rates/${encodeURIComponent(procedureSearchCode)}`);
+        const data = await response.data;
+        console.log("DATAAAA:", data);
+        dispatch({
+            type: 'SUBMIT_DISTANCE_DATA',
+            payload: {
+                procedureCode: procedureSearchCode,
+                zip,
+                distance,
+                providers: data  // Pass providers data fetched from the backend to Redux
+            },
+        });
+        history.push('/results');
+    } catch (error) {
+        console.error('Error fetching provider data:', error);
+    }
+};
+
+  const handleSearchQueryChange = (searchQuery) => {
+    console.log('Search query:', searchQuery);
+    const procedureCode = searchQuery.substring(0, searchQuery.indexOf("-")-1);
+    console.log(procedureCode);
+    setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
   };
 
   return (
@@ -85,7 +92,7 @@ function MarketplacePage() {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} wrap="wrap">
             <Grid item xs={12}>
-              <ProcedureSearchBar />
+              <ProcedureSearchBar onSearchQueryChange={handleSearchQueryChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField
