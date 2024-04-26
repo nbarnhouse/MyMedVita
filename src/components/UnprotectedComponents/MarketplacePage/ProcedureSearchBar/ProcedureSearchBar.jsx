@@ -16,7 +16,7 @@ function ProcedureSearchBar({ onSearchQueryChange }) {
 
     try {
       // Make a request to your backend API to fetch suggestions
-      const response = await axios.get(`/api/search/${encodeURIComponent(query)}`);
+      const response = await axios.get(`/api/search/query/${encodeURIComponent(query)}`);
       const data = await response.data;
       console.log('Data received:', data); // Log the data received from the backend
       setSuggestions(data);
