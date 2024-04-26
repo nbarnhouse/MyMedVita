@@ -1,11 +1,14 @@
+//import 3rd party libraries
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
+//import css files
 import 'leaflet/dist/leaflet.css';
 import './MarketplaceSearchResults.css';
 
+//import custom component
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 
 export default function MarketplaceSearchResults() {
