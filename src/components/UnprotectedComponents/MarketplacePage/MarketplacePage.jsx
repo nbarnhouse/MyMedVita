@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
 import {
   Typography,
@@ -68,6 +69,7 @@ function MarketplacePage() {
 
   return (
     <>
+      <NavBar />
       <div className="search-container">
         <Typography
           variant="h3"
