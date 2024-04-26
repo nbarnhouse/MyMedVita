@@ -75,6 +75,15 @@ export default function MarketplaceSearchResults() {
     setProviders(initialProviders);
   }, [initialProviders]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    // Revert the background color back when the component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   // Function to route user to Provider Details Page
   const handleDetailsClick = (provider) => {
     console.log('PROVIDER:', provider);
