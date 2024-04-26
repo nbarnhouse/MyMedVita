@@ -1,8 +1,14 @@
+//import 3rd party libraries
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
+
+//custom components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
+
+//import Material UI and custom CSS
 import {
   Typography,
   Grid,
@@ -15,7 +21,6 @@ import {
 import MapIcon from '@mui/icons-material/Map';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './MarketplacePage.css';
-import axios from 'axios';
 
 function MarketplacePage() {
   const [query, setQuery] = useState({
@@ -24,6 +29,7 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -43,8 +49,8 @@ function MarketplacePage() {
 
     try {
         const response = await axios.get(`/api/search/rates/${encodeURIComponent(procedureSearchCode)}`);
-        const data = await response.data;
-        console.log("DATAAAA:", data);
+        const data = await response.data; //all data for providers that offer searched for procedure
+        console.log("DATA:", data);
         dispatch({
             type: 'SUBMIT_DISTANCE_DATA',
             payload: {
