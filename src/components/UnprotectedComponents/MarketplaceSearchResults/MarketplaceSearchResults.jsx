@@ -208,7 +208,7 @@ export default function MarketplaceSearchResults() {
                             </TableCell>
                             <TableCell>{provider.negotiated_rate}</TableCell>
                             <TableCell>
-                              {providerDistance.toFixed(2)} miles
+                              {Math.floor(providerDistance.toFixed(2))} miles
                             </TableCell>
                             <TableCell>
                               <Button
