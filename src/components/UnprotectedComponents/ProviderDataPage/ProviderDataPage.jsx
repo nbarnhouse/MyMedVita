@@ -38,7 +38,7 @@ function ProviderDataPage() {
           <h1>Provider Details</h1>
         </div>
         <div className="provider-details-bottom-container">
-          <div className="provider-details-information">
+          <div className="provider-details-information-container">
             <ul>
               <li>
                 <strong>CMS Specialty Name:</strong>{' '}
@@ -120,8 +120,23 @@ function ProviderDataPage() {
             )}
           </div>
         </div>
+        <div className="provider-details-button-container">
+          <Button
+            variant="contained"
+            size="large"
+            style={{
+              backgroundColor: '#782cf6',
+              color: 'white',
+            }}
+            sx={{
+              transition: 'transform 0.3s',
+              '&:hover': { transform: 'scale(1.1)' },
+            }}
+          >
+            Back
+          </Button>
+        </div>
       </div>
-      <button onClick={handleBackClick}>Back</button>
     </>
   );
 }

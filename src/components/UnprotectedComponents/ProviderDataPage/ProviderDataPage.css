@@ -1,0 +1,46 @@
+/* Main Container */
+.provider-details-container {
+  width: 80%;
+  height: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 1rem auto;
+}
+
+/* Provider Header */
+.provider-details-header {
+  margin-top: 0px;
+}
+
+/* Details and Map Container */
+.provider-details-bottom-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Provider Data Container */
+.provider-details-information-container {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border: 1px solid black;
+}
+
+/* Map Container */
+.provider-details-map-container {
+  flex: 1;
+}
+
+/* Button Container */
+.provider-details-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
