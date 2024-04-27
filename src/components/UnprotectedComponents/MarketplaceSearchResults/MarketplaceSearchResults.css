@@ -36,16 +36,23 @@
   border-radius: 30px;
 }
 
-/* Map Container */
-.map {
-  height: 500px;
-  width: 500px;
-}
-
 /* Table Container */
 .result-table-container {
   height: 100%;
+  width: 100%;
+  padding: 20px;
   overflow-y: auto;
+}
+
+/* Map Container */
+.map-container {
+  width: 100%;
+  height: auto;
+  border: 1px solid black;
+}
+.map {
+  height: 500px;
+  width: 100%;
 }
 
 /* Button Container */
