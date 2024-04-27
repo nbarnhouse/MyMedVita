@@ -142,9 +142,7 @@ export default function MarketplaceSearchResults() {
       <div className="container">
         <div className="result-header-container">
           <h1 className="result-header-h1">
-            <span className="purple-span" style={{ color: '#782cf6' }}>
-              My
-            </span>
+            <span style={{ color: '#782cf6' }}>My</span>
             MedVita Search Results
           </h1>
           <p className="result-header-paragraph">
@@ -152,35 +150,6 @@ export default function MarketplaceSearchResults() {
           </p>
         </div>
         <div className="result-container">
-          <div className="map-container">
-            <MapContainer
-              className="map"
-              center={[centerLat, centerLon]}
-              zoom={6}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {providers &&
-                providers.map((provider, index) => {
-                  // Ensure provider latitude and longitude are defined before rendering the marker
-                  if (provider.provider_lat && provider.provider_long) {
-                    const providerLat = parseFloat(provider.provider_lat);
-                    const providerLon = parseFloat(provider.provider_long);
-                    return (
-                      <Marker key={index} position={[providerLat, providerLon]}>
-                        <Popup>
-                          {provider.provider_last_name},{' '}
-                          {provider.provider_first_name}
-                        </Popup>
-                      </Marker>
-                    );
-                  }
-                  return null;
-                })}
-            </MapContainer>
-          </div>
           <div className="result-table-container">
             <TableContainer>
               <Table>
@@ -242,6 +211,35 @@ export default function MarketplaceSearchResults() {
                 </TableBody>
               </Table>
             </TableContainer>
+          </div>
+          <div className="map-container">
+            <MapContainer
+              className="map"
+              center={[centerLat, centerLon]}
+              zoom={6}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {providers &&
+                providers.map((provider, index) => {
+                  // Ensure provider latitude and longitude are defined before rendering the marker
+                  if (provider.provider_lat && provider.provider_long) {
+                    const providerLat = parseFloat(provider.provider_lat);
+                    const providerLon = parseFloat(provider.provider_long);
+                    return (
+                      <Marker key={index} position={[providerLat, providerLon]}>
+                        <Popup>
+                          {provider.provider_last_name},{' '}
+                          {provider.provider_first_name}
+                        </Popup>
+                      </Marker>
+                    );
+                  }
+                  return null;
+                })}
+            </MapContainer>
           </div>
         </div>
         <div className="result-button-container">
