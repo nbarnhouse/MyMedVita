@@ -1,16 +1,57 @@
+/* Main Container */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Result Header Container */
+.result-header-container {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.result-header-h1 {
+  margin-bottom: 0px;
+}
+
+.result-header-paragraph {
+  margin-top: 0px;
+  margin-bottom: 2rem;
+}
+
+/* Result Container */
+.result-container {
+  width: 90%;
+  max-height: 60vh;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 3rem;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 30px;
+}
+
+/* Map Container */
 .map {
   height: 500px;
   width: 500px;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
+/* Table Container */
+.result-table-container {
+  height: 100%;
+  overflow-y: auto;
 }
 
-.centered-table {
-  margin: 0 auto;
+/* Button Container */
+.result-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
