@@ -48,7 +48,7 @@ function App() {
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
-          <Route exact path="/">
+          <Route exact path="/home">
             <LandingPage />
           </Route>
           <Route exact path="/marketplace">
@@ -98,14 +98,6 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute> */}
-
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
@@ -125,17 +117,6 @@ function App() {
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            )}
-          </Route>
-
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
             )}
           </Route>
 
