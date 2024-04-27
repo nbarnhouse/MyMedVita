@@ -43,28 +43,4 @@ router.get('/rates/:procedureCode', async (req, res) => {
   }
 });
 
-// Saved search routes
-
-// get saved searches by user
-router.get('/saved/:user_id', (req, res) => {
-  const user = req.params.user_id;
-
-  const queryText = `SELECT "CPT_Code", "service_codes"."description" AS "procedure", 
-    "search_zip" AS "zip", "search_distance" AS "distance" FROM "user_searches"
-    JOIN "service_codes" ON "user_searches"."CPT_Code" = "service_codes"."primary_code" 
-    WHERE "user_id" = $1;`;
-  const queryArgs = [user];
-
-  // conduct query and return results
-  pool
-    .query(queryText, queryArgs)
-    .then((response) => {
-      res.send(response.rows).status(200);
-    })
-    .catch((err) => {
-      console.error('ERROR in /saved/:user_id GET:', err);
-      res.status(500).send(err);
-    });
-});
-
 module.exports = router;

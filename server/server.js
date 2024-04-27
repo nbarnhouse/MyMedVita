@@ -13,6 +13,7 @@ const geoRouter = require('./routes/geocode.router');
 const categoryRouter = require('./routes/category.router');
 const searchRouter = require('./routes/search.router');
 const contactRouter = require('./routes/contact.router');
+const savedRouter = require('./routes/saved.router');
 
 // Express Middleware
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use('/api/location', geoRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/saved', savedRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {
