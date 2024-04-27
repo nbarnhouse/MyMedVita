@@ -39,6 +39,46 @@ function ProviderDataPage() {
         </div>
         <div className="provider-details-bottom-container">
           <div className="provider-details-information-container">
+            <div className="provider-info-div">
+              <h5>Provider</h5>
+              <p className="provider-info-paragraph">
+                {provider.provider_first_name && provider.provider_first_name}{' '}
+                {provider.provider_last_name && provider.provider_last_name}{' '}
+                {provider.provider_credential && provider.provider_credential}
+              </p>
+            </div>
+
+            <div className="provider-info-div">
+              <h5>Procedure</h5>
+              <p className="provider-info-paragraph">
+                {provider.CPT_CODE && provider.CPT_CODE}
+              </p>
+            </div>
+
+            <div className="provider-info-div">
+              <h5>Address</h5>
+              <p className="provider-info-paragraph"></p>
+            </div>
+
+            <div className="provider-info-div">
+              <h5>Pricing</h5>
+              <p className="provider-info-paragraph">
+                $
+                {provider.negotiated_rate &&
+                  Math.floor(provider.negotiated_rate)}
+              </p>
+            </div>
+
+            <div className="provider-info-div">
+              <h5>Phone Number</h5>
+              <p className="provider-info-paragraph"></p>
+            </div>
+
+            <div className="provider-info-div">
+              <h5>Distance</h5>
+              <p className="provider-info-paragraph"></p>
+            </div>
+
             <ul>
               <li>
                 <strong>CMS Specialty Name:</strong>{' '}
