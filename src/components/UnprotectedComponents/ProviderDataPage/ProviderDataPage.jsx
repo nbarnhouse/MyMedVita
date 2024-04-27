@@ -109,6 +109,10 @@ function ProviderDataPage() {
             variant="contained"
             size="large"
             style={{ backgroundColor: '#782cf6', color: 'white' }}
+            sx={{
+              transition: 'transform 0.3s',
+              '&:hover': { transform: 'scale(1.1)' },
+            }}
             onClick={handleBackClick}
           >
             Back
