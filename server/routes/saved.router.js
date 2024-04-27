@@ -80,4 +80,23 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// delete all saved searches by user_id (multiple record delete record delete)
+router.delete('/all/:user_id', (req, res) => {
+  const queryArgs = [req.params.user_id];
+  const queryText = `DELETE FROM "user_searches" WHERE "user_id" = $1;`;
+
+  pool
+    .query(queryText, queryArgs)
+    .then((result) => {
+      console.log(
+        `All Saved Queries by User ID ${req.params.user_id} deleted.`
+      );
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error('ERROR in saved/:id DELETE Route:', err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
