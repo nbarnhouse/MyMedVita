@@ -63,4 +63,21 @@ router.post('/', async (req, res) => {
   }
 });
 
+// delete saved search by id (individual record delete)
+router.delete('/:id', (req, res) => {
+  const queryArgs = [req.params.id];
+  const queryText = `DELETE FROM "user_searches" WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, queryArgs)
+    .then((result) => {
+      console.log(`Saved Query ID ${req.params.id} deleted.`);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error('ERROR in saved/:id DELETE Route:', err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
