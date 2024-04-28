@@ -34,7 +34,18 @@ function MarketplaceInsuranceSelect({
 
   const insuranceSearchChange = (event) => {
     setSearchByInsurance(event.target.value);
+    if (event.target.value === 'false') {
+      clearCheckboxes();
+    }
     // console.log('New Search Value:', event.target.value);
+  };
+
+  const clearCheckboxes = () => {
+    const resetCheckboxState = {};
+    for (let insurer of insuranceList) {
+      resetCheckboxState[`key${insurer.insurer_name}`] = false;
+    }
+    setCheckboxState(resetCheckboxState);
   };
 
   const handleCheckChg = (event) => {
