@@ -11,8 +11,17 @@ function* fetchProviderDetails() {
   }
 }
 
+function* fetchInsurerDetail() {
+  try {
+    yield put({ type: 'CLEAR_INSURER_DATA' });
+  } catch (err) {
+    console.error('FAILED TO FETCH INSURANCE PROVIDERS:', err);
+  }
+}
+
 function* providerSaga() {
   yield takeLatest('FETCH_PROVIDER_DATA', fetchProviderDetails);
+  yield takeLatest('FETCH_INSURANCE_PROVIDERS', fetchInsurerDetail);
 }
 
 export default providerSaga;

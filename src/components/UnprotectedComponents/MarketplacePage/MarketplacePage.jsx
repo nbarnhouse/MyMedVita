@@ -83,6 +83,11 @@ function MarketplacePage() {
     setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
   };
 
+  const insuranceSearchChange = (event) => {
+    setSearchByInsurance(event.target.value);
+    console.log('New Search Value:', event.target.value);
+  };
+
   return (
     <>
       <NavBar />
@@ -166,12 +171,11 @@ function MarketplacePage() {
           <div className="insurance-search">
             <p className="search-option-label">How do you want to search:</p>
             <RadioGroup
+              className="insurance-type-group"
               row
               value={searchByInsurance}
               name="insurance-type"
-              onChange={(event) => {
-                setSearchByInsurance(event.target.value);
-              }}>
+              onChange={insuranceSearchChange}>
               <FormControlLabel
                 value={true}
                 control={<Radio />}
@@ -183,7 +187,9 @@ function MarketplacePage() {
                 label="No Insurance"
               />
             </RadioGroup>
-            <p>Current Selection Value: {JSON.stringify(searchByInsurance)}</p>
+
+            {searchByInsurance ? <p>Add Selection options here</p> : <></>}
+            <p>Current Selection Value: {searchByInsurance}</p>
           </div>
           <div className="search-button-container">
             <Button
