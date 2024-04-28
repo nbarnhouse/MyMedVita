@@ -16,6 +16,11 @@ import {
   MenuItem,
   InputAdornment,
   Button,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
 } from '@mui/material';
 import MapIcon from '@mui/icons-material/Map';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -28,6 +33,7 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
+  const [searchByInsurance, setSearchByInsurance] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -159,6 +165,25 @@ function MarketplacePage() {
           </Grid>
           <div className="insurance-search">
             <p className="search-option-label">How do you want to search:</p>
+            <RadioGroup
+              row
+              value={searchByInsurance}
+              name="insurance-type"
+              onChange={(event) => {
+                setSearchByInsurance(event.target.value);
+              }}>
+              <FormControlLabel
+                value={true}
+                control={<Radio />}
+                label="By Insurance Options"
+              />
+              <FormControlLabel
+                value={false}
+                control={<Radio />}
+                label="No Insurance"
+              />
+            </RadioGroup>
+            <p>Current Selection Value: {JSON.stringify(searchByInsurance)}</p>
           </div>
           <div className="search-button-container">
             <Button
