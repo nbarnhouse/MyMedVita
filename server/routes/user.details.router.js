@@ -20,5 +20,12 @@ router.get('/', (req, res) => {
 });
 
 // PUT (UPDATE) Route
+router.post('/', (req, res) => {
+  const sqlText = `
+    UPDATE "user"
+    SET "first_name" = $1, "last_name" = $2, "email" = $3, "phone" = $4, "dob" = $5, "gender" = $6, "street_address" = $7, "city" = $8, "state" = $9, "zip" = $10
+    WHERE "id" = $11;
+  `;
+});
 
 module.exports = router;
