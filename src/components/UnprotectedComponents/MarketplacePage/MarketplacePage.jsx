@@ -41,33 +41,38 @@ function MarketplacePage() {
     event.preventDefault();
     const { zip, distance } = query;
     if (zip.length !== 5 || isNaN(Number(zip))) {
-        alert('Please enter a valid 5-digit zip code.');
-        setQuery((prev) => ({ ...prev, zip: '' }));
-        return;
+      alert('Please enter a valid 5-digit zip code.');
+      setQuery((prev) => ({ ...prev, zip: '' }));
+      return;
     }
 
     try {
-        const response = await axios.get(`/api/search/rates/${encodeURIComponent(procedureSearchCode)}`);
-        const data = await response.data; //all data for providers that offer searched for procedure
-        console.log("DATA:", data);
-        dispatch({
-            type: 'SUBMIT_DISTANCE_DATA',
-            payload: {
-                procedureCode: procedureSearchCode,
-                zip,
-                distance,
-                providers: data  // Pass providers data fetched from the backend to Redux
-            },
-        });
-        history.push('/results');
+      const response = await axios.get(
+        `/api/search/rates/${encodeURIComponent(procedureSearchCode)}`
+      );
+      const data = await response.data; //all data for providers that offer searched for procedure
+      console.log('DATA:', data);
+      dispatch({
+        type: 'SUBMIT_DISTANCE_DATA',
+        payload: {
+          procedureCode: procedureSearchCode,
+          zip,
+          distance,
+          providers: data, // Pass providers data fetched from the backend to Redux
+        },
+      });
+      history.push('/results');
     } catch (error) {
-        console.error('Error fetching provider data:', error);
+      console.error('Error fetching provider data:', error);
     }
-};
+  };
 
   const handleSearchQueryChange = (searchQuery) => {
     console.log('Search query:', searchQuery);
-    const procedureCode = searchQuery.substring(0, searchQuery.indexOf("-")-1);
+    const procedureCode = searchQuery.substring(
+      0,
+      searchQuery.indexOf('-') - 1
+    );
     console.log(procedureCode);
     setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
   };
@@ -80,8 +85,7 @@ function MarketplacePage() {
           variant="h3"
           component="h1"
           className="search-header"
-          sx={{ fontWeight: 'bold', marginTop: '3rem' }}
-        >
+          sx={{ fontWeight: 'bold', marginTop: '3rem' }}>
           <span style={{ color: '#782cf6' }}>My</span>MedVita
           <span style={{ verticalAlign: 'super', fontSize: '0.5em' }}>
             ™
@@ -90,17 +94,28 @@ function MarketplacePage() {
         </Typography>
         <p className="search-paragraph">
           Click{' '}
-          <Link to="/category/outpatient" className="search-category-link">
+          <Link
+            to="/category/outpatient"
+            className="search-category-link">
             HERE
           </Link>{' '}
           for a CPT Reference Guide
         </p>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2} wrap="wrap">
-            <Grid item xs={12}>
-              <ProcedureSearchBar onSearchQueryChange={handleSearchQueryChange} />
+          <Grid
+            container
+            spacing={2}
+            wrap="wrap">
+            <Grid
+              item
+              xs={12}>
+              <ProcedureSearchBar
+                onSearchQueryChange={handleSearchQueryChange}
+              />
             </Grid>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}>
               <TextField
                 label="Zip Code"
                 name="zip"
@@ -117,7 +132,9 @@ function MarketplacePage() {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}>
               <TextField
                 select
                 label="Distance (Miles)"
@@ -132,8 +149,7 @@ function MarketplacePage() {
                       <MapIcon />
                     </InputAdornment>
                   ),
-                }}
-              >
+                }}>
                 <MenuItem value="5">5</MenuItem>
                 <MenuItem value="10">10</MenuItem>
                 <MenuItem value="25">25</MenuItem>
@@ -141,6 +157,9 @@ function MarketplacePage() {
               </TextField>
             </Grid>
           </Grid>
+          <div className="insurance-search">
+            <p className="search-option-label">How do you want to search:</p>
+          </div>
           <div className="search-button-container">
             <Button
               type="submit"
@@ -155,8 +174,7 @@ function MarketplacePage() {
                   color: 'white',
                   transform: 'scale(1.05)',
                 },
-              }}
-            >
+              }}>
               Shop Now
             </Button>
           </div>
