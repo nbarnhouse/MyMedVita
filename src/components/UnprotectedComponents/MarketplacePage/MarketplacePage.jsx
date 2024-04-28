@@ -29,6 +29,7 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
+  const [insuranceSearchMask, setInsuranceSearchMask] = useState(0);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -158,7 +159,10 @@ function MarketplacePage() {
               </TextField>
             </Grid>
           </Grid>
-          <MarketplaceInsuranceSelect />
+          <MarketplaceInsuranceSelect
+            insuranceSearchMask={insuranceSearchMask}
+            setInsuranceSearchMask={setInsuranceSearchMask}
+          />
           <div className="search-button-container">
             <Button
               type="submit"

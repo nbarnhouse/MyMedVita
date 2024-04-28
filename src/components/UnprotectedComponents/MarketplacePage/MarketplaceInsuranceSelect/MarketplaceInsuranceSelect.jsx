@@ -25,7 +25,10 @@ import {
 
 import './MarketplaceInsuranceSelect.css';
 
-function MarketplaceInsuranceSelect() {
+function MarketplaceInsuranceSelect({
+  insuranceSearchMask,
+  setInsuranceSearchMask,
+}) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -41,20 +44,43 @@ function MarketplaceInsuranceSelect() {
     console.log('New Search Value:', event.target.value);
   };
 
+  const handleCheckChg = (event) => {
+    console.log('Changing checkbox status for:', event.target.name);
+    setCheckboxState({
+      ...checkboxState,
+      [`key${event.target.name}`]: !checkboxState[`key${event.target.name}`],
+    });
+    generateInsuranceSearchMask();
+  };
+
+  const generateInsuranceSearchMask = () => {
+    let searchMask = 0;
+    for (let insurer of insuranceList) {
+      if (checkboxState[`key${insurer.insurer_name}`]) {
+        searchMask += +insurer.insurer_code;
+      }
+    }
+    setInsuranceSearchMask(searchMask);
+  };
+
   useEffect(() => {
     dispatch({ type: 'FETCH_INSURANCE_PROVIDERS' });
   }, []);
 
   useEffect(() => {
     setInsuranceReady(true);
+    const initialCheckboxState = {};
     for (let insurer of insuranceList) {
-      setCheckboxState({
-        ...checkboxState,
-        [`${insurer.insurer_name}`]: false,
-      });
-      console.log(checkboxState);
+      initialCheckboxState[`key${insurer.insurer_name}`] = false;
+      console.log(initialCheckboxState);
     }
+    setCheckboxState(initialCheckboxState);
   }, [!loading]);
+
+  useEffect(() => {
+    const newMask = insuranceSearchMask;
+    console.log('New Mask:', newMask);
+  }, [insuranceSearchMask]);
 
   return (
     insuranceReady && (
@@ -97,6 +123,8 @@ function MarketplaceInsuranceSelect() {
                       label={insurer.insurer_name}
                       control={
                         <Checkbox
+                          checked={checkboxState[`key${insurer.insurer_name}`]}
+                          onChange={handleCheckChg}
                           name={insurer.insurer_name}
                           value={+insurer.insurer_code}
                         />
@@ -109,6 +137,7 @@ function MarketplaceInsuranceSelect() {
           </FormGroup>
         )}
         <p>Control State: {JSON.stringify(checkboxState)}</p>
+        <p>Insurance Search Mask: {insuranceSearchMask}</p>
       </div>
     )
   );
