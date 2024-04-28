@@ -48,7 +48,7 @@ function App() {
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
-          <Route exact path="/">
+          <Route exact path="/home">
             <LandingPage />
           </Route>
           <Route exact path="/marketplace">
@@ -85,27 +85,6 @@ function App() {
             <ProviderDataPage />
           </Route>
 
-          {/* -----------------------------------TESTING----------------------------------- */}
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:5173/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:5173/user */}
-          {/* <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute> */}
-
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
@@ -128,17 +107,6 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
-
           <Route exact path="/userEdit">
             {user.id ? (
               // If the user is already logged in,
@@ -149,6 +117,22 @@ function App() {
               <LandingPage />
             )}
           </Route>
+
+          {/* -----------------------------------TESTING----------------------------------- */}
+          {/* For protected routes, the view could show one of several things on the same route.
+            Visiting localhost:5173/user will show the UserPage if the user is logged in.
+            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+            Even though it seems like they are different pages, the user is always on localhost:5173/user */}
+          {/* <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/user"
+          >
+            <UserPage />
+          </ProtectedRoute>
+
+      
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
