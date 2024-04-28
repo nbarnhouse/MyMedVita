@@ -8,17 +8,10 @@ import axios from 'axios';
 
 //import Material UI and custom CSS
 import {
-  Typography,
   Grid,
-  TextField,
-  MenuItem,
-  InputAdornment,
-  Button,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormControl,
-  FormLabel,
   FormGroup,
   Checkbox,
 } from '@mui/material';
@@ -41,16 +34,15 @@ function MarketplaceInsuranceSelect({
 
   const insuranceSearchChange = (event) => {
     setSearchByInsurance(event.target.value);
-    console.log('New Search Value:', event.target.value);
+    // console.log('New Search Value:', event.target.value);
   };
 
   const handleCheckChg = (event) => {
-    console.log('Changing checkbox status for:', event.target.name);
+    // console.log('Changing checkbox status for:', event.target.name);
     setCheckboxState({
       ...checkboxState,
       [`key${event.target.name}`]: !checkboxState[`key${event.target.name}`],
     });
-    generateInsuranceSearchMask();
   };
 
   const generateInsuranceSearchMask = () => {
@@ -60,6 +52,7 @@ function MarketplaceInsuranceSelect({
         searchMask += +insurer.insurer_code;
       }
     }
+    // console.log('New Search Mask:', searchMask);
     setInsuranceSearchMask(searchMask);
   };
 
@@ -72,15 +65,14 @@ function MarketplaceInsuranceSelect({
     const initialCheckboxState = {};
     for (let insurer of insuranceList) {
       initialCheckboxState[`key${insurer.insurer_name}`] = false;
-      console.log(initialCheckboxState);
+      // console.log(initialCheckboxState);
     }
     setCheckboxState(initialCheckboxState);
   }, [!loading]);
 
   useEffect(() => {
-    const newMask = insuranceSearchMask;
-    console.log('New Mask:', newMask);
-  }, [insuranceSearchMask]);
+    generateInsuranceSearchMask();
+  }, [checkboxState]);
 
   return (
     insuranceReady && (
@@ -136,8 +128,8 @@ function MarketplaceInsuranceSelect({
             </Grid>
           </FormGroup>
         )}
-        <p>Control State: {JSON.stringify(checkboxState)}</p>
-        <p>Insurance Search Mask: {insuranceSearchMask}</p>
+        {/* <p>Control State: {JSON.stringify(checkboxState)}</p>
+        <p>Insurance Search Mask: {insuranceSearchMask}</p> */}
       </div>
     )
   );
