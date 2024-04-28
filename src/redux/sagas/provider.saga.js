@@ -14,6 +14,8 @@ function* fetchProviderDetails() {
 function* fetchInsurerDetail() {
   try {
     yield put({ type: 'CLEAR_INSURER_DATA' });
+    const response = yield axios.get('/api/insurance');
+    yield put({ type: 'SET_INSURANCE_DATA', payload: response.data });
   } catch (err) {
     console.error('FAILED TO FETCH INSURANCE PROVIDERS:', err);
   }

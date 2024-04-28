@@ -6,7 +6,7 @@ const insuranceReducer = (
     case 'CLEAR_INSURANCE_DATA':
       return { loading: true, insuranceList: [] };
     case 'SET_INSURANCE_DATA':
-      return { ...action.payload, loading: false };
+      return { insuranceList: action.payload, loading: false };
     default:
       return state;
   }

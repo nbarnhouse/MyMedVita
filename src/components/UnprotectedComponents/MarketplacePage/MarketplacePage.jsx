@@ -7,6 +7,7 @@ import axios from 'axios';
 //custom components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
+import MarketplaceInsuranceSelect from './MarketplaceInsuranceSelect/MarketplaceInsuranceSelect';
 
 //import Material UI and custom CSS
 import {
@@ -168,29 +169,10 @@ function MarketplacePage() {
               </TextField>
             </Grid>
           </Grid>
-          <div className="insurance-search">
-            <p className="search-option-label">How do you want to search:</p>
-            <RadioGroup
-              className="insurance-type-group"
-              row
-              value={searchByInsurance}
-              name="insurance-type"
-              onChange={insuranceSearchChange}>
-              <FormControlLabel
-                value={true}
-                control={<Radio />}
-                label="By Insurance Options"
-              />
-              <FormControlLabel
-                value={false}
-                control={<Radio />}
-                label="No Insurance"
-              />
-            </RadioGroup>
-
-            {searchByInsurance ? <p>Add Selection options here</p> : <></>}
-            <p>Current Selection Value: {searchByInsurance}</p>
-          </div>
+          <MarketplaceInsuranceSelect
+            searchByInsurance={searchByInsurance}
+            setSearchByInsurance={setSearchByInsurance}
+          />
           <div className="search-button-container">
             <Button
               type="submit"
