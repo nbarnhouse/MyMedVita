@@ -33,7 +33,19 @@ router.post('/register', (req, res, next) => {
                     street_address, city, state, zip)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id`;
   pool
-    .query(queryText, [password, phone, first_name, last_name, email, dob, gender, street_address, city, state, zip])
+    .query(queryText, [
+      password,
+      phone,
+      first_name,
+      last_name,
+      email,
+      dob,
+      gender,
+      street_address,
+      city,
+      state,
+      zip,
+    ])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
@@ -43,7 +55,7 @@ router.post('/register', (req, res, next) => {
 
 //Handles PUT request with updated user info
 router.put('/update', rejectUnauthenticated, (req, res) => {
-  const userId = req.user.id; 
+  const userId = req.user.id;
   const phone = req.body.phone;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
@@ -57,7 +69,19 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
 
   const queryText = `UPDATE "user" SET phone=$1, first_name=$2, last_name=$3, email=$4, dob=$5, gender=$6, street_address=$7, city=$8, state=$9, zip=$10 WHERE id=$11`;
   pool
-    .query(queryText, [phone, first_name, last_name, email, dob, gender, street_address, city, state, zip, userId])
+    .query(queryText, [
+      phone,
+      first_name,
+      last_name,
+      email,
+      dob,
+      gender,
+      street_address,
+      city,
+      state,
+      zip,
+      userId,
+    ])
     .then(() => res.sendStatus(200))
     .catch((err) => {
       console.log('Error updating user information:', err);

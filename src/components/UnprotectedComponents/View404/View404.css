@@ -1,0 +1,32 @@
+/* Main Container */
+.error-container {
+  width: 80%;
+  height: 80vh;
+  background-image: url('./images/not_found.avif');
+  background-size: cover;
+  object-fit: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 3rem auto;
+  border-radius: 30px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+/* Error Header */
+.error-number {
+  font-size: 60px;
+  font-weight: bolder;
+  margin-bottom: 30px;
+}
+
+.error-header {
+  align-items: flex-start;
+  color: black;
+  text-transform: uppercase;
+  padding: 0 20px;
+  margin-top: 0px;
+}

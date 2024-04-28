@@ -1,0 +1,23 @@
+/* Main Container */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search-paragraph {
+  margin-top: 0px;
+}
+
+.search-category-link {
+  color: '#782cf6';
+  text-decoration: underline;
+}
+
+/* Button Container */
+.search-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

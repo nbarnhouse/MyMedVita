@@ -1,61 +1,49 @@
-import React, { useState } from 'react';
+// Import 3rd party libraries
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-import 'leaflet/dist/leaflet.css';
-import './MarketplaceSearchResults.css';
-
-// CUSTOM COMPONENTS
+// Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 
+// Import Material UI and CSS files
+import {
+  Button,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
+import './MarketplaceSearchResults.css';
+import 'leaflet/dist/leaflet.css';
+
 export default function MarketplaceSearchResults() {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [zip, setZip] = useState('');
-  const [distance, setDistance] = useState('');
-  const [filteredPoints, setFilteredPoints] = useState([]);
-  const [originalZip, setOriginalZip] = useState('');
-  const [originalDistance, setOriginalDistance] = useState('');
+
+  // Obtain provider data from the database and store in an object
+  const {
+    procedureCode,
+    zip,
+    distance,
+    providers: initialProviders,
+  } = useSelector((state) => state.distance);
+
+  const [providers, setProviders] = useState(initialProviders);
+  // null: not sorted, true: ascending, false: descending
+  const [sortedByPrice, setSortedByPrice] = useState(null);
+  // null: not sorted, true: ascending, false: descending
+  const [sortedByDistance, setSortedByDistance] = useState(null);
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
 
-  const points = [
-    [36.1539, -95.9927],
-    [33.6609, -95.5555],
-    [35.9334, -95.8776],
-  ];
-
-  const handleZipSearch = (event) => {
-    event.preventDefault();
-    if (zip.length !== 5 || isNaN(zip)) {
-      alert('Please enter a valid 5-digit zip code.');
-
-      setZip('');
-      setDistance('');
-      return;
-    }
-
-    console.log(`Zip Code: ${zip} and Distance:${distance}`);
-    const maxDistance = parseFloat(distance); // Maximum distance in miles
-    const filteredPoints = filterPoints(
-      centerLat,
-      centerLon,
-      points,
-      maxDistance
-    );
-    setFilteredPoints(filteredPoints);
-
-    setOriginalZip(zip);
-    setOriginalDistance(distance);
-
-    setZip('');
-    setDistance('');
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleZipSearch(event);
-    }
+  // Function to handle a "back" button click
+  const handleBackClick = () => {
+    history.push('/marketplace');
   };
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -82,94 +70,196 @@ export default function MarketplaceSearchResults() {
     return filteredPoints;
   }
 
-  const handleBack = () => {
-    history.push('/search');
+  // Reset providers whenever initialProviders changes
+  useEffect(() => {
+    setProviders(initialProviders);
+  }, [initialProviders]);
+
+  // Prevent the page from being scrollable
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    // Revert the background color back when the component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  // Function to route user to Provider Details Page
+  const handleDetailsClick = (provider) => {
+    console.log('PROVIDER:', provider);
+    history.push({
+      pathname: '/details',
+      state: { provider: provider },
+    });
+  };
+
+  // Function to sort by Price
+  const sortByPrice = () => {
+    const sorted = [...providers].sort((a, b) => {
+      if (sortedByPrice === null || sortedByPrice) {
+        return a.negotiated_rate - b.negotiated_rate;
+      } else {
+        return b.negotiated_rate - a.negotiated_rate;
+      }
+    });
+    setProviders(sorted);
+    setSortedByPrice(sortedByPrice === null ? true : !sortedByPrice);
+    // Reset distance sorting
+    setSortedByDistance(null);
+  };
+
+  // Function to sort by Distance
+  const sortByDistance = () => {
+    const sorted = [...providers].sort((a, b) => {
+      const distanceA = haversine(
+        centerLat,
+        centerLon,
+        parseFloat(a.provider_lat),
+        parseFloat(a.provider_long)
+      );
+      const distanceB = haversine(
+        centerLat,
+        centerLon,
+        parseFloat(b.provider_lat),
+        parseFloat(b.provider_long)
+      );
+      if (sortedByDistance === null || sortedByDistance) {
+        return distanceA - distanceB;
+      } else {
+        return distanceB - distanceA;
+      }
+    });
+    setProviders(sorted);
+    setSortedByDistance(sortedByDistance === null ? true : !sortedByDistance);
+    // Reset price sorting
+    setSortedByPrice(null);
   };
 
   return (
     <>
       <NavBar />
       <div className="container">
-        <div className="input container">
-          <form onSubmit={handleZipSearch}>
-            <label htmlFor="zipSearch">Zip Code:</label>
-            <input
-              type="text"
-              id="zipSearch"
-              name="zipSearch"
-              placeholder="Zip Code"
-              value={zip}
-              onChange={(event) => setZip(event.target.value)}
-              onKeyDown={handleKeyDown}
-            ></input>
-
-            <label htmlFor="distanceSearch">Distance(Miles):</label>
-            <input
-              type="number"
-              id="distanceSearch"
-              name="distanceSearch"
-              placeholder="Distance(Miles)"
-              value={distance}
-              onChange={(event) => setDistance(event.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-
-        <div className="result-container">
-          <h1>MyMedVita Search Results</h1>
-          <h4>
-            Search Parameters: MRI - , Zip: {originalZip}, {originalDistance}{' '}
-            Miles
-          </h4>
-
-          <p>
-            NOTE: setting zip 74011 as center on map. (This is hardcoded for
-            now). Test markers are: [36.1539, -95.9927] and [33.6609, -95.5555]
-            within 30 miles. Test marker [33.6609, -95.5555 ] is within 200
-            miles.
+        <div className="result-header-container">
+          <h1 className="result-header-h1">
+            <span style={{ color: '#782cf6' }}>My</span>
+            MedVita Search Results
+          </h1>
+          <p className="result-header-paragraph">
+            CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
           </p>
-          <h2>Filtered Data</h2>
-          <table className="centered-table">
-            <thead>
-              <tr>
-                <th>Coordinate</th>
-                <th>Distance (miles)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPoints.map((point, index) => (
-                <tr key={index}>
-                  <td>{point.join(', ')}</td>
-                  <td>
-                    {haversine(
-                      centerLat,
-                      centerLon,
-                      point[0],
-                      point[1]
-                    ).toFixed(0)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <button onClick={handleBack}>Back</button>
         </div>
-        <div className="map-container">
-          <MapContainer
-            className="map"
-            center={[centerLat, centerLon]}
-            zoom={6}
+        <div className="result-container">
+          <div className="result-table-container">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Provider</TableCell>
+                    <TableCell>
+                      Price{' '}
+                      <Button onClick={sortByPrice}>
+                        {sortedByPrice ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      Distance{' '}
+                      <Button onClick={sortByDistance}>
+                        {sortedByDistance ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                    <TableCell>Details</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {providers &&
+                    providers.map((provider, index) => {
+                      if (provider.provider_lat && provider.provider_long) {
+                        const providerLat = parseFloat(provider.provider_lat);
+                        const providerLon = parseFloat(provider.provider_long);
+                        const providerDistance = haversine(
+                          centerLat,
+                          centerLon,
+                          providerLat,
+                          providerLon
+                        );
+                        return (
+                          <TableRow key={index}>
+                            <TableCell>
+                              {provider.provider_last_name},{' '}
+                              {provider.provider_first_name}{' '}
+                              {provider.provider_credential}
+                            </TableCell>
+                            <TableCell>
+                              ${Math.floor(provider.negotiated_rate)}
+                            </TableCell>
+                            <TableCell>
+                              {Math.floor(providerDistance)} miles
+                            </TableCell>
+                            <TableCell>
+                              <Button
+                                onClick={() => handleDetailsClick(provider)}
+                              >
+                                Details
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      }
+                      return null;
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+          <div className="map-container">
+            <MapContainer
+              className="map"
+              center={[centerLat, centerLon]}
+              zoom={6}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {providers &&
+                providers.map((provider, index) => {
+                  // Ensure provider latitude and longitude are defined before rendering the marker
+                  if (provider.provider_lat && provider.provider_long) {
+                    const providerLat = parseFloat(provider.provider_lat);
+                    const providerLon = parseFloat(provider.provider_long);
+                    return (
+                      <Marker key={index} position={[providerLat, providerLon]}>
+                        <Popup>
+                          {provider.provider_last_name},{' '}
+                          {provider.provider_first_name}
+                        </Popup>
+                      </Marker>
+                    );
+                  }
+                  return null;
+                })}
+            </MapContainer>
+          </div>
+        </div>
+        <div className="result-button-container">
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={handleBackClick}
+            sx={{
+              backgroundColor: '#782CF6',
+              color: 'white',
+              margin: '10px auto',
+              '&:hover': {
+                backgroundColor: '#782CF6',
+                color: 'white',
+                transform: 'scale(1.05)',
+              },
+            }}
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {filteredPoints.map((point, index) => (
-              <Marker key={index} position={point}></Marker>
-            ))}
-          </MapContainer>
+            Back
+          </Button>
         </div>
       </div>
     </>
