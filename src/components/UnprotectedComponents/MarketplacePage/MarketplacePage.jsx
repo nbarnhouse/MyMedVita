@@ -1,5 +1,5 @@
 //import 3rd party libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -17,11 +17,6 @@ import {
   MenuItem,
   InputAdornment,
   Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
 } from '@mui/material';
 import MapIcon from '@mui/icons-material/Map';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -34,7 +29,6 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
-  const [searchByInsurance, setSearchByInsurance] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -82,11 +76,6 @@ function MarketplacePage() {
     );
     console.log(procedureCode);
     setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
-  };
-
-  const insuranceSearchChange = (event) => {
-    setSearchByInsurance(event.target.value);
-    console.log('New Search Value:', event.target.value);
   };
 
   return (
@@ -169,10 +158,7 @@ function MarketplacePage() {
               </TextField>
             </Grid>
           </Grid>
-          <MarketplaceInsuranceSelect
-            searchByInsurance={searchByInsurance}
-            setSearchByInsurance={setSearchByInsurance}
-          />
+          <MarketplaceInsuranceSelect />
           <div className="search-button-container">
             <Button
               type="submit"
