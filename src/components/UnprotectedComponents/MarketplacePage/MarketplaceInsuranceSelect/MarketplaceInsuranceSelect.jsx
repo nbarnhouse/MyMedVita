@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 //custom components
 
@@ -27,43 +26,55 @@ function MarketplaceInsuranceSelect({
 
   const [searchByInsurance, setSearchByInsurance] = useState(false);
   const [insuranceReady, setInsuranceReady] = useState(false);
+  const [insuranceSelection, setInsuranceSelection] = useState(null);
   const loading = useSelector((store) => store.insurance.loading);
   const insuranceList = useSelector((store) => store.insurance.insuranceList);
 
+  // CHECKBOX SELECTION CODE
   const [checkboxState, setCheckboxState] = useState({});
 
   const insuranceSearchChange = (event) => {
     setSearchByInsurance(event.target.value);
-    if (event.target.value === 'false') {
-      clearCheckboxes();
+    if (!insuranceSelection) {
+      setInsuranceSelection(insuranceList[0].id);
     }
-    // console.log('New Search Value:', event.target.value);
+    // CHECKBOX SELECTION CODE
+    // if (event.target.value === 'false') {
+    //   clearCheckboxes();
+    // }
   };
 
-  const clearCheckboxes = () => {
-    const resetCheckboxState = {};
-    for (let insurer of insuranceList) {
-      resetCheckboxState[`key${insurer.insurer_name}`] = false;
-    }
-    setCheckboxState(resetCheckboxState);
+  const insuranceProviderChange = (event) => {
+    setInsuranceSelection(event.target.value);
   };
 
-  const handleCheckChg = (event) => {
-    // console.log('Changing checkbox status for:', event.target.name);
-    setCheckboxState({
-      ...checkboxState,
-      [`key${event.target.name}`]: !checkboxState[`key${event.target.name}`],
-    });
-  };
+  // CHECKBOX SELECTION CODE
+  // const clearCheckboxes = () => {
+  //   const resetCheckboxState = {};
+  //   for (let insurer of insuranceList) {
+  //     resetCheckboxState[`key${insurer.insurer_name}`] = false;
+  //   }
+  //   setCheckboxState(resetCheckboxState);
+  // };
+
+  // CHECKBOX SELECTION CODE
+  // const handleCheckChg = (event) => {
+  //   setCheckboxState({
+  //     ...checkboxState,
+  //     [`key${event.target.name}`]: !checkboxState[`key${event.target.name}`],
+  //   });
+  // };
 
   const generateInsuranceSearchMask = () => {
-    let searchMask = 0;
-    for (let insurer of insuranceList) {
-      if (checkboxState[`key${insurer.insurer_name}`]) {
-        searchMask += +insurer.insurer_code;
-      }
-    }
-    // console.log('New Search Mask:', searchMask);
+    // CHECKBOX SELECTION CODE
+    // let searchMask = 0;
+    // for (let insurer of insuranceList) {
+    //   if (checkboxState[`key${insurer.insurer_name}`]) {
+    //     searchMask += +insurer.insurer_code;
+    //   }
+    // }
+    const searchMask = insuranceSelection;
+
     setInsuranceSearchMask(searchMask);
   };
 
@@ -73,17 +84,19 @@ function MarketplaceInsuranceSelect({
 
   useEffect(() => {
     setInsuranceReady(true);
-    const initialCheckboxState = {};
-    for (let insurer of insuranceList) {
-      initialCheckboxState[`key${insurer.insurer_name}`] = false;
-      // console.log(initialCheckboxState);
-    }
-    setCheckboxState(initialCheckboxState);
+
+    // CHECKBOX SELECTION CODE
+    // const initialCheckboxState = {};
+    // for (let insurer of insuranceList) {
+    //   initialCheckboxState[`key${insurer.insurer_name}`] = false;
+    // }
+    // setCheckboxState(initialCheckboxState);
+    //
   }, [!loading]);
 
   useEffect(() => {
     generateInsuranceSearchMask();
-  }, [checkboxState]);
+  }, [checkboxState, insuranceSelection]);
 
   return (
     insuranceReady && (
@@ -108,12 +121,16 @@ function MarketplaceInsuranceSelect({
         </RadioGroup>
 
         {searchByInsurance === 'true' && (
-          <FormGroup className="insurance-selection-formGroup">
+          <RadioGroup
+            className="insurance-selection-formGroup"
+            row
+            value={insuranceSelection}
+            name="insurance-type"
+            onChange={insuranceProviderChange}>
             <Grid
               className="insurance-grid"
               container
               spacing={-20}
-              // sx={{ width: '75%' }}
               justifyContent={'center'}
               wrap="wrap">
               {insuranceList.map((insurer) => {
@@ -122,6 +139,14 @@ function MarketplaceInsuranceSelect({
                     key={insurer.id}
                     item
                     xs={3}>
+                    <FormControlLabel
+                      value={insurer.id}
+                      control={<Radio />}
+                      label={insurer.insurer_name}
+                    />
+
+                    {/* 
+                    CHECKBOX SELECTION CODE
                     <FormControlLabel
                       label={insurer.insurer_name}
                       control={
@@ -132,12 +157,12 @@ function MarketplaceInsuranceSelect({
                           value={+insurer.insurer_code}
                         />
                       }
-                    />
+                    /> */}
                   </Grid>
                 );
               })}
             </Grid>
-          </FormGroup>
+          </RadioGroup>
         )}
         {/* <p>Control State: {JSON.stringify(checkboxState)}</p>
         <p>Insurance Search Mask: {insuranceSearchMask}</p> */}
