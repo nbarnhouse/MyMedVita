@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
-import { useSelector } from 'react-redux';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -26,11 +25,10 @@ function* fetchUser() {
   }
 }
 
-function* fetchSavedSearches() {
+function* fetchSavedSearches(action) {
   try {
-    const id = useSelector((store) => store.user.id);
     yield put({ type: 'CLEAR_SEARCHES' });
-    const response = yield axios.get(`/api/saved/${id}`);
+    const response = yield axios.get(`/api/saved/${action.payload}`);
     yield put({ type: 'SET_SEARCHES', payload: response.data });
   } catch (err) {
     console.error('ERROR fetching saved searches:', err);

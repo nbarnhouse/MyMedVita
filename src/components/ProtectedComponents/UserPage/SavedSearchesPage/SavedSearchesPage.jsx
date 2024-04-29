@@ -24,7 +24,7 @@ function SavedSearchesPage() {
   // );
 
   const dispatch = useDispatch();
-
+  const userID = useSelector((store) => store.user.id);
   // useEffect(() => {
   //   document.body.style.overflow = 'hidden';
 
@@ -34,6 +34,9 @@ function SavedSearchesPage() {
   //     document.body.style.overflow = '';
   //   };
   // }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_SEARCHES', payload: userID });
+  }, []);
 
   return (
     <div className="saved-container">
