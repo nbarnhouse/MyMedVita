@@ -5,11 +5,11 @@ const router = express.Router();
 // GET (READ) user details
 router.get('/', (req, res) => {
   const sqlText = `
-  SELECT "id", "first_name", "last_name", "email", "phone", "dob", "gender", "street_address", "city", "state", "zip" FROM "user" WHERE "id"=1;
+  SELECT "id", "first_name", "last_name", "email", "phone", "dob", "gender", "street_address", "city", "state", "zip" FROM "user" WHERE "id"=$1;
   `;
 
   pool
-    .query(sqlText)
+    .query(sqlText, [req.body.id])
     .then((dbRes) => {
       res.send(dbRes.rows);
     })
