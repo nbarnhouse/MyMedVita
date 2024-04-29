@@ -8,6 +8,7 @@ import axios from 'axios';
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import ProcedureSearchBar from './ProcedureSearchBar/ProcedureSearchBar';
 import MarketplaceInsuranceSelect from './MarketplaceInsuranceSelect/MarketplaceInsuranceSelect';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 
 //import Material UI and custom CSS
 import {
@@ -87,7 +88,8 @@ function MarketplacePage() {
           variant="h3"
           component="h1"
           className="search-header"
-          sx={{ fontWeight: 'bold', marginTop: '3rem' }}>
+          sx={{ fontWeight: 'bold', marginTop: '3rem' }}
+        >
           <span style={{ color: '#782cf6' }}>My</span>MedVita
           <span style={{ verticalAlign: 'super', fontSize: '0.5em' }}>
             ™
@@ -96,28 +98,19 @@ function MarketplacePage() {
         </Typography>
         <p className="search-paragraph">
           Click{' '}
-          <Link
-            to="/category/outpatient"
-            className="search-category-link">
+          <Link to="/category/outpatient" className="search-category-link">
             HERE
           </Link>{' '}
           for a CPT Reference Guide
         </p>
         <form onSubmit={handleSubmit}>
-          <Grid
-            container
-            spacing={2}
-            wrap="wrap">
-            <Grid
-              item
-              xs={12}>
+          <Grid container spacing={2} wrap="wrap">
+            <Grid item xs={12}>
               <ProcedureSearchBar
                 onSearchQueryChange={handleSearchQueryChange}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}>
+            <Grid item xs={12}>
               <TextField
                 label="Zip Code"
                 name="zip"
@@ -134,9 +127,7 @@ function MarketplacePage() {
                 required
               />
             </Grid>
-            <Grid
-              item
-              xs={12}>
+            <Grid item xs={12}>
               <TextField
                 select
                 label="Distance (Miles)"
@@ -151,7 +142,8 @@ function MarketplacePage() {
                       <MapIcon />
                     </InputAdornment>
                   ),
-                }}>
+                }}
+              >
                 <MenuItem value="5">5</MenuItem>
                 <MenuItem value="10">10</MenuItem>
                 <MenuItem value="25">25</MenuItem>
@@ -177,12 +169,14 @@ function MarketplacePage() {
                   color: 'white',
                   transform: 'scale(1.05)',
                 },
-              }}>
+              }}
+            >
               Shop Now
             </Button>
           </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 }
