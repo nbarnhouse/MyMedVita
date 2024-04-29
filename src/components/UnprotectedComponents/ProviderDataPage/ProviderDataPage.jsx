@@ -85,7 +85,7 @@ function ProviderDataPage() {
           <div className="provider-details-map-container">
             {isValidProvider ? (
               <MapContainer
-                className="map"
+                className="provider-map"
                 center={[centerLat, centerLon]}
                 zoom={12}
               >
