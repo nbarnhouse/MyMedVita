@@ -1,0 +1,29 @@
+/* Insurance search container */
+
+.search-option-label {
+  align-self: center;
+  font-weight: bold;
+}
+
+.insurance-search {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 0px #782cf6;
+  padding: 0px 10px;
+}
+
+.insurance-type-group {
+  display: flex;
+  justify-content: center;
+}
+
+.insurance-selection-formGroup {
+  justify-self: center;
+  align-self: center;
+}
+.insurance-grid {
+  align-self: center;
+}
