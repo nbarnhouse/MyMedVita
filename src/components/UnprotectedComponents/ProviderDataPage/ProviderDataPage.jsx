@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 
 // Import Material UI and Custom CSS
 import { Button } from '@mui/material';
@@ -118,6 +119,7 @@ function ProviderDataPage() {
             Back
           </Button>
         </div>
+        <Footer />
       </div>
     </>
   );
