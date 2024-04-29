@@ -36,8 +36,8 @@ function SavedSearchesPage() {
   // we should change them here as well
   const searchBtnClk = async (event) => {
     event.preventDefault();
-    console.log('Search Button Clicked');
-    console.log('DataSet:', event.target.dataset);
+    // console.log('Search Button Clicked');
+    // console.log('DataSet:', event.target.dataset);
 
     const zip = event.target.dataset.zip;
     const distance = event.target.dataset.distance;
@@ -53,7 +53,7 @@ function SavedSearchesPage() {
         `/api/search/rates/${encodeURIComponent(procedureSearchCode)}`
       );
       const data = await response.data; //all data for providers that offer searched for procedure
-      console.log('DATA:', data);
+      // console.log('DATA:', data);
       dispatch({
         type: 'SUBMIT_DISTANCE_DATA',
         payload: {
