@@ -1,9 +1,12 @@
 // Import 3rd Party Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
+
+// Import Material UI and CSS
 import './FeaturesPage.css';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -96,6 +99,7 @@ function FeaturesPage() {
           </i>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
