@@ -19,29 +19,31 @@ import {
 import './SavedSearchesPage.css';
 
 function SavedSearchesPage() {
-  const outpatientList = useSelector(
-    (store) => store.categoryReducer.outpatientReducer
-  );
+  // const outpatientList = useSelector(
+  //   (store) => store.categoryReducer.outpatientReducer
+  // );
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
+  // useEffect(() => {
+  //   document.body.style.overflow = 'hidden';
 
-    dispatch({ type: 'FETCH_OUTPATIENT' });
+  //   dispatch({ type: 'FETCH_OUTPATIENT' });
 
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     document.body.style.overflow = '';
+  //   };
+  // }, [dispatch]);
 
   return (
-    <div className="category-container">
+    <div className="saved-container">
       <Navbar />
-      <div className="category-bottom-container">
-        <CategoryNavbar />
-        <div className="category-right-container">
-          <h1 className="category-header">Outpatient Care Codes</h1>
+      <div className="saved-bottom-container">
+        <h1>User Navbar Placeholder</h1>
+        {/* Render user navbar component here
+        <UserNavbar or whatever it's going to be called /> */}
+        <div className="saved-right-container">
+          <h1 className="saved-header">Outpatient Care Codes</h1>
           <TableContainer
             component={Paper}
             sx={{ margin: '20px auto' }}>
@@ -53,13 +55,13 @@ function SavedSearchesPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {outpatientList &&
+                {/* {outpatientList &&
                   outpatientList.map((item, index) => (
                     <TableRow key={index}>
                       <TableCell>{item.description}</TableCell>
                       <TableCell>{item.primary_code}</TableCell>
                     </TableRow>
-                  ))}
+                  ))} */}
               </TableBody>
             </Table>
           </TableContainer>
