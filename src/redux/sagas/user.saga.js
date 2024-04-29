@@ -18,15 +18,23 @@ function* fetchUser() {
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    console.log("IN FETCH USER, response.data:", response.data);
+    console.log('IN FETCH USER, response.data:', response.data);
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
   }
 }
 
+function* fetchSavedSearches() {
+  try {
+  } catch (err) {
+    console.error('ERROR fetching saved searches:', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_SEARCHES', fetchSavedSearches);
 }
 
 export default userSaga;
