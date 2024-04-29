@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 
 // Import Material UI and CSS files
 import {
@@ -262,6 +263,7 @@ export default function MarketplaceSearchResults() {
           </Button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
