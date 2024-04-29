@@ -3,8 +3,11 @@ import React from 'react';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
-import './AboutPage.css';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 import '/AboutPage_Image.jpg';
+
+// Import Material UI and CSS
+import './AboutPage.css';
 
 function AboutPage() {
   return (
@@ -65,6 +68,7 @@ function AboutPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
