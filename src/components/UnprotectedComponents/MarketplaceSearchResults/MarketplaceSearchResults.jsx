@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 
 // Import Material UI and CSS files
 import {
@@ -23,6 +24,8 @@ import 'leaflet/dist/leaflet.css';
 export default function MarketplaceSearchResults() {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const user = useSelector((store) => store.user);
 
   // Obtain provider data from the database and store in an object
   const {
@@ -183,8 +186,16 @@ export default function MarketplaceSearchResults() {
                           providerLat,
                           providerLon
                         );
+                        // Check if user is logged in and whether the index is beyond the first 6
+                        const blurClass =
+                          !user.id && index >= 6 ? 'blur' : '';
+                          const renderDetailsButton = !user.id && index >= 6 ? null : (
+                            <Button onClick={() => handleDetailsClick(provider)}>
+                              Details
+                            </Button>
+                          );
                         return (
-                          <TableRow key={index}>
+                          <TableRow key={index} className={blurClass}>
                             <TableCell>
                               {provider.provider_last_name},{' '}
                               {provider.provider_first_name}{' '}
@@ -197,11 +208,7 @@ export default function MarketplaceSearchResults() {
                               {Math.floor(providerDistance)} miles
                             </TableCell>
                             <TableCell>
-                              <Button
-                                onClick={() => handleDetailsClick(provider)}
-                              >
-                                Details
-                              </Button>
+                              {renderDetailsButton}
                             </TableCell>
                           </TableRow>
                         );
@@ -223,7 +230,8 @@ export default function MarketplaceSearchResults() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {providers &&
-                providers.map((provider, index) => {
+              //if user is logged in show all pins on map, if not only show first 6
+                (user.id ? providers : providers.slice(0, 6)).map((provider, index) => {
                   // Ensure provider latitude and longitude are defined before rendering the marker
                   if (provider.provider_lat && provider.provider_long) {
                     const providerLat = parseFloat(provider.provider_lat);
@@ -242,6 +250,11 @@ export default function MarketplaceSearchResults() {
             </MapContainer>
           </div>
         </div>
+        {!user.id && (
+              <p style={{ textAlign: 'center', color: '#FF0000' }}>
+                Login or create an account to see all results
+              </p>
+            )}
         <div className="result-button-container">
           <Button
             variant="outlined"
@@ -262,6 +275,7 @@ export default function MarketplaceSearchResults() {
           </Button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

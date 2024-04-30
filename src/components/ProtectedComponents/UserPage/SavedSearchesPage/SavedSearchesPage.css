@@ -1,0 +1,23 @@
+/* Category Navbar and Table Container */
+.saved-container {
+  overflow-y: hidden;
+}
+
+.saved-bottom-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.saved-right-container {
+  width: 80%;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.saved-right-container TableCell {
+  font-weight: bold;
+}

@@ -95,6 +95,9 @@ ALTER TABLE "user_account_types" ADD CONSTRAINT "user_account_types_fk2" FOREIGN
 ALTER TABLE "rates" ADD "provider_lat" VARCHAR(255);
 ALTER TABLE "rates" ADD "provider_long" VARCHAR(255);
 
+-- Add search mask to table user_searches
+ALTER TABLE "user_searches" ADD "insurance_mask" bigint;
+
 --CSV Import Order
 -- 1. service_types (import id column)
 -- 2. service_codes
