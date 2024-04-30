@@ -4,6 +4,7 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 import doctorImage from './images/multipleDoctors.avif';
 
 // Import Material UI
@@ -79,6 +80,7 @@ function LandingPage() {
           />
         </div>
       </div>
+      <Footer className="footer" />
     </>
   );
 }

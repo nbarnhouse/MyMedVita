@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 import doctorImage from './images/doctor_phone.avif';
 
 // Import Material UI and Custom CSS
@@ -145,6 +146,7 @@ function ContactPage() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

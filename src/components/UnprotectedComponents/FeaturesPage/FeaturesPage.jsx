@@ -1,9 +1,12 @@
 // Import 3rd Party Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
+
+// Import Material UI and CSS
 import './FeaturesPage.css';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -53,12 +56,20 @@ function FeaturesPage() {
             <b className="featurePageWords">can vary up to 600% in price</b>
           </p>
           <p>
-            So if you don't know the price before you go,{' '}
+            So-if you don't know the price before you go,{' '}
             <b className="featurePageWords">your wallet might be running low</b>
           </p>
         </div>
-
+        <div className="finePrint">
+          <i>
+            Note: *Providers* are not necessarily the medical clinicians,
+            meaning <u>a clinician might not have control over the prices</u>{' '}
+            but rather it might be the administrator staff negotiating those
+            prices with insurers.
+          </i>
+        </div>
         <div className="featureDetailsDiv">
+          <h1>Additional Information:</h1>
           <h2>Disclaimers</h2>
           <p>
             <b className="featurePageWords">MyMedVita</b> is independent of
@@ -87,15 +98,8 @@ function FeaturesPage() {
             be willing to service you at that rate.
           </p>
         </div>
-        <div className="finePrint">
-          <i>
-            Note: *Providers* are not necessarily the medical clinicians,
-            meaning <u>a clinician might not have control over the prices</u>{' '}
-            but rather it might be the administrator staff negotiating those
-            prices with insurers.
-          </i>
-        </div>
       </div>
+      <Footer />
     </div>
   );
 }
