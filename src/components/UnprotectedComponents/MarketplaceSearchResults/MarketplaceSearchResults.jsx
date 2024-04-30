@@ -27,7 +27,6 @@ export default function MarketplaceSearchResults() {
 
   const user = useSelector((store) => store.user);
 
-
   // Obtain provider data from the database and store in an object
   const {
     procedureCode,
@@ -76,7 +75,6 @@ export default function MarketplaceSearchResults() {
 
   // Reset providers whenever initialProviders changes
   useEffect(() => {
-    console.log(user);
     setProviders(initialProviders);
   }, [initialProviders]);
 
@@ -140,7 +138,6 @@ export default function MarketplaceSearchResults() {
     // Reset price sorting
     setSortedByPrice(null);
   };
-
 
   return (
     <>
