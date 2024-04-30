@@ -25,6 +25,9 @@ export default function MarketplaceSearchResults() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const user = useSelector((store) => store.user);
+
+
   // Obtain provider data from the database and store in an object
   const {
     procedureCode,
@@ -73,6 +76,7 @@ export default function MarketplaceSearchResults() {
 
   // Reset providers whenever initialProviders changes
   useEffect(() => {
+    console.log(user);
     setProviders(initialProviders);
   }, [initialProviders]);
 
@@ -184,8 +188,11 @@ export default function MarketplaceSearchResults() {
                           providerLat,
                           providerLon
                         );
+                        // Check if user is logged in and whether the index is beyond the first 6
+                        const blurClass =
+                          !user.id && index >= 6 ? 'blur' : '';
                         return (
-                          <TableRow key={index}>
+                          <TableRow key={index} className={blurClass}>
                             <TableCell>
                               {provider.provider_last_name},{' '}
                               {provider.provider_first_name}{' '}
