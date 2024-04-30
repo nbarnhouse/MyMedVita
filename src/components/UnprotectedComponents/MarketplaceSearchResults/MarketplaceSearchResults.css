@@ -62,3 +62,7 @@
   align-items: center;
   margin-top: 10px;
 }
+/*blur results after 6 if user is not logged in*/
+.blur{
+  filter: blur(3px);
+}
