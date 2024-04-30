@@ -141,8 +141,6 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(null);
   };
 
-  // Sorting providers by price before mapping for default order
-  const sortedProviders = [...providers].sort((a, b) => a.negotiated_rate - b.negotiated_rate);
 
   return (
     <>
@@ -180,8 +178,8 @@ export default function MarketplaceSearchResults() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {sortedProviders &&
-                    sortedProviders.map((provider, index) => {
+                  {providers &&
+                    providers.map((provider, index) => {
                       if (provider.provider_lat && provider.provider_long) {
                         const providerLat = parseFloat(provider.provider_lat);
                         const providerLon = parseFloat(provider.provider_long);
@@ -234,7 +232,8 @@ export default function MarketplaceSearchResults() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {providers &&
-                providers.map((provider, index) => {
+              //if user is logged in show all pins on map, if not only show first 6
+                (user.id ? providers : providers.slice(0, 6)).map((provider, index) => {
                   // Ensure provider latitude and longitude are defined before rendering the marker
                   if (provider.provider_lat && provider.provider_long) {
                     const providerLat = parseFloat(provider.provider_lat);
@@ -253,6 +252,11 @@ export default function MarketplaceSearchResults() {
             </MapContainer>
           </div>
         </div>
+        {!user.id && (
+              <p style={{ textAlign: 'center', color: '#FF0000' }}>
+                Login or create an account to see all results
+              </p>
+            )}
         <div className="result-button-container">
           <Button
             variant="outlined"
