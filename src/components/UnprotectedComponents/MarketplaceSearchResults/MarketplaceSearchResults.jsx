@@ -189,6 +189,11 @@ export default function MarketplaceSearchResults() {
                         // Check if user is logged in and whether the index is beyond the first 6
                         const blurClass =
                           !user.id && index >= 6 ? 'blur' : '';
+                          const renderDetailsButton = !user.id && index >= 6 ? null : (
+                            <Button onClick={() => handleDetailsClick(provider)}>
+                              Details
+                            </Button>
+                          );
                         return (
                           <TableRow key={index} className={blurClass}>
                             <TableCell>
@@ -203,11 +208,7 @@ export default function MarketplaceSearchResults() {
                               {Math.floor(providerDistance)} miles
                             </TableCell>
                             <TableCell>
-                              <Button
-                                onClick={() => handleDetailsClick(provider)}
-                              >
-                                Details
-                              </Button>
+                              {renderDetailsButton}
                             </TableCell>
                           </TableRow>
                         );
