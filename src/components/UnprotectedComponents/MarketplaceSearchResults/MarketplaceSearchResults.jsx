@@ -141,6 +141,9 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(null);
   };
 
+  // Sorting providers by price before mapping for default order
+  const sortedProviders = [...providers].sort((a, b) => a.negotiated_rate - b.negotiated_rate);
+
   return (
     <>
       <NavBar />
@@ -177,8 +180,8 @@ export default function MarketplaceSearchResults() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {providers &&
-                    providers.map((provider, index) => {
+                  {sortedProviders &&
+                    sortedProviders.map((provider, index) => {
                       if (provider.provider_lat && provider.provider_long) {
                         const providerLat = parseFloat(provider.provider_lat);
                         const providerLon = parseFloat(provider.provider_long);
