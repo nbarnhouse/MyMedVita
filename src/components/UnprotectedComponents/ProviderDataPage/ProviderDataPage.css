@@ -60,6 +60,12 @@
   flex: 1;
   min-height: 100%;
   padding: 0px;
+  overflow: hidden;
+}
+
+.provider-map {
+  width: 100%;
+  height: 500px;
 }
 
 /* Button Container */

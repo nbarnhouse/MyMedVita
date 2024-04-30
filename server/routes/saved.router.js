@@ -8,7 +8,7 @@ router.get('/:user_id', (req, res) => {
   const user = req.params.user_id;
 
   const queryText = `SELECT "CPT_Code", "service_codes"."description" AS "procedure", 
-    "search_zip" AS "zip", "search_distance" AS "distance" FROM "user_searches"
+    "search_zip" AS "zip", "search_distance" AS "distance", "insurance_mask" FROM "user_searches"
     JOIN "service_codes" ON "user_searches"."CPT_Code" = "service_codes"."primary_code" 
     WHERE "user_id" = $1;`;
   const queryArgs = [user];
@@ -32,21 +32,24 @@ router.post('/', async (req, res) => {
   const CPT_Code = +req.body.CPT_Code; // Number
   const zip = req.body.zip; // Text
   const distance = +req.body.distance; // Number
-  const queryArgs = [user, CPT_Code, zip, distance];
+  const insuranceMask = +req.body.insuranceMask ? +req.body.insuranceMask : 0;
+  const queryArgs = [user, CPT_Code, zip, distance, insuranceMask];
 
   try {
     // Check to see if search already exists...
     const checkQueryText = `SELECT * FROM "user_searches" 
       WHERE "user_id" = $1 AND "CPT_Code" = $2 
-      AND "search_zip" = $3 AND "search_distance" = $4;`;
+      AND "search_zip" = $3 AND "search_distance" = $4
+      AND "insurance_mask" = $5;`;
 
     const checkResults = await pool.query(checkQueryText, queryArgs);
 
     if (checkResults.rows.length) {
       res.status(406).send(`Search Results Already Exist ID:${user}`);
     } else {
-      const queryText = `INSERT INTO "user_searches" ("user_id", "CPT_Code", "search_zip", "search_distance")
-      VALUES ($1, $2, $3, $4);`;
+      const queryText = `INSERT INTO "user_searches" 
+      ("user_id", "CPT_Code", "search_zip", "search_distance", "insurance_mask")
+      VALUES ($1, $2, $3, $4, $5);`;
       pool
         .query(queryText, queryArgs)
         .then((results) => {
