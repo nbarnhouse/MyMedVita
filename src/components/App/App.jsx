@@ -132,7 +132,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/userdetails">
+          <Route exact path="/profile">
             <UserPage />
           </Route>
 
