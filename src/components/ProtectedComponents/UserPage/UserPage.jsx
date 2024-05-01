@@ -1,16 +1,51 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+// Import 3rd Party Libraries
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+// CUSTOM COMPONENTS
+import Navbar from '../../AccessoryComponents/Nav/Nav';
+// import UserNavbar from '../SomePath';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const userDetails = useSelector((store) => store.userDetails);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_USER_DATA',
+      payload: Response.data,
+    });
+  }, []);
+
+  const navBack = () => {
+    history.push('/userEdit');
+  };
+
   return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+    <div className="saved-container">
+      <Navbar />
+      <div className="saved-bottom-container">
+        {/* <h1>User Navbar Placeholder</h1> */}
+        <div className="saved-right-container">
+          <h4>Personal Details:</h4>
+          <p>First Name: {userDetails.first_name}</p>
+          <p>Last Name:{userDetails.last_name}</p>
+          <p>Email Address:{userDetails.email}</p>
+          <p>Phone Number:{userDetails.phone}</p>
+          <p>DOB:{userDetails.dob}</p>
+          <p>Gender:{userDetails.gender}</p>
+          <h4>Address:</h4>
+          <p>Street:{userDetails.street_address}</p>{' '}
+          <p>City:{userDetails.city}</p>
+          <p>State:{userDetails.state}</p>
+          <p>Zip Code:{userDetails.zip}</p>
+        </div>
+      </div>
+      <button onClick={navBack}>Edit</button>
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;
