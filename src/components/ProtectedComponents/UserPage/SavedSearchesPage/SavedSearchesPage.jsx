@@ -70,7 +70,14 @@ function SavedSearchesPage() {
     }
   };
 
-  const deleteBtnClk = (event) => {};
+  const deleteBtnClk = async (event) => {
+    try {
+      dispatch({ type: 'DELETE_SEARCH', payload: +event.target.dataset.id });
+      dispatch({ type: 'FETCH_SEARCHES', payload: user.id });
+    } catch (err) {
+      console.error('ERROR deleting search:', err);
+    }
+  };
 
   useEffect(() => {
     dispatch({ type: 'FETCH_SEARCHES', payload: user.id });

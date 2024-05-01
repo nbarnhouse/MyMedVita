@@ -37,6 +37,7 @@ function* fetchSavedSearches(action) {
 
 function* deleteSavedSearch(action) {
   try {
+    yield put({ type: 'CLEAR_SEARCHES' });
     yield axios.delete(`/api/saved/${action.payload}`);
   } catch (err) {
     console.error('ERROR deleting saved searches:', err);
