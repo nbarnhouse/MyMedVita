@@ -47,6 +47,8 @@ export default function MarketplaceSearchResults() {
   const [sortedByPrice, setSortedByPrice] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByDistance, setSortedByDistance] = useState(null);
+ // null: not sorted, true: ascending, false: descending
+  const [sortedByName, setSortedByName] = useState(null);
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
@@ -146,6 +148,21 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(null);
   };
 
+  const sortByLastName = () => {
+    const sorted = [...providers].sort((a, b) => {
+      if (sortedByName === null || sortedByName) {
+        return a.provider_last_name.localeCompare(b.provider_last_name);
+      } else {
+        return b.provider_last_name.localeCompare(a.provider_last_name);
+      }
+    });
+    setProviders(sorted);
+    setSortedByName(sortedByName === null ? true : !sortedByName);
+    // Reset other sorting states if needed
+    setSortedByPrice(null);
+    setSortedByDistance(null);
+  };
+
   const saveSearchClicked = () => {
     console.log('Search Span Clicked');
     // Assemble data
@@ -228,8 +245,13 @@ export default function MarketplaceSearchResults() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Provider</TableCell>
                     <TableCell>
+                      Provider Name{' '}
+                      <Button onClick={sortByLastName}>
+                        {sortedByName ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                            <TableCell>
                       Price{' '}
                       <Button onClick={sortByPrice}>
                         {sortedByPrice ? '↑' : '↓'}
