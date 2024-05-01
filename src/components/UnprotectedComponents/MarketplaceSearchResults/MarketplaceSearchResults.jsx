@@ -18,6 +18,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Snackbar,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
@@ -28,6 +29,10 @@ export default function MarketplaceSearchResults() {
   const history = useHistory();
 
   const user = useSelector((store) => store.user);
+
+  // snackBar States
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   // Obtain provider data from the database and store in an object
   const {
@@ -159,20 +164,45 @@ export default function MarketplaceSearchResults() {
         console.log('Response:', response.data);
         let searchStatus = '';
         if (response.data === `Search Results Already Exist ID:${user.id}`) {
-          searchStatus = 'Search criteria already saved for current user';
+          setSnackbarMessage('Search criteria already saved for current user');
         } else {
-          searchStatus = 'Search successfully saved';
+          setSnackbarMessage('Search successfully saved');
         }
+        setSnackbarOpen(true);
       })
       .catch((err) => {
         console.error('ERROR saving search results:', err);
       });
   };
 
+  // Function to close Snackbar
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
   return (
     <>
       <NavBar />
       <div className="container">
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          message={snackbarMessage}
+          action={
+            <>
+              <Button
+                color="secondary"
+                size="small"
+                onClick={handleCloseSnackbar}>
+                CLOSE
+              </Button>
+            </>
+          }
+        />
         <div className="result-header-container">
           <h1 className="result-header-h1">
             <span style={{ color: '#782cf6' }}>My</span>
