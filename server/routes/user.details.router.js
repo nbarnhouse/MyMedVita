@@ -9,9 +9,9 @@ router.get('/', (req, res) => {
   `;
 
   pool
-    .query(sqlText, [req.body.id])
+    .query(sqlText, [req.user.id])
     .then((dbRes) => {
-      res.send(dbRes.rows);
+      res.send(dbRes.rows[0]);
     })
     .catch((dbError) => {
       console.log('Error in retrieving user details from DB', dbError);
