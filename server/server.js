@@ -10,6 +10,12 @@ const passport = require('./strategies/user.strategy');
 // Route Includes
 const userRouter = require('./routes/user.router');
 const geoRouter = require('./routes/geocode.router');
+const categoryRouter = require('./routes/category.router');
+const searchRouter = require('./routes/search.router');
+const contactRouter = require('./routes/contact.router');
+const savedRouter = require('./routes/saved.router');
+const insuranceRouter = require('./routes/insurance.router');
+const userDetailsRouter = require('./routes/user.details.router');
 
 // Express Middleware
 app.use(express.json());
@@ -26,6 +32,12 @@ app.use(passport.session());
 // Routes
 app.use('/api/user', userRouter);
 app.use('/api/location', geoRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/search', searchRouter);
+app.use('/api/contact', contactRouter);
+app.use('/api/saved', savedRouter);
+app.use('/api/insurance', insuranceRouter);
+app.use('/api/userDetails', userDetailsRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {

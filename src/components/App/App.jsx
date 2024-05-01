@@ -12,7 +12,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Import Unprotected Components
 import AboutPage from '../UnprotectedComponents/AboutPage/AboutPage';
-import CategoryPage from '../UnprotectedComponents/CategoryPage/CategoryPage';
+import CategoryOutpatient from '../UnprotectedComponents/CategoryPage/CategoryOutpatient/CategoryOutpatient';
+import CategoryLaboratory from '../UnprotectedComponents/CategoryPage/CategoryLaboratory/CategoryLaboratory';
+import CategoryRadiology from '../UnprotectedComponents/CategoryPage/CategoryRadiology/CategoryRadiology';
+import CategorySurgery from '../UnprotectedComponents/CategoryPage/CategorySurgery/CategorySurgery';
 import ContactPage from '../UnprotectedComponents/ContactPage/ContactPage';
 import FeaturesPage from '../UnprotectedComponents/FeaturesPage/FeaturesPage';
 import LandingPage from '../UnprotectedComponents/LandingPage/LandingPage';
@@ -23,6 +26,7 @@ import ProviderDataPage from '../UnprotectedComponents/ProviderDataPage/Provider
 import RegisterPage from '../UnprotectedComponents/RegisterPage/RegisterPage';
 import UserEditPage from '../ProtectedComponents/UserPage/UserEditPage/UserEditPage';
 import View404 from '../UnprotectedComponents/View404/View404';
+import SavedSearchesPage from '../ProtectedComponents/UserPage/SavedSearchesPage/SavedSearchesPage';
 
 // Import Protected Components
 import UserPage from '../ProtectedComponents/UserPage/UserPage';
@@ -44,24 +48,122 @@ function App() {
       <div>
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
-          <Redirect exact from="/" to="/home" />
-          <Route exact path="/">
+          <Redirect
+            exact
+            from="/"
+            to="/home"
+          />
+          <Route
+            exact
+            path="/home">
             <LandingPage />
           </Route>
-          <Route exact path="/marketplace">
+          <Route
+            exact
+            path="/marketplace">
             <MarketplacePage />
           </Route>
-          <Route exact path="/features">
+          <Route
+            exact
+            path="/features">
             <FeaturesPage />
           </Route>
-          <Route exact path="/about">
+          <Route
+            exact
+            path="/about">
             <AboutPage />
           </Route>
-          <Route exact path="/contact">
+          <Route
+            exact
+            path="/contact">
             <ContactPage />
           </Route>
-          <Route exact path="/login">
-            <LoginPage />
+          <Route
+            exact
+            path="/results">
+            <MarketPlaceSearchResults />
+          </Route>
+
+          {/* Categories */}
+          <Route
+            exact
+            path="/category/outpatient">
+            <CategoryOutpatient />
+          </Route>
+          <Route
+            exact
+            path="/category/laboratory">
+            <CategoryLaboratory />
+          </Route>
+          <Route
+            exact
+            path="/category/radiology">
+            <CategoryRadiology />
+          </Route>
+          <Route
+            exact
+            path="/category/surgery">
+            <CategorySurgery />
+          </Route>
+
+          <Route
+            exact
+            path="/details">
+            <ProviderDataPage />
+          </Route>
+
+          <Route
+            exact
+            path="/login">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect to the /user page
+              <Redirect to="/marketplace" />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route
+            exact
+            path="/register">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to="/user" />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage />
+            )}
+          </Route>
+
+          <Route
+            exact
+            path="/userEdit">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <UserEditPage />
+            ) : (
+              // Otherwise, show the Landing page
+              <LandingPage />
+            )}
+          </Route>
+
+          {/* Route for testing of component only
+          Delete when integrated with UserPage   */}
+          <Route
+            exact
+            path="/savedSearches">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /savedSearches page
+              <SavedSearchesPage />
+            ) : (
+              // Otherwise, show the Landing page
+              <LandingPage />
+            )}
           </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}
@@ -77,57 +179,8 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute> */}
+      
 
-          <Route exact path="/login">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
-          </Route>
-
-          <Route exact path="/registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
-
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
-
-          <Route exact path="/userEdit">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <UserEditPage />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

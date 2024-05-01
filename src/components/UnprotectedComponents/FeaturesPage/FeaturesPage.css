@@ -1,0 +1,32 @@
+/* Main Container */
+.feature-container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 3rem auto;
+  padding: 20px;
+}
+
+/* Feature Headers and Divs */
+.featurePageDiv,
+.featureDetailsDiv,
+.finePrint {
+  text-align: center;
+}
+
+/* Purple Words and Icons */
+.featurePageWords {
+  color: #782cf6;
+  overflow-wrap: break-word;
+}
+
+.featurePageIcons {
+  color: #782cf6;
+}
+
+/* Fine Print */
+.finePrint {
+  margin: 3rem 0;
+}

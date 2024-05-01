@@ -1,0 +1,29 @@
+.AboutPageHeaderAndImageDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AboutPageHeader {
+  text-align: center;
+}
+
+.AboutPageMainImage {
+  border-radius: 25px;
+  width: 60%;
+}
+
+.AboutPageMainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AboutPageWrittenSection {
+  text-align: center;
+  align-items: center;
+  margin-right: 20%;
+  margin-left: 20%;
+  line-height: 1.5;
+}

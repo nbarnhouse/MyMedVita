@@ -4,10 +4,11 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
+import Footer from '../../AccessoryComponents/Footer/Footer';
 import doctorImage from './images/multipleDoctors.avif';
 
 // Import Material UI
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 // Import Custom CSS
 import './LandingPage.css';
@@ -20,7 +21,15 @@ function LandingPage() {
       <NavBar />
       <div className="landing-content-container">
         <div className="landing-left-container">
-          <h1 className="landing-header">MyMedVita</h1>
+          <Typography
+            variant="h3"
+            component="h1"
+            className="landing-header"
+            sx={{ fontWeight: 'bold' }}
+          >
+            <span style={{ color: '#782cf6' }}>My</span>MedVita
+            <span style={{ verticalAlign: 'super', fontSize: '0.5em' }}>™</span>
+          </Typography>
           <p className="landing-paragraph">
             Your Compass for Healthcare Prices
           </p>
@@ -31,7 +40,11 @@ function LandingPage() {
               to="/marketplace"
               variant="outlined"
               sx={{
-                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
+                transition: 'transform 0.3s',
+                '&:hover': {
+                  backgroundColor: '#782cf6',
+                  transform: 'scale(1.1)',
+                },
                 backgroundColor: '#782cf6',
                 color: 'white',
               }}
@@ -45,7 +58,11 @@ function LandingPage() {
               variant="outlined"
               size="large"
               sx={{
-                '&:hover': { backgroundColor: 'white', color: '#782cf6' },
+                transition: 'transform 0.3s',
+                '&:hover': {
+                  backgroundColor: '#782cf6',
+                  transform: 'scale(1.1)',
+                },
                 backgroundColor: '#782cf6',
                 color: 'white',
                 margin: '10px 10px',
@@ -63,7 +80,9 @@ function LandingPage() {
           />
         </div>
       </div>
+      <Footer className="footer" />
     </>
   );
 }
+
 export default LandingPage;
