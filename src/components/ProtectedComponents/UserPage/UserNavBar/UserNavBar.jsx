@@ -1,8 +1,16 @@
 import React from 'react';
 import { useLocation, Link as RouterLink } from 'react-router-dom';
 import LogOutButton from '../../../AccessoryComponents/LogOutButton/LogOutButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 
-import { Box, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  InputAdornment,
+} from '@mui/material';
 
 function UserNavBar() {
   const location = useLocation();
@@ -39,6 +47,12 @@ function UserNavBar() {
               marginTop: '5px',
               '&:hover': { backgroundColor: '#782cf6', color: 'white' },
             }}>
+            <InputAdornment position="start">
+              <AccountCircleIcon />
+            </InputAdornment>
+            <InputAdornment position="start">
+              <SavedSearchIcon />
+            </InputAdornment>
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
