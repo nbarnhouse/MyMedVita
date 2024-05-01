@@ -32,6 +32,7 @@ export default function MarketplaceSearchResults() {
     procedureCode,
     zip,
     distance,
+    insuranceMask,
     providers: initialProviders,
   } = useSelector((state) => state.distance);
 
@@ -187,15 +188,18 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and whether the index is beyond the first 6
-                        const blurClass =
-                          !user.id && index >= 6 ? 'blur' : '';
-                          const renderDetailsButton = !user.id && index >= 6 ? null : (
-                            <Button onClick={() => handleDetailsClick(provider)}>
+                        const blurClass = !user.id && index >= 6 ? 'blur' : '';
+                        const renderDetailsButton =
+                          !user.id && index >= 6 ? null : (
+                            <Button
+                              onClick={() => handleDetailsClick(provider)}>
                               Details
                             </Button>
                           );
                         return (
-                          <TableRow key={index} className={blurClass}>
+                          <TableRow
+                            key={index}
+                            className={blurClass}>
                             <TableCell>
                               {provider.provider_last_name},{' '}
                               {provider.provider_first_name}{' '}
@@ -207,9 +211,7 @@ export default function MarketplaceSearchResults() {
                             <TableCell>
                               {Math.floor(providerDistance)} miles
                             </TableCell>
-                            <TableCell>
-                              {renderDetailsButton}
-                            </TableCell>
+                            <TableCell>{renderDetailsButton}</TableCell>
                           </TableRow>
                         );
                       }
@@ -223,38 +225,41 @@ export default function MarketplaceSearchResults() {
             <MapContainer
               className="map"
               center={[centerLat, centerLon]}
-              zoom={6}
-            >
+              zoom={6}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {providers &&
-              //if user is logged in show all pins on map, if not only show first 6
-                (user.id ? providers : providers.slice(0, 6)).map((provider, index) => {
-                  // Ensure provider latitude and longitude are defined before rendering the marker
-                  if (provider.provider_lat && provider.provider_long) {
-                    const providerLat = parseFloat(provider.provider_lat);
-                    const providerLon = parseFloat(provider.provider_long);
-                    return (
-                      <Marker key={index} position={[providerLat, providerLon]}>
-                        <Popup>
-                          {provider.provider_last_name},{' '}
-                          {provider.provider_first_name}
-                        </Popup>
-                      </Marker>
-                    );
+                //if user is logged in show all pins on map, if not only show first 6
+                (user.id ? providers : providers.slice(0, 6)).map(
+                  (provider, index) => {
+                    // Ensure provider latitude and longitude are defined before rendering the marker
+                    if (provider.provider_lat && provider.provider_long) {
+                      const providerLat = parseFloat(provider.provider_lat);
+                      const providerLon = parseFloat(provider.provider_long);
+                      return (
+                        <Marker
+                          key={index}
+                          position={[providerLat, providerLon]}>
+                          <Popup>
+                            {provider.provider_last_name},{' '}
+                            {provider.provider_first_name}
+                          </Popup>
+                        </Marker>
+                      );
+                    }
+                    return null;
                   }
-                  return null;
-                })}
+                )}
             </MapContainer>
           </div>
         </div>
         {!user.id && (
-              <p style={{ textAlign: 'center', color: '#FF0000' }}>
-                Login or create an account to see all results
-              </p>
-            )}
+          <p style={{ textAlign: 'center', color: '#FF0000' }}>
+            Login or create an account to see all results
+          </p>
+        )}
         <div className="result-button-container">
           <Button
             variant="outlined"
@@ -269,8 +274,7 @@ export default function MarketplaceSearchResults() {
                 color: 'white',
                 transform: 'scale(1.05)',
               },
-            }}
-          >
+            }}>
             Back
           </Button>
         </div>
