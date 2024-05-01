@@ -63,6 +63,11 @@
   margin-top: 10px;
 }
 /*blur results after 6 if user is not logged in*/
-.blur{
+.blur {
   filter: blur(3px);
+}
+
+/* Save seacrch clickable element */
+span.save-search-span {
+  cursor: pointer;
 }

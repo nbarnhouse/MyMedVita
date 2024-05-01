@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import axios from 'axios';
 
 // Import Custom Components
 import NavBar from '../../AccessoryComponents/Nav/Nav';
@@ -18,6 +19,7 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -139,6 +141,20 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(null);
   };
 
+  const saveSearchClicked = () => {
+    console.log('Search Span Clicked');
+    // Assemble data
+    const insuranceMask = null; // Change when by search insurance is implemented
+    const newSave = {
+      procedureCode,
+      zip,
+      distance,
+      user: user.id,
+      insuranceMask: insuranceMask || null,
+    };
+    console.log('Saved Search Data:', newSave);
+  };
+
   return (
     <>
       <NavBar />
@@ -150,6 +166,14 @@ export default function MarketplaceSearchResults() {
           </h1>
           <p className="result-header-paragraph">
             CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
+            <span
+              className="save-search-span"
+              onClick={saveSearchClicked}
+              style={{ fontSize: '12px' }}>
+              {' '}
+              - <FavoriteIcon fontSize="18px" />
+              (Add to Saved Searches)
+            </span>
           </p>
         </div>
         <div className="result-container">
@@ -187,15 +211,18 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and whether the index is beyond the first 6
-                        const blurClass =
-                          !user.id && index >= 6 ? 'blur' : '';
-                          const renderDetailsButton = !user.id && index >= 6 ? null : (
-                            <Button onClick={() => handleDetailsClick(provider)}>
+                        const blurClass = !user.id && index >= 6 ? 'blur' : '';
+                        const renderDetailsButton =
+                          !user.id && index >= 6 ? null : (
+                            <Button
+                              onClick={() => handleDetailsClick(provider)}>
                               Details
                             </Button>
                           );
                         return (
-                          <TableRow key={index} className={blurClass}>
+                          <TableRow
+                            key={index}
+                            className={blurClass}>
                             <TableCell>
                               {provider.provider_last_name},{' '}
                               {provider.provider_first_name}{' '}
@@ -207,9 +234,7 @@ export default function MarketplaceSearchResults() {
                             <TableCell>
                               {Math.floor(providerDistance)} miles
                             </TableCell>
-                            <TableCell>
-                              {renderDetailsButton}
-                            </TableCell>
+                            <TableCell>{renderDetailsButton}</TableCell>
                           </TableRow>
                         );
                       }
@@ -223,38 +248,41 @@ export default function MarketplaceSearchResults() {
             <MapContainer
               className="map"
               center={[centerLat, centerLon]}
-              zoom={6}
-            >
+              zoom={6}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {providers &&
-              //if user is logged in show all pins on map, if not only show first 6
-                (user.id ? providers : providers.slice(0, 6)).map((provider, index) => {
-                  // Ensure provider latitude and longitude are defined before rendering the marker
-                  if (provider.provider_lat && provider.provider_long) {
-                    const providerLat = parseFloat(provider.provider_lat);
-                    const providerLon = parseFloat(provider.provider_long);
-                    return (
-                      <Marker key={index} position={[providerLat, providerLon]}>
-                        <Popup>
-                          {provider.provider_last_name},{' '}
-                          {provider.provider_first_name}
-                        </Popup>
-                      </Marker>
-                    );
+                //if user is logged in show all pins on map, if not only show first 6
+                (user.id ? providers : providers.slice(0, 6)).map(
+                  (provider, index) => {
+                    // Ensure provider latitude and longitude are defined before rendering the marker
+                    if (provider.provider_lat && provider.provider_long) {
+                      const providerLat = parseFloat(provider.provider_lat);
+                      const providerLon = parseFloat(provider.provider_long);
+                      return (
+                        <Marker
+                          key={index}
+                          position={[providerLat, providerLon]}>
+                          <Popup>
+                            {provider.provider_last_name},{' '}
+                            {provider.provider_first_name}
+                          </Popup>
+                        </Marker>
+                      );
+                    }
+                    return null;
                   }
-                  return null;
-                })}
+                )}
             </MapContainer>
           </div>
         </div>
         {!user.id && (
-              <p style={{ textAlign: 'center', color: '#FF0000' }}>
-                Login or create an account to see all results
-              </p>
-            )}
+          <p style={{ textAlign: 'center', color: '#FF0000' }}>
+            Login or create an account to see all results
+          </p>
+        )}
         <div className="result-button-container">
           <Button
             variant="outlined"
@@ -269,8 +297,7 @@ export default function MarketplaceSearchResults() {
                 color: 'white',
                 transform: 'scale(1.05)',
               },
-            }}
-          >
+            }}>
             Back
           </Button>
         </div>
