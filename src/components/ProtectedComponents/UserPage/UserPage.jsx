@@ -1,8 +1,7 @@
 // Import 3rd Party Libraries
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 // CUSTOM COMPONENTS
 import Navbar from '../../AccessoryComponents/Nav/Nav';
@@ -16,6 +15,7 @@ function UserPage() {
   useEffect(() => {
     dispatch({
       type: 'FETCH_USER_DATA',
+      payload: Response.data,
     });
   }, []);
 
