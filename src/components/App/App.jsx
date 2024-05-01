@@ -68,10 +68,6 @@ function App() {
             <MarketPlaceSearchResults />
           </Route>
 
-          <Route exact path="/userdetails">
-            <UserPage />
-          </Route>
-
           {/* Categories */}
           <Route exact path="/category/outpatient">
             <CategoryOutpatient />
