@@ -21,3 +21,7 @@
 .saved-right-container TableCell {
   font-weight: bold;
 }
+
+.saved-search-clickable {
+  cursor: pointer;
+}

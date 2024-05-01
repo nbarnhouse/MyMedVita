@@ -19,6 +19,7 @@ import {
   Paper,
   Button,
 } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import './SavedSearchesPage.css';
 
 function SavedSearchesPage() {
@@ -69,6 +70,8 @@ function SavedSearchesPage() {
     }
   };
 
+  const deleteBtnClk = (event) => {};
+
   useEffect(() => {
     dispatch({ type: 'FETCH_SEARCHES', payload: user.id });
   }, []);
@@ -115,6 +118,7 @@ function SavedSearchesPage() {
                       <TableCell sx={{ fontWeight: 'bold' }}>
                         View Again?
                       </TableCell>
+                      <TableCell sx={{ fontWeight: 'bold' }}>Delete?</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -126,6 +130,7 @@ function SavedSearchesPage() {
                         <TableCell>{item.distance} mi</TableCell>
                         <TableCell>
                           <Button
+                            className="saved-search-clickable"
                             type="button"
                             variant="outlined"
                             onClick={searchBtnClk}
@@ -146,6 +151,12 @@ function SavedSearchesPage() {
                             }}>
                             Search
                           </Button>
+                        </TableCell>
+                        <TableCell align="center">
+                          <DeleteForeverIcon
+                            className="saved-search-clickable"
+                            onClick={deleteBtnClk}
+                          />
                         </TableCell>
                       </TableRow>
                     ))}
