@@ -146,13 +146,27 @@ export default function MarketplaceSearchResults() {
     // Assemble data
     const insuranceMask = null; // Change when by search insurance is implemented
     const newSave = {
-      procedureCode,
+      CPT_Code: +procedureCode,
       zip,
       distance,
-      user: user.id,
+      user_id: user.id,
       insuranceMask: insuranceMask || null,
     };
     console.log('Saved Search Data:', newSave);
+    axios
+      .post('/api/saved', newSave)
+      .then((response) => {
+        console.log('Response:', response.data);
+        let searchStatus = '';
+        if (response.data === `Search Results Already Exist ID:${user.id}`) {
+          searchStatus = 'Search criteria already saved for current user';
+        } else {
+          searchStatus = 'Search successfully saved';
+        }
+      })
+      .catch((err) => {
+        console.error('ERROR saving search results:', err);
+      });
   };
 
   return (
