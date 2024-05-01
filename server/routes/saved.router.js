@@ -8,7 +8,8 @@ router.get('/:user_id', (req, res) => {
   const user = req.params.user_id;
 
   const queryText = `SELECT "CPT_Code", "service_codes"."description" AS "procedure", 
-    "search_zip" AS "zip", "search_distance" AS "distance", "insurance_mask" FROM "user_searches"
+    "search_zip" AS "zip", "search_distance" AS "distance", "insurance_mask", 
+    "user_searches"."id" AS "id" FROM "user_searches"
     JOIN "service_codes" ON "user_searches"."CPT_Code" = "service_codes"."primary_code" 
     WHERE "user_id" = $1;`;
   const queryArgs = [user];
