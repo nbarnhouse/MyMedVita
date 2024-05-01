@@ -156,6 +156,7 @@ function SavedSearchesPage() {
                           <DeleteForeverIcon
                             className="saved-search-clickable"
                             onClick={deleteBtnClk}
+                            data-id={item.id}
                           />
                         </TableCell>
                       </TableRow>
