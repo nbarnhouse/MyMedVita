@@ -19,8 +19,12 @@ function UserNavBar() {
   const isActive = (pathname) => location.pathname === pathname;
   //Nav Items & links
   const navItems = [
-    { text: 'User Profile', path: '/userEdit' },
-    { text: 'Saved Searches', path: '/savedSearches' },
+    { text: 'User Profile', path: '/userEdit', icon: <AccountCircleIcon /> },
+    {
+      text: 'Saved Searches',
+      path: '/savedSearches',
+      icon: <SavedSearchIcon />,
+    },
   ];
 
   return (
@@ -47,13 +51,7 @@ function UserNavBar() {
               marginTop: '5px',
               '&:hover': { backgroundColor: '#782cf6', color: 'white' },
             }}>
-            <InputAdornment position="start">
-              <AccountCircleIcon />
-            </InputAdornment>
-            <InputAdornment position="start">
-              <SavedSearchIcon />
-            </InputAdornment>
-            <ListItemText primary={item.text} />
+            <ListItemText primary={[item.icon, item.text]} />
           </ListItem>
         ))}
       </List>
