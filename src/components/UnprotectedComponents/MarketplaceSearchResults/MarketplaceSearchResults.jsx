@@ -19,6 +19,7 @@ import {
   TableRow,
   TableCell,
   Snackbar,
+  Paper
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
@@ -33,6 +34,7 @@ export default function MarketplaceSearchResults() {
   // snackBar States
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  
 
   // Obtain provider data from the database and store in an object
   const {
@@ -279,6 +281,17 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and whether the index is beyond the first 6
+                        if (!user.id && (index === 6 || (index>0 && index%6===0 ))) {
+                          return (
+                            <TableRow key={index}>
+                              <TableCell colSpan={4}>
+                                <Paper elevation={3} className="login-paper" style={{ textAlign: 'center', color: '#FF0000', fontWeight: 'bold', fontSize: '16px' }}>
+                                  Login or create an account to view all results
+                                </Paper>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
                         const blurClass = !user.id && index >= 6 ? 'blur' : '';
                         const renderDetailsButton =
                           !user.id && index >= 6 ? null : (
@@ -346,11 +359,6 @@ export default function MarketplaceSearchResults() {
             </MapContainer>
           </div>
         </div>
-        {!user.id && (
-          <p style={{ textAlign: 'center', color: '#FF0000' }}>
-            Login or create an account to see all results
-          </p>
-        )}
         <div className="result-button-container">
           <Button
             variant="outlined"
