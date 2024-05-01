@@ -161,7 +161,7 @@ export default function MarketplaceSearchResults() {
     axios
       .post('/api/saved', newSave)
       .then((response) => {
-        console.log('Response:', response.data);
+        // console.log('Response:', response.data);
         let searchStatus = '';
         if (response.data === `Search Results Already Exist ID:${user.id}`) {
           setSnackbarMessage('Search criteria already saved for current user');
@@ -172,6 +172,8 @@ export default function MarketplaceSearchResults() {
       })
       .catch((err) => {
         console.error('ERROR saving search results:', err);
+        setSnackbarMessage('Error. Search not saved.');
+        setSnackbarOpen(true);
       });
   };
 
