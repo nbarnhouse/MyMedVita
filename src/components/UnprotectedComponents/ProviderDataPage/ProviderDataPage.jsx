@@ -1,4 +1,4 @@
-// Import 3rd Party Libraries
+ Import 3rd Party Libraries
  import React, { useState, useEffect } from 'react';
  import { useSelector } from 'react-redux';
  import { useHistory, useLocation } from 'react-router-dom';
@@ -6,7 +6,30 @@
 
  // Import Custom Components
  import NavBar from '../../AccessoryComponents/Nav/Nav';
- @@ -33,94 +33,10 @@ function ProviderDataPage() {
+ import Footer from '../../AccessoryComponents/Footer/Footer';
+
+ // Import Material UI and Custom CSS
+ import { Button } from '@mui/material';
+ import './ProviderDataPage.css';
+
+ function ProviderDataPage() {
+   const history = useHistory();
+   const location = useLocation();
+   const provider = location.state?.provider || {};
+
+   useEffect(() => {
+     console.log('Provider on details page:', provider);
+   }, [provider]);
+
+   // Function to user back click
+   const handleBackClick = () => {
+     history.push('/results');
+   };
+
+   const isValidProvider = provider.provider_lat && provider.provider_long;
+   const centerLat = isValidProvider ? parseFloat(provider.provider_lat) : 0;
+   const centerLon = isValidProvider ? parseFloat(provider.provider_long) : 0;
+
    return (
      <>
        <NavBar />
@@ -101,3 +124,5 @@
      </>
    );
  }
+
+ export default ProviderDataPage;
