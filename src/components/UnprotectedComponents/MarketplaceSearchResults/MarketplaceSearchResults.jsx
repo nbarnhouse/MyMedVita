@@ -39,6 +39,7 @@ export default function MarketplaceSearchResults() {
     procedureCode,
     zip,
     distance,
+    insuranceMask,
     providers: initialProviders,
   } = useSelector((state) => state.distance);
 
