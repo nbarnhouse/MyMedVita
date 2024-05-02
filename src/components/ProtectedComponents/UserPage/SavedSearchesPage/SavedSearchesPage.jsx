@@ -7,6 +7,7 @@ import axios from 'axios';
 // CUSTOM COMPONENTS
 import Navbar from '../../../AccessoryComponents/Nav/Nav';
 // import UserNavbar from '../SomePath';
+import UserNavBar from '../UserNavBar/UserNavBar';
 
 // Import Material UI and Custom CSS
 import {
@@ -83,15 +84,15 @@ function SavedSearchesPage() {
     <div className="saved-container">
       <Navbar />
       <div className="saved-bottom-container">
-        <h1>User Navbar Placeholder</h1>
+        <h1>
+          <UserNavBar />
+        </h1>
         {/* Render user navbar component here
         <UserNavbar or whatever it's going to be called /> */}
         <div className="saved-right-container">
           <h1 className="saved-header">Saved Searches </h1>
           {searchDataReady && (
-            <TableContainer
-              component={Paper}
-              sx={{ margin: '20px auto' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
               {savedList.length === 0 ? (
                 <h2>
                   I'm sorry, {user.first_name}, but you have no saved searches.

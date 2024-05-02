@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Import 3rd Party Libraries
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -5,7 +7,8 @@ import { useHistory } from 'react-router-dom';
 
 // CUSTOM COMPONENTS
 import Navbar from '../../AccessoryComponents/Nav/Nav';
-// import UserNavbar from '../SomePath';
+import UserNavBar from './UserNavBar/UserNavBar';
+
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -24,9 +27,11 @@ function UserPage() {
   };
 
   return (
+
     <div className="saved-container">
       <Navbar />
       <div className="saved-bottom-container">
+    <UserNavBar />
         {/* <h1>User Navbar Placeholder</h1> */}
         <div className="saved-right-container">
           <h4>Personal Details:</h4>
@@ -45,6 +50,7 @@ function UserPage() {
       </div>
       <button onClick={navBack}>Edit</button>
     </div>
+
   );
 }
 

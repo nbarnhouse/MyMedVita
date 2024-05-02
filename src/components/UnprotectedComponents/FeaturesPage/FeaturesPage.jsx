@@ -82,7 +82,7 @@ function FeaturesPage() {
           <p>
             You can search by{' '}
             <b className="featurePageWords">
-              you insurance, other insurance, or all insurances
+              your insurance, other insurance, or all insurances
             </b>{' '}
             to learn what a provider has negotiated for a price
           </p>
