@@ -19,7 +19,7 @@ import {
   TableRow,
   TableCell,
   Snackbar,
-  Paper
+  Paper,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
@@ -34,7 +34,6 @@ export default function MarketplaceSearchResults() {
   // snackBar States
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  
 
   // Obtain provider data from the database and store in an object
   const {
@@ -50,7 +49,7 @@ export default function MarketplaceSearchResults() {
   const [sortedByPrice, setSortedByPrice] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByDistance, setSortedByDistance] = useState(null);
- // null: not sorted, true: ascending, false: descending
+  // null: not sorted, true: ascending, false: descending
   const [sortedByName, setSortedByName] = useState(null);
 
   const centerLat = 36.1539;
@@ -169,13 +168,13 @@ export default function MarketplaceSearchResults() {
   const saveSearchClicked = () => {
     console.log('Search Span Clicked');
     // Assemble data
-    const insuranceMask = null; // Change when by search insurance is implemented
+
     const newSave = {
       CPT_Code: +procedureCode,
       zip,
       distance,
       user_id: user.id,
-      insuranceMask: insuranceMask || null,
+      insuranceMask: insuranceMask,
     };
     console.log('Saved Search Data:', newSave);
     axios
@@ -232,14 +231,16 @@ export default function MarketplaceSearchResults() {
           </h1>
           <p className="result-header-paragraph">
             CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
-            <span
-              className="save-search-span"
-              onClick={saveSearchClicked}
-              style={{ fontSize: '12px' }}>
-              {' '}
-              - <FavoriteIcon fontSize="18px" />
-              (Add to Saved Searches)
-            </span>
+            {user.id && (
+              <span
+                className="save-search-span"
+                onClick={saveSearchClicked}
+                style={{ fontSize: '12px' }}>
+                {' '}
+                - <FavoriteIcon fontSize="18px" />
+                (Add to Saved Searches)
+              </span>
+            )}
           </p>
         </div>
         <div className="result-container">
@@ -254,7 +255,7 @@ export default function MarketplaceSearchResults() {
                         {sortedByName ? '↑' : '↓'}
                       </Button>
                     </TableCell>
-                            <TableCell>
+                    <TableCell>
                       Price{' '}
                       <Button onClick={sortByPrice}>
                         {sortedByPrice ? '↑' : '↓'}
@@ -282,11 +283,22 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and whether the index is beyond the first 6
-                        if (!user.id && (index === 6 || (index>0 && index%6===0 ))) {
+                        if (
+                          !user.id &&
+                          (index === 6 || (index > 0 && index % 6 === 0))
+                        ) {
                           return (
                             <TableRow key={index}>
                               <TableCell colSpan={4}>
-                                <Paper elevation={3} className="login-paper" style={{ textAlign: 'center', color: '#FF0000', fontWeight: 'bold', fontSize: '16px' }}>
+                                <Paper
+                                  elevation={3}
+                                  className="login-paper"
+                                  style={{
+                                    textAlign: 'center',
+                                    color: '#FF0000',
+                                    fontWeight: 'bold',
+                                    fontSize: '16px',
+                                  }}>
                                   Login or create an account to view all results
                                 </Paper>
                               </TableCell>
