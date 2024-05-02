@@ -232,7 +232,7 @@ export default function MarketplaceSearchResults() {
             MedVita Search Results
           </h1>
           <p className="result-header-paragraph">
-            CPT Code: {procedureCode+" "+procedureDescription} Zip: {zip} within {distance} Miles
+            <b>Procedure:</b> {procedureCode+" - "+procedureDescription} <b>Zip:</b> {zip} <b>Within </b>{distance} <b>Miles</b>
             <span
               className="save-search-span"
               onClick={saveSearchClicked}
