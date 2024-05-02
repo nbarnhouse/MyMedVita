@@ -19,6 +19,7 @@ import {
   TableRow,
   TableCell,
   Snackbar,
+  Paper
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
@@ -33,6 +34,7 @@ export default function MarketplaceSearchResults() {
   // snackBar States
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  
 
   // Obtain provider data from the database and store in an object
   const {
@@ -48,6 +50,8 @@ export default function MarketplaceSearchResults() {
   const [sortedByPrice, setSortedByPrice] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByDistance, setSortedByDistance] = useState(null);
+ // null: not sorted, true: ascending, false: descending
+  const [sortedByName, setSortedByName] = useState(null);
 
   const centerLat = 36.1539;
   const centerLon = -95.9927;
@@ -147,6 +151,21 @@ export default function MarketplaceSearchResults() {
     setSortedByPrice(null);
   };
 
+  const sortByLastName = () => {
+    const sorted = [...providers].sort((a, b) => {
+      if (sortedByName === null || sortedByName) {
+        return a.provider_last_name.localeCompare(b.provider_last_name);
+      } else {
+        return b.provider_last_name.localeCompare(a.provider_last_name);
+      }
+    });
+    setProviders(sorted);
+    setSortedByName(sortedByName === null ? true : !sortedByName);
+    // Reset other sorting states if needed
+    setSortedByPrice(null);
+    setSortedByDistance(null);
+  };
+
   const saveSearchClicked = () => {
     console.log('Search Span Clicked');
     // Assemble data
@@ -229,8 +248,13 @@ export default function MarketplaceSearchResults() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Provider</TableCell>
                     <TableCell>
+                      Provider Name{' '}
+                      <Button onClick={sortByLastName}>
+                        {sortedByName ? '↑' : '↓'}
+                      </Button>
+                    </TableCell>
+                            <TableCell>
                       Price{' '}
                       <Button onClick={sortByPrice}>
                         {sortedByPrice ? '↑' : '↓'}
@@ -258,6 +282,17 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and whether the index is beyond the first 6
+                        if (!user.id && (index === 6 || (index>0 && index%6===0 ))) {
+                          return (
+                            <TableRow key={index}>
+                              <TableCell colSpan={4}>
+                                <Paper elevation={3} className="login-paper" style={{ textAlign: 'center', color: '#FF0000', fontWeight: 'bold', fontSize: '16px' }}>
+                                  Login or create an account to view all results
+                                </Paper>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
                         const blurClass = !user.id && index >= 6 ? 'blur' : '';
                         const renderDetailsButton =
                           !user.id && index >= 6 ? null : (
@@ -325,11 +360,6 @@ export default function MarketplaceSearchResults() {
             </MapContainer>
           </div>
         </div>
-        {!user.id && (
-          <p style={{ textAlign: 'center', color: '#FF0000' }}>
-            Login or create an account to see all results
-          </p>
-        )}
         <div className="result-button-container">
           <Button
             variant="outlined"
