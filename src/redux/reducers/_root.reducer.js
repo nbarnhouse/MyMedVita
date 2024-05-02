@@ -6,6 +6,7 @@ import distance from './distance.reducer';
 import categoryReducer from './category.reducer';
 import insurance from './insurance.reducer';
 import savedSearches from './savedSearches.reducer';
+import userDetails from './details.reducer';
 
 const rootReducer = combineReducers({
   errors,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   categoryReducer,
   insurance,
   savedSearches,
+  userDetails,
 });
 
 export default rootReducer;

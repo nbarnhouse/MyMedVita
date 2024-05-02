@@ -140,7 +140,7 @@ function MarketplaceInsuranceSelect({
                     item
                     xs={3}>
                     <FormControlLabel
-                      value={insurer.id}
+                      value={insurer.insurer_code}
                       control={<Radio />}
                       label={insurer.insurer_name}
                     />

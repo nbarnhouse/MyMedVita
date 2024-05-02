@@ -1,5 +1,6 @@
 // Import 3rd Party Libraries
 import React, { useState } from 'react';
+import axios from 'axios';
 
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
@@ -27,6 +28,13 @@ function ContactPage() {
   // Handle Form Submission
   const handleSubmit = (event) => {
     event.preventDefault();
+    const emailData = {
+      name: newContact.name,
+      email: newContact.email,
+      message: newContact.message,
+    };
+
+    axios.post('/api/contact', emailData);
     setSnackbarOpen(true);
     setNewContact({
       name: '',
@@ -58,22 +66,26 @@ function ContactPage() {
               <Button
                 color="secondary"
                 size="small"
-                onClick={handleCloseSnackbar}
-              >
+                onClick={handleCloseSnackbar}>
                 UNDO
               </Button>
             </>
           }
         />
         <div className="contact-left-container">
-          <img src={doctorImage} alt="picture of a doctor holding a phone" />
+          <img
+            src={doctorImage}
+            alt="picture of a doctor holding a phone"
+          />
         </div>
         <div className="contact-left-container">
           <form
             onSubmit={handleSubmit}
-            style={{ margin: 'auto', width: '80%' }}
-          >
-            <Grid container spacing={2} direction="column">
+            style={{ margin: 'auto', width: '80%' }}>
+            <Grid
+              container
+              spacing={2}
+              direction="column">
               <Grid item>
                 <Typography
                   variant="h6"
@@ -81,8 +93,7 @@ function ContactPage() {
                     textAlign: 'center',
                     fontSize: '30px',
                     fontWeight: 'bolder',
-                  }}
-                >
+                  }}>
                   Contact Us
                 </Typography>
               </Grid>
@@ -95,8 +106,7 @@ function ContactPage() {
                   value={newContact.name}
                   onChange={handleChange}
                   required
-                  style={{ backgroundColor: 'white' }}
-                ></TextField>
+                  style={{ backgroundColor: 'white' }}></TextField>
               </Grid>
               <Grid item>
                 <TextField
@@ -107,8 +117,7 @@ function ContactPage() {
                   value={newContact.email}
                   onChange={handleChange}
                   required
-                  style={{ backgroundColor: 'white' }}
-                ></TextField>
+                  style={{ backgroundColor: 'white' }}></TextField>
               </Grid>
               <Grid item>
                 <TextField
@@ -121,8 +130,7 @@ function ContactPage() {
                   value={newContact.message}
                   onChange={handleChange}
                   required
-                  style={{ backgroundColor: 'white' }}
-                ></TextField>
+                  style={{ backgroundColor: 'white' }}></TextField>
               </Grid>
             </Grid>
             <div className="contact-button-container">
@@ -138,8 +146,7 @@ function ContactPage() {
                 sx={{
                   transition: 'transform 0.3s',
                   '&:hover': { transform: 'scale(1.1)' },
-                }}
-              >
+                }}>
                 Submit
               </Button>
             </div>
