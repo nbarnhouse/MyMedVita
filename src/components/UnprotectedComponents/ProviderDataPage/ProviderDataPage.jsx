@@ -16,14 +16,7 @@ function ProviderDataPage() {
   const location = useLocation();
   const provider = location.state?.provider || {};
 
-  const {
-    procedureCode,
-    procedureDescription,
-    zip,
-    distance,
-    insuranceMask,
-    providers: initialProviders,
-  } = useSelector((state) => state.distance);
+  const {procedureDescription} = useSelector((state) => state.distance);
 
   useEffect(() => {
     console.log('Provider on details page:', provider);
@@ -33,6 +26,15 @@ function ProviderDataPage() {
   const handleBackClick = () => {
     history.push('/results');
   };
+
+  //function to add leading zeros if zip length < 5
+  const formattedZip = (originalZip) =>{
+    let newZip=originalZip;
+    while(newZip.length<5){
+      newZip="0"+newZip;
+    }
+    return newZip;
+  }
 
   const isValidProvider = provider.provider_lat && provider.provider_long;
   const centerLat = isValidProvider ? parseFloat(provider.provider_lat) : 0;
@@ -66,7 +68,7 @@ function ProviderDataPage() {
                     <br />
                     {`${provider.provider_city || ''} ${
                       provider.provider_state || ''
-                    } ${provider.provider_zip || ''}`}
+                    } ${formattedZip(provider.provider_zip) || ''}`}
                   </>
                 ),
               },
