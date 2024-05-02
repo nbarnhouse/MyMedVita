@@ -24,12 +24,18 @@ router.get('/:zip', async (req, res) => {
     // if not in database, get from geocodio
     if (dbResult.rows.length === 0) {
       console.log('Not in DB, getting from Geocodio.');
-      axios.get(endpointURL).then((response) => {
-        const searchResponse = response.data.results[0].location;
-        results = { lat: searchResponse.lat, long: searchResponse.lng };
-        console.log('Results:', results);
-        res.send(results);
-      });
+      const codioResponse = await axios.get(endpointURL);
+      const searchData = codioResponse.data.results[0].location;
+
+      results = { lat: searchData.lat, long: searchData.lng };
+      console.log('Results:', results);
+
+      // store data in geo_zip
+      const storeZipQueryText = `INSERT INTO "geo_zip" ("zip", "lat", "long")
+        VALUES ($1, $2, $3);`;
+      const storeZipQueryArgs = [zip_code, results.lat, results.long];
+      await pool.query(storeZipQueryText, storeZipQueryArgs);
+      res.send(results);
     } else {
       results = {
         lat: dbResult.rows[0].lat,
