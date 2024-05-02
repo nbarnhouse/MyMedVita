@@ -39,6 +39,7 @@ export default function MarketplaceSearchResults() {
   // Obtain provider data from the database and store in an object
   const {
     procedureCode,
+    procedureDescription,
     zip,
     distance,
     insuranceMask,
@@ -231,7 +232,7 @@ export default function MarketplaceSearchResults() {
             MedVita Search Results
           </h1>
           <p className="result-header-paragraph">
-            CPT Code: {procedureCode} Zip: {zip} within {distance} Miles
+            CPT Code: {procedureCode+" "+procedureDescription} Zip: {zip} within {distance} Miles
             <span
               className="save-search-span"
               onClick={saveSearchClicked}
