@@ -25,6 +25,11 @@ function UserNavBar() {
       path: '/savedSearches',
       icon: <SavedSearchIcon />,
     },
+    {
+      text: 'Logout',
+      path: '/home',
+      icon: <LogOutButton sx={{ textAlign: 'left' }} />,
+    },
   ];
 
   return (
@@ -55,7 +60,7 @@ function UserNavBar() {
           </ListItem>
         ))}
       </List>
-      <LogOutButton />
+      {/* <LogOutButton /> */}
     </Box>
   );
 }
