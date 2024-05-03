@@ -3,6 +3,7 @@ import { useLocation, Link as RouterLink } from 'react-router-dom';
 import LogOutButton from '../../../AccessoryComponents/LogOutButton/LogOutButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SavedSearchIcon from '@mui/icons-material/SavedSearch';
+import { useDispatch } from 'react-redux'; 
 
 import {
   Box,
@@ -14,23 +15,15 @@ import {
 
 function UserNavBar() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  function handleLogout(){
+    console.log("logging out");
+    dispatch({ type: 'LOGOUT' }); // Dispatching logout action
+  };
 
   // Function to determine if current route is active
   const isActive = (pathname) => location.pathname === pathname;
-  //Nav Items & links
-  const navItems = [
-    { text: 'User Profile', path: '/userEdit', icon: <AccountCircleIcon /> },
-    {
-      text: 'Saved Searches',
-      path: '/savedSearches',
-      icon: <SavedSearchIcon />,
-    },
-    {
-      text: 'Logout',
-      path: '/home',
-      icon: <LogOutButton sx={{ textAlign: 'left' }} />,
-    },
-  ];
 
   return (
     <Box
@@ -42,25 +35,52 @@ function UserNavBar() {
       }}
       role="presentation">
       <List>
-        {navItems.map((item, index) => (
-          <ListItem
-            button
-            key={item.text}
-            component={RouterLink}
-            to={item.path}
-            selected={isActive(item.path)}
-            sx={{
-              color: 'black',
-              backgroundColor: isActive(item.path) ? '#782cf6' : 'transparent',
-              marginLeft: '10px',
-              marginTop: '5px',
-              '&:hover': { backgroundColor: '#782cf6', color: 'white' },
-            }}>
-            <ListItemText primary={[item.icon, item.text]} />
-          </ListItem>
-        ))}
+        {/* User Profile */}
+        <ListItem
+          button
+          component={RouterLink}
+          to="/userEdit"
+          selected={isActive('/userEdit')}
+          sx={{
+            color: 'black',
+            backgroundColor: isActive('/userEdit') ? '#782cf6' : 'transparent',
+            marginLeft: '10px',
+            marginTop: '5px',
+            '&:hover': { backgroundColor: '#782cf6', color: 'white' },
+          }}>
+          <ListItemText primary={<><AccountCircleIcon /> User Profile</>} />
+        </ListItem>
+        {/* Saved Searches */}
+        <ListItem
+          button
+          component={RouterLink}
+          to="/savedSearches"
+          selected={isActive('/savedSearches')}
+          sx={{
+            color: 'black',
+            backgroundColor: isActive('/savedSearches') ? '#782cf6' : 'transparent',
+            marginLeft: '10px',
+            marginTop: '5px',
+            '&:hover': { backgroundColor: '#782cf6', color: 'white' },
+          }}>
+          <ListItemText primary={<><SavedSearchIcon /> Saved Searches</>} />
+        </ListItem>
+        {/* Logout */}
+        <ListItem
+          button
+          component={RouterLink}
+          to="/home" // Assuming this is the logout destination
+          onClick={handleLogout} // Attach onClick handler only to the "Logout" list item
+          sx={{
+            color: 'black',
+            backgroundColor: isActive('/home') ? '#782cf6' : 'transparent',
+            marginLeft: '10px',
+            marginTop: '5px',
+            '&:hover': { backgroundColor: '#782cf6', color: 'white' },
+          }}>
+          <ListItemText primary={<><LogOutButton sx={{ textAlign: 'left' }} /> Logout</>} />
+        </ListItem>
       </List>
-      {/* <LogOutButton /> */}
     </Box>
   );
 }

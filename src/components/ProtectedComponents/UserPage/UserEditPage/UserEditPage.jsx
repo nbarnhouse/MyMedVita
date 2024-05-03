@@ -55,8 +55,10 @@ function UserEditPage() {
   }
 
   return (
-    <div className="container">
+    <div className="saved-container">
+      <div className="saved-bottom-container">
       <UserNavBar />
+      <div className="saved-right-container">
       <h2>Hello, {user.first_name}!</h2>
       <p>Account Details:</p>
       <p>Name: {firstNameValue + ' ' + lastNameValue}</p>
@@ -164,6 +166,8 @@ function UserEditPage() {
           fontSize: '1rem', // Set initial font size
         }}
       />
+      </div>
+      </div>
     </div>
   );
 }
