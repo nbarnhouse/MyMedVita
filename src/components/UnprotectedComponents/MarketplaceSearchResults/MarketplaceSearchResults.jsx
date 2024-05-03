@@ -19,7 +19,7 @@ import {
   TableRow,
   TableCell,
   Snackbar,
-  Paper
+  Paper,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './MarketplaceSearchResults.css';
@@ -34,7 +34,6 @@ export default function MarketplaceSearchResults() {
   // snackBar States
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  
 
   // Obtain provider data from the database and store in an object
   const {
@@ -46,16 +45,29 @@ export default function MarketplaceSearchResults() {
     providers: initialProviders,
   } = useSelector((state) => state.distance);
 
-  const [providers, setProviders] = useState(initialProviders);
+  // Search coords
+  const searchCoords = useSelector((store) => store.distance.searchCoords);
+  const [centerLat, setCenterLat] = useState(0);
+  const [centerLon, setCenterLon] = useState(0);
+  const [coordsReady, setCoordsReady] = useState(false);
+
+  const [providers, setProviders] = useState(
+    initialProviders.filter((provider) => {
+      const range = haversine(
+        centerLat,
+        centerLon,
+        +provider.provider_lat,
+        +provider.provider_long
+      );
+      return range < distance;
+    })
+  );
   // null: not sorted, true: ascending, false: descending
   const [sortedByPrice, setSortedByPrice] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByDistance, setSortedByDistance] = useState(null);
- // null: not sorted, true: ascending, false: descending
+  // null: not sorted, true: ascending, false: descending
   const [sortedByName, setSortedByName] = useState(null);
-
-  const centerLat = 36.1539;
-  const centerLon = -95.9927;
 
   // Function to handle a "back" button click
   const handleBackClick = () => {
@@ -88,7 +100,17 @@ export default function MarketplaceSearchResults() {
 
   // Reset providers whenever initialProviders changes
   useEffect(() => {
-    setProviders(initialProviders);
+    setProviders(
+      initialProviders.filter((provider) => {
+        const range = haversine(
+          centerLat,
+          centerLon,
+          +provider.provider_lat,
+          +provider.provider_long
+        );
+        return range < distance;
+      })
+    );
   }, [initialProviders]);
 
   // Prevent the page from being scrollable
@@ -100,6 +122,31 @@ export default function MarketplaceSearchResults() {
       document.body.style.overflow = '';
     };
   }, []);
+
+  // Get search Coords on page load
+  useEffect(() => {
+    dispatch({ type: 'FETCH_SEARCH_COORDS', payload: zip });
+  }, []);
+
+  // Set initial coords when store is loaded
+  useEffect(() => {
+    if (searchCoords.lat && searchCoords.lon) {
+      setCenterLat(+searchCoords.lat);
+      setCenterLon(+searchCoords.lon);
+      setProviders(
+        initialProviders.filter((provider) => {
+          const range = haversine(
+            +searchCoords.lat,
+            +searchCoords.lon,
+            +provider.provider_lat,
+            +provider.provider_long
+          );
+          return range < distance;
+        })
+      );
+      setCoordsReady(true);
+    }
+  }, [searchCoords]);
 
   // Function to route user to Provider Details Page
   const handleDetailsClick = (provider) => {
@@ -170,13 +217,13 @@ export default function MarketplaceSearchResults() {
   const saveSearchClicked = () => {
     console.log('Search Span Clicked');
     // Assemble data
-    const insuranceMask = null; // Change when by search insurance is implemented
+
     const newSave = {
       CPT_Code: +procedureCode,
       zip,
       distance,
       user_id: user.id,
-      insuranceMask: insuranceMask || null,
+      insuranceMask: insuranceMask,
     };
     console.log('Saved Search Data:', newSave);
     axios
@@ -232,8 +279,9 @@ export default function MarketplaceSearchResults() {
             MedVita Search Results
           </h1>
           <p className="result-header-paragraph">
+
             <b>Procedure:</b> {procedureCode+" - "+procedureDescription} <b>Zip:</b> {zip} <b>Within </b>{distance} <b>Miles</b>
-            <span
+             {user.id && (<span
               className="save-search-span"
               onClick={saveSearchClicked}
               style={{ fontSize: '12px' }}>
@@ -241,6 +289,8 @@ export default function MarketplaceSearchResults() {
               - <FavoriteIcon fontSize="18px" />
               (Add to Saved Searches)
             </span>
+            )}
+
           </p>
         </div>
         <div className="result-container">
@@ -255,7 +305,7 @@ export default function MarketplaceSearchResults() {
                         {sortedByName ? '↑' : '↓'}
                       </Button>
                     </TableCell>
-                            <TableCell>
+                    <TableCell>
                       Price{' '}
                       <Button onClick={sortByPrice}>
                         {sortedByPrice ? '↑' : '↓'}
@@ -283,11 +333,19 @@ export default function MarketplaceSearchResults() {
                           providerLon
                         );
                         // Check if user is logged in and display login/create account message after first 6 results and after every following 6
-                        if (!user.id && index !==0 && index%6===0 ) {
+                        if (!user.id && index !== 0 && index % 6 === 0) {
                           return (
                             <TableRow key={index}>
                               <TableCell colSpan={4}>
-                                <Paper elevation={3} className="login-paper" style={{ textAlign: 'center', color: '#FF0000', fontWeight: 'bold', fontSize: '16px' }}>
+                                <Paper
+                                  elevation={3}
+                                  className="login-paper"
+                                  style={{
+                                    textAlign: 'center',
+                                    color: '#FF0000',
+                                    fontWeight: 'bold',
+                                    fontSize: '16px',
+                                  }}>
                                   Login or create an account to view all results
                                 </Paper>
                               </TableCell>
@@ -327,39 +385,41 @@ export default function MarketplaceSearchResults() {
               </Table>
             </TableContainer>
           </div>
-          <div className="map-container">
-            <MapContainer
-              className="map"
-              center={[centerLat, centerLon]}
-              zoom={6}>
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {providers &&
-                //if user is logged in show all pins on map, if not only show first 6
-                (user.id ? providers : providers.slice(0, 6)).map(
-                  (provider, index) => {
-                    // Ensure provider latitude and longitude are defined before rendering the marker
-                    if (provider.provider_lat && provider.provider_long) {
-                      const providerLat = parseFloat(provider.provider_lat);
-                      const providerLon = parseFloat(provider.provider_long);
-                      return (
-                        <Marker
-                          key={index}
-                          position={[providerLat, providerLon]}>
-                          <Popup>
-                            {provider.provider_last_name},{' '}
-                            {provider.provider_first_name}
-                          </Popup>
-                        </Marker>
-                      );
+          {coordsReady && (
+            <div className="map-container">
+              <MapContainer
+                className="map"
+                center={[centerLat, centerLon]}
+                zoom={6}>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {providers &&
+                  //if user is logged in show all pins on map, if not only show first 6
+                  (user.id ? providers : providers.slice(0, 6)).map(
+                    (provider, index) => {
+                      // Ensure provider latitude and longitude are defined before rendering the marker
+                      if (provider.provider_lat && provider.provider_long) {
+                        const providerLat = parseFloat(provider.provider_lat);
+                        const providerLon = parseFloat(provider.provider_long);
+                        return (
+                          <Marker
+                            key={index}
+                            position={[providerLat, providerLon]}>
+                            <Popup>
+                              {provider.provider_last_name},{' '}
+                              {provider.provider_first_name}
+                            </Popup>
+                          </Marker>
+                        );
+                      }
+                      return null;
                     }
-                    return null;
-                  }
-                )}
-            </MapContainer>
-          </div>
+                  )}
+              </MapContainer>
+            </div>
+          )}
         </div>
         <div className="result-button-container">
           <Button

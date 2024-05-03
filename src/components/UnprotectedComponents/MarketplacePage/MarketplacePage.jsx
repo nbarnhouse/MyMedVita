@@ -69,6 +69,7 @@ function MarketplacePage() {
           providers: data, // Pass providers data fetched from the backend to Redux
         },
       });
+
       history.push('/results');
     } catch (error) {
       console.error('Error fetching provider data:', error);
