@@ -69,7 +69,7 @@ router.post('/', async (req, res) => {
 
 // delete saved search by id (individual record delete)
 router.delete('/:id', (req, res) => {
-  const queryArgs = [req.params.id];
+  const queryArgs = [+req.params.id];
   const queryText = `DELETE FROM "user_searches" WHERE "id" = $1;`;
 
   pool
