@@ -71,3 +71,10 @@
 span.save-search-span {
   cursor: pointer;
 }
+
+.disable-selection {
+  user-select: none; /* Standard syntax */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  -webkit-user-select: none; /* Safari */
+}

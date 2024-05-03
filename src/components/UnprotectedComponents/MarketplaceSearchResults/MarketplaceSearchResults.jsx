@@ -335,7 +335,7 @@ export default function MarketplaceSearchResults() {
                         // Check if user is logged in and display login/create account message after first 6 results and after every following 6
                         if (!user.id && index !== 0 && index % 6 === 0) {
                           return (
-                            <TableRow key={index}>
+                            <TableRow key={index} >
                               <TableCell colSpan={4}>
                                 <Paper
                                   elevation={3}
@@ -364,18 +364,18 @@ export default function MarketplaceSearchResults() {
                           <TableRow
                             key={index}
                             className={blurClass}>
-                            <TableCell>
+                            <TableCell className="disable-selection">
                               {provider.provider_last_name},{' '}
                               {provider.provider_first_name}{' '}
                               {provider.provider_credential}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="disable-selection">
                               ${Math.floor(provider.negotiated_rate)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="disable-selection">
                               {Math.floor(providerDistance)} miles
                             </TableCell>
-                            <TableCell>{renderDetailsButton}</TableCell>
+                            <TableCell className="disable-selection">{renderDetailsButton}</TableCell>
                           </TableRow>
                         );
                       }
