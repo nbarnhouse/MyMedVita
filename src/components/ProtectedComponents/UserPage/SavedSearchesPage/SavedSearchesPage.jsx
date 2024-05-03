@@ -20,6 +20,7 @@ import {
   Paper,
   Button,
 } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import './SavedSearchesPage.css';
 
 function SavedSearchesPage() {
@@ -43,6 +44,8 @@ function SavedSearchesPage() {
     const zip = event.target.dataset.zip;
     const distance = event.target.dataset.distance;
     const procedureSearchCode = event.target.dataset.code;
+    const mask = event.target.dataset.mask;
+
     if (zip.length !== 5 || isNaN(Number(zip))) {
       alert('Please enter a valid 5-digit zip code.');
       setQuery((prev) => ({ ...prev, zip: '' }));
@@ -51,15 +54,18 @@ function SavedSearchesPage() {
 
     try {
       const response = await axios.get(
-        `/api/search/rates/${encodeURIComponent(procedureSearchCode)}`
+        `/api/search/rates/${encodeURIComponent(
+          procedureSearchCode
+        )}/${encodeURIComponent(mask)}`
       );
       const data = await response.data; //all data for providers that offer searched for procedure
-      // console.log('DATA:', data);
+      console.log('DATA:', data);
       dispatch({
         type: 'SUBMIT_DISTANCE_DATA',
         payload: {
           procedureCode: procedureSearchCode,
           zip,
+          insuranceMask: mask,
           distance,
           providers: data, // Pass providers data fetched from the backend to Redux
         },
@@ -67,6 +73,15 @@ function SavedSearchesPage() {
       history.push('/results');
     } catch (error) {
       console.error('Error fetching provider data:', error);
+    }
+  };
+
+  const deleteBtnClk = async (event) => {
+    try {
+      dispatch({ type: 'DELETE_SEARCH', payload: +event.target.dataset.id });
+      dispatch({ type: 'FETCH_SEARCHES', payload: user.id });
+    } catch (err) {
+      console.error('ERROR deleting search:', err);
     }
   };
 
@@ -84,15 +99,14 @@ function SavedSearchesPage() {
     <div className="saved-container">
       <Navbar />
       <div className="saved-bottom-container">
-        <h1>
-          <UserNavBar />
-        </h1>
-        {/* Render user navbar component here
-        <UserNavbar or whatever it's going to be called /> */}
+        <UserNavBar />
+
         <div className="saved-right-container">
           <h1 className="saved-header">Saved Searches </h1>
           {searchDataReady && (
-            <TableContainer component={Paper} sx={{ margin: '20px auto' }}>
+            <TableContainer
+              component={Paper}
+              sx={{ margin: '20px auto' }}>
               {savedList.length === 0 ? (
                 <h2>
                   I'm sorry, {user.first_name}, but you have no saved searches.
@@ -116,6 +130,7 @@ function SavedSearchesPage() {
                       <TableCell sx={{ fontWeight: 'bold' }}>
                         View Again?
                       </TableCell>
+                      <TableCell sx={{ fontWeight: 'bold' }}>Delete?</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -127,6 +142,7 @@ function SavedSearchesPage() {
                         <TableCell>{item.distance} mi</TableCell>
                         <TableCell>
                           <Button
+                            className="saved-search-clickable"
                             type="button"
                             variant="outlined"
                             onClick={searchBtnClk}
@@ -147,6 +163,13 @@ function SavedSearchesPage() {
                             }}>
                             Search
                           </Button>
+                        </TableCell>
+                        <TableCell align="center">
+                          <DeleteForeverIcon
+                            className="saved-search-clickable"
+                            onClick={deleteBtnClk}
+                            data-id={item.id}
+                          />
                         </TableCell>
                       </TableRow>
                     ))}

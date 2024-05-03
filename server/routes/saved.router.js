@@ -8,7 +8,8 @@ router.get('/:user_id', (req, res) => {
   const user = req.params.user_id;
 
   const queryText = `SELECT "CPT_Code", "service_codes"."description" AS "procedure", 
-    "search_zip" AS "zip", "search_distance" AS "distance", "insurance_mask" FROM "user_searches"
+    "search_zip" AS "zip", "search_distance" AS "distance", "insurance_mask", 
+    "user_searches"."id" AS "id" FROM "user_searches"
     JOIN "service_codes" ON "user_searches"."CPT_Code" = "service_codes"."primary_code" 
     WHERE "user_id" = $1;`;
   const queryArgs = [user];
@@ -68,7 +69,7 @@ router.post('/', async (req, res) => {
 
 // delete saved search by id (individual record delete)
 router.delete('/:id', (req, res) => {
-  const queryArgs = [req.params.id];
+  const queryArgs = [+req.params.id];
   const queryText = `DELETE FROM "user_searches" WHERE "id" = $1;`;
 
   pool
