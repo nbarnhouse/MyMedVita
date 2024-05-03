@@ -330,11 +330,8 @@ export default function MarketplaceSearchResults() {
                           providerLat,
                           providerLon
                         );
-                        // Check if user is logged in and whether the index is beyond the first 6
-                        if (
-                          !user.id &&
-                          (index === 6 || (index > 0 && index % 6 === 0))
-                        ) {
+                        // Check if user is logged in and display login/create account message after first 6 results and after every following 6
+                        if (!user.id && index !== 0 && index % 6 === 0) {
                           return (
                             <TableRow key={index}>
                               <TableCell colSpan={4}>
