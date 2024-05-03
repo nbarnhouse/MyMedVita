@@ -36,19 +36,19 @@ function UserPage() {
         <div className="saved-right-container">
           <h4>Personal Details:</h4>
           <p>First Name: {userDetails.first_name}</p>
-          <p>Last Name:{userDetails.last_name}</p>
-          <p>Email Address:{userDetails.email}</p>
-          <p>Phone Number:{userDetails.phone}</p>
-          <p>DOB:{userDetails.dob}</p>
-          <p>Gender:{userDetails.gender}</p>
+          <p>Last Name: {userDetails.last_name}</p>
+          <p>Email Address: {userDetails.email}</p>
+          <p>Phone Number: {userDetails.phone.substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6)}</p>
+          <p>DOB: {userDetails.dob.substring(5,8)+userDetails.dob.substring(8,10)+"-"+userDetails.dob.substring(0,4)}</p>
+          <p>Gender: {userDetails.gender}</p>
           <h4>Address:</h4>
-          <p>Street:{userDetails.street_address}</p>{' '}
-          <p>City:{userDetails.city}</p>
-          <p>State:{userDetails.state}</p>
-          <p>Zip Code:{userDetails.zip}</p>
+          <p>Street: {userDetails.street_address}</p>{' '}
+          <p>City: {userDetails.city}</p>
+          <p>State: {userDetails.state}</p>
+          <p>Zip Code: {userDetails.zip}</p>
+      <button onClick={navBack}>Edit</button>
         </div>
       </div>
-      <button onClick={navBack}>Edit</button>
     </div>
 
   );
