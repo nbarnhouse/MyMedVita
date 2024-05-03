@@ -19,7 +19,7 @@ function UserNavBar() {
   const isActive = (pathname) => location.pathname === pathname;
   //Nav Items & links
   const navItems = [
-    { text: 'User Profile', path: '/userEdit', icon: <AccountCircleIcon /> },
+    { text: 'User Profile', path: '/profile', icon: <AccountCircleIcon /> },
     {
       text: 'Saved Searches',
       path: '/savedSearches',
