@@ -30,6 +30,7 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
+  const [procedureSearchDescription, setProcedureSearchDescription] = useState('');
   const [insuranceSearchMask, setInsuranceSearchMask] = useState(0);
 
   const dispatch = useDispatch();
@@ -61,12 +62,14 @@ function MarketplacePage() {
         type: 'SUBMIT_DISTANCE_DATA',
         payload: {
           procedureCode: procedureSearchCode,
+          procedureDescription: procedureSearchDescription,
           zip,
           insuranceMask: insuranceSearchMask,
           distance,
           providers: data, // Pass providers data fetched from the backend to Redux
         },
       });
+
       history.push('/results');
     } catch (error) {
       console.error('Error fetching provider data:', error);
@@ -79,8 +82,11 @@ function MarketplacePage() {
       0,
       searchQuery.indexOf('-') - 1
     );
+    const procedureDescription = searchQuery.substring(searchQuery.indexOf('-')+2);
+    console.log("PROCEDURE DESCRIPTION", procedureDescription);
     console.log(procedureCode);
     setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
+    setProcedureSearchDescription(procedureDescription); //Set procedureSearchDescription in state
   };
 
   return (
