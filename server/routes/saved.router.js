@@ -86,7 +86,7 @@ router.delete('/:id', (req, res) => {
 
 // delete all saved searches by user_id (multiple record delete record delete)
 router.delete('/all/:user_id', (req, res) => {
-  const queryArgs = [req.params.user_id];
+  const queryArgs = [+req.params.user_id];
   const queryText = `DELETE FROM "user_searches" WHERE "user_id" = $1;`;
 
   pool
