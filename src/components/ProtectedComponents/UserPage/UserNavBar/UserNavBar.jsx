@@ -42,13 +42,16 @@ function UserNavBar() {
           to="/userEdit"
           selected={isActive('/userEdit')}
           sx={{
+            display: 'flex',
+            alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/userEdit') ? '#782cf6' : 'transparent',
             marginLeft: '10px',
             marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
-          <ListItemText primary={<><AccountCircleIcon /> User Profile</>} />
+          <AccountCircleIcon sx={{ marginRight: '5px' }} />
+          <ListItemText primary="User Profile" />
         </ListItem>
         {/* Saved Searches */}
         <ListItem
@@ -57,13 +60,16 @@ function UserNavBar() {
           to="/savedSearches"
           selected={isActive('/savedSearches')}
           sx={{
+            display: 'flex',
+            alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/savedSearches') ? '#782cf6' : 'transparent',
             marginLeft: '10px',
             marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
-          <ListItemText primary={<><SavedSearchIcon /> Saved Searches</>} />
+          <SavedSearchIcon sx={{ marginRight: '5px' }} />
+          <ListItemText primary="Saved Searches" />
         </ListItem>
         {/* Logout */}
         <ListItem
@@ -72,13 +78,16 @@ function UserNavBar() {
           to="/home" // Assuming this is the logout destination
           onClick={handleLogout} // Attach onClick handler only to the "Logout" list item
           sx={{
+            display: 'flex',
+            alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/home') ? '#782cf6' : 'transparent',
             marginLeft: '10px',
             marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
-          <ListItemText primary={<><LogOutButton sx={{ textAlign: 'left' }} /> Logout</>} />
+          <LogOutButton sx={{ marginRight: '5px', textAlign: 'left' }} />
+          <ListItemText primary="Logout" />
         </ListItem>
       </List>
     </Box>
