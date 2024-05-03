@@ -1,6 +1,24 @@
+/**
+ * @file API routes for service queries and provider rates
+ * @module routes/api
+ * @requires express
+ * @requires ../modules/pool
+ */
+
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+
+/**
+ * @api {get} /api/query/:query Get codes and descriptions
+ * @apiName GetCPTCodesAndDescriptions
+ * @apiGroup Procedures
+ * 
+ * @apiParam {String} query Search query entered by the user.
+ * 
+ * @apiSuccess {String} primary_code Primary code of the service.
+ * @apiSuccess {String} description Description of the service.
+ */
 
 //get codes and descriptions to suggest to user as they type in search bar
 router.get('/query/:query', async (req, res) => {
@@ -22,6 +40,16 @@ router.get('/query/:query', async (req, res) => {
   }
 });
 
+/**
+ * @api {get} /api/rates/:procedureCode Get providers that offer specified procedure, procedure rate, and all provider details
+ * @apiName GetProvidersAndRatesForProcedure
+ * @apiGroup Provider
+ * 
+ * @apiParam {String} procedureCode Code for the procedure.
+ * 
+ * @apiSuccess {Object[]} Object[] of all providers that offer specified procedure with negotiated rate, and provider details such as address, phone number, etc.
+ */
+
 //get providers that offer searched for procedure
 router.get('/rates/:procedureCode', async (req, res) => {
   try {
@@ -42,6 +70,17 @@ router.get('/rates/:procedureCode', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+/**
+ * @api {get} /api/rates/:procedureCode/:insuranceMask Get providers for a procedure with insurance
+ * @apiName GetProvidersForProcedureWithInsuranceRate
+ * @apiGroup Provider
+ * 
+ * @apiParam {String} procedureCode Code for the procedure.
+ * @apiParam {Number} insuranceMask Mask for the insurance provider.
+ * 
+ * @apiSuccess {Object[]} rates Array of provider rates based on chosen insurance provider.
+ */
 
 //get providers that offer searched for procedure AND insuranceProvider
 router.get('/rates/:procedureCode/:insuranceMask', async (req, res) => {

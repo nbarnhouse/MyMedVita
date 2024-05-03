@@ -35,9 +35,19 @@ function* fetchSavedSearches(action) {
   }
 }
 
+function* deleteSavedSearch(action) {
+  try {
+    yield put({ type: 'CLEAR_SEARCHES' });
+    yield axios.delete(`/api/saved/${action.payload}`);
+  } catch (err) {
+    console.error('ERROR deleting saved searches:', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_SEARCHES', fetchSavedSearches);
+  yield takeLatest('DELETE_SEARCH', deleteSavedSearch);
 }
 
 export default userSaga;
