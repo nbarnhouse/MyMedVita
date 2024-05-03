@@ -38,8 +38,8 @@ function UserPage() {
           <p>First Name: {userDetails.first_name}</p>
           <p>Last Name: {userDetails.last_name}</p>
           <p>Email Address: {userDetails.email}</p>
-          <p>Phone Number: {userDetails.phone.substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6)}</p>
-          <p>DOB: {userDetails.dob.substring(5,8)+userDetails.dob.substring(8,10)+"-"+userDetails.dob.substring(0,4)}</p>
+          <p>Phone Number: {userDetails.phone? userDetails.phone.substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6): 'No Phone Number Listed'}</p>
+          <p>DOB: {userDetails.dob? userDetails.dob.substring(5,8)+userDetails.dob.substring(8,10)+"-"+userDetails.dob.substring(0,4): 'No DOB Listed'}</p>
           <p>Gender: {userDetails.gender}</p>
           <h4>Address:</h4>
           <p>Street: {userDetails.street_address}</p>{' '}
