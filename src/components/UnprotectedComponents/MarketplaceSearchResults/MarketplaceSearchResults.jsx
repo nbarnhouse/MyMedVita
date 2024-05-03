@@ -44,19 +44,29 @@ export default function MarketplaceSearchResults() {
     providers: initialProviders,
   } = useSelector((state) => state.distance);
 
-  const [providers, setProviders] = useState(initialProviders);
+  // Search coords
+  const searchCoords = useSelector((store) => store.distance.searchCoords);
+  const [centerLat, setCenterLat] = useState(0);
+  const [centerLon, setCenterLon] = useState(0);
+  const [coordsReady, setCoordsReady] = useState(false);
+
+  const [providers, setProviders] = useState(
+    initialProviders.filter((provider) => {
+      const range = haversine(
+        centerLat,
+        centerLon,
+        +provider.provider_lat,
+        +provider.provider_long
+      );
+      return range < distance;
+    })
+  );
   // null: not sorted, true: ascending, false: descending
   const [sortedByPrice, setSortedByPrice] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByDistance, setSortedByDistance] = useState(null);
   // null: not sorted, true: ascending, false: descending
   const [sortedByName, setSortedByName] = useState(null);
-
-  // Search coords
-  const searchCoords = useSelector((store) => store.distance.searchCoords);
-  const [centerLat, setCenterLat] = useState(0);
-  const [centerLon, setCenterLon] = useState(0);
-  const [coordsReady, setCoordsReady] = useState(false);
 
   // Function to handle a "back" button click
   const handleBackClick = () => {
@@ -89,7 +99,17 @@ export default function MarketplaceSearchResults() {
 
   // Reset providers whenever initialProviders changes
   useEffect(() => {
-    setProviders(initialProviders);
+    setProviders(
+      initialProviders.filter((provider) => {
+        const range = haversine(
+          centerLat,
+          centerLon,
+          +provider.provider_lat,
+          +provider.provider_long
+        );
+        return range < distance;
+      })
+    );
   }, [initialProviders]);
 
   // Prevent the page from being scrollable
@@ -112,6 +132,17 @@ export default function MarketplaceSearchResults() {
     if (searchCoords.lat && searchCoords.lon) {
       setCenterLat(+searchCoords.lat);
       setCenterLon(+searchCoords.lon);
+      setProviders(
+        initialProviders.filter((provider) => {
+          const range = haversine(
+            +searchCoords.lat,
+            +searchCoords.lon,
+            +provider.provider_lat,
+            +provider.provider_long
+          );
+          return range < distance;
+        })
+      );
       setCoordsReady(true);
     }
   }, [searchCoords]);
@@ -257,9 +288,7 @@ export default function MarketplaceSearchResults() {
                 - <FavoriteIcon fontSize="18px" />
                 (Add to Saved Searches)
               </span>
-            )}{' '}
-            Lat: {centerLat}/{coordsReady && searchCoords.lat} Lon: {centerLon}/
-            {coordsReady && searchCoords.lon}
+            )}
           </p>
         </div>
         <div className="result-container">
