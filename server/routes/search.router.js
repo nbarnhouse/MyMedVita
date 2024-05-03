@@ -43,4 +43,37 @@ router.get('/rates/:procedureCode', async (req, res) => {
   }
 });
 
+//get providers that offer searched for procedure AND insuranceProvider
+router.get('/rates/:procedureCode/:insuranceMask', async (req, res) => {
+  try {
+    const { procedureCode, insuranceMask } = req.params;
+
+    const query = `
+            SELECT "rates".*, "insurance_providers"."insurer_code"
+            FROM rates
+            JOIN "insurance_providers" ON "insurance_providers"."id" = "rates"."insurer_id"
+            WHERE "CPT_CODE" = $1;
+        `;
+
+    const proceduresResult = await pool.query(query, [procedureCode]);
+    console.log('PROCEDURES RESULT LENGTH', proceduresResult.rows.length);
+    console.log('Searching by Mask:', insuranceMask);
+
+    let result = proceduresResult.rows;
+
+    if (+insuranceMask) {
+      result = result.filter((resultRow) => {
+        return +resultRow.insurer_code & +insuranceMask;
+      });
+    }
+
+    console.log(`Returning ${result.length} records for mask ${insuranceMask}`);
+
+    res.json(result);
+  } catch (error) {
+    console.error('Error searching for providers:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

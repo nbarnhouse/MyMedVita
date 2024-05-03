@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     const checkResults = await pool.query(checkQueryText, queryArgs);
 
     if (checkResults.rows.length) {
-      res.status(406).send(`Search Results Already Exist ID:${user}`);
+      res.status(200).send(`Search Results Already Exist ID:${user}`);
     } else {
       const queryText = `INSERT INTO "user_searches" 
       ("user_id", "CPT_Code", "search_zip", "search_distance", "insurance_mask")

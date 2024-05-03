@@ -48,73 +48,45 @@ function App() {
       <div>
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
-          <Redirect
-            exact
-            from="/"
-            to="/home"
-          />
-          <Route
-            exact
-            path="/home">
+          <Redirect exact from="/" to="/home" />
+          <Route exact path="/home">
             <LandingPage />
           </Route>
-          <Route
-            exact
-            path="/marketplace">
+          <Route exact path="/marketplace">
             <MarketplacePage />
           </Route>
-          <Route
-            exact
-            path="/features">
+          <Route exact path="/features">
             <FeaturesPage />
           </Route>
-          <Route
-            exact
-            path="/about">
+          <Route exact path="/about">
             <AboutPage />
           </Route>
-          <Route
-            exact
-            path="/contact">
+          <Route exact path="/contact">
             <ContactPage />
           </Route>
-          <Route
-            exact
-            path="/results">
+          <Route exact path="/results">
             <MarketPlaceSearchResults />
           </Route>
 
           {/* Categories */}
-          <Route
-            exact
-            path="/category/outpatient">
+          <Route exact path="/category/outpatient">
             <CategoryOutpatient />
           </Route>
-          <Route
-            exact
-            path="/category/laboratory">
+          <Route exact path="/category/laboratory">
             <CategoryLaboratory />
           </Route>
-          <Route
-            exact
-            path="/category/radiology">
+          <Route exact path="/category/radiology">
             <CategoryRadiology />
           </Route>
-          <Route
-            exact
-            path="/category/surgery">
+          <Route exact path="/category/surgery">
             <CategorySurgery />
           </Route>
 
-          <Route
-            exact
-            path="/details">
+          <Route exact path="/details">
             <ProviderDataPage />
           </Route>
 
-          <Route
-            exact
-            path="/login">
+          <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
@@ -125,9 +97,7 @@ function App() {
             )}
           </Route>
 
-          <Route
-            exact
-            path="/register">
+          <Route exact path="/register">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -138,9 +108,7 @@ function App() {
             )}
           </Route>
 
-          <Route
-            exact
-            path="/userEdit">
+          <Route exact path="/userEdit">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -153,9 +121,7 @@ function App() {
 
           {/* Route for testing of component only
           Delete when integrated with UserPage   */}
-          <Route
-            exact
-            path="/savedSearches">
+          <Route exact path="/savedSearches">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /savedSearches page
@@ -164,6 +130,10 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             )}
+          </Route>
+
+          <Route exact path="/profile">
+            <UserPage />
           </Route>
 
           {/* -----------------------------------TESTING----------------------------------- */}

@@ -98,9 +98,19 @@ ALTER TABLE "rates" ADD "provider_long" VARCHAR(255);
 -- Add search mask to table user_searches
 ALTER TABLE "user_searches" ADD "insurance_mask" bigint;
 
+-- Add geo_zip table to store location data on know zips
+CREATE TABLE IF NOT EXISTS "geo_zip" (
+	"id" bigint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE,
+	"zip" text NOT NULL,
+	"lat" VARCHAR(255) NOT NULL,
+	"long" VARCHAR(255) NOT NULL,
+	PRIMARY KEY ("id")
+);
+
 --CSV Import Order
 -- 1. service_types (import id column)
 -- 2. service_codes
 -- 3. insurance_providers
 -- 4. account_types
 -- 5. rates
+-- 6. geo_zip
