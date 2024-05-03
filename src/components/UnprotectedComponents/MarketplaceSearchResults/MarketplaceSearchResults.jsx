@@ -52,8 +52,11 @@ export default function MarketplaceSearchResults() {
   // null: not sorted, true: ascending, false: descending
   const [sortedByName, setSortedByName] = useState(null);
 
-  const centerLat = 36.1539;
-  const centerLon = -95.9927;
+  // Search coords
+  const searchCoords = useSelector((store) => store.distance.searchCoords);
+  const [centerLat, setCenterLat] = useState(0);
+  const [centerLon, setCenterLon] = useState(0);
+  const [coordsReady, setCoordsReady] = useState(false);
 
   // Function to handle a "back" button click
   const handleBackClick = () => {
@@ -98,6 +101,20 @@ export default function MarketplaceSearchResults() {
       document.body.style.overflow = '';
     };
   }, []);
+
+  // Get search Coords on page load
+  useEffect(() => {
+    dispatch({ type: 'FETCH_SEARCH_COORDS', payload: zip });
+  }, []);
+
+  // Set initial coords when store is loaded
+  useEffect(() => {
+    if (searchCoords.lat && searchCoords.lon) {
+      setCenterLat(+searchCoords.lat);
+      setCenterLon(+searchCoords.lon);
+      setCoordsReady(true);
+    }
+  }, [searchCoords]);
 
   // Function to route user to Provider Details Page
   const handleDetailsClick = (provider) => {
@@ -240,7 +257,9 @@ export default function MarketplaceSearchResults() {
                 - <FavoriteIcon fontSize="18px" />
                 (Add to Saved Searches)
               </span>
-            )}
+            )}{' '}
+            Lat: {centerLat}/{coordsReady && searchCoords.lat} Lon: {centerLon}/
+            {coordsReady && searchCoords.lon}
           </p>
         </div>
         <div className="result-container">
@@ -338,39 +357,41 @@ export default function MarketplaceSearchResults() {
               </Table>
             </TableContainer>
           </div>
-          <div className="map-container">
-            <MapContainer
-              className="map"
-              center={[centerLat, centerLon]}
-              zoom={6}>
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {providers &&
-                //if user is logged in show all pins on map, if not only show first 6
-                (user.id ? providers : providers.slice(0, 6)).map(
-                  (provider, index) => {
-                    // Ensure provider latitude and longitude are defined before rendering the marker
-                    if (provider.provider_lat && provider.provider_long) {
-                      const providerLat = parseFloat(provider.provider_lat);
-                      const providerLon = parseFloat(provider.provider_long);
-                      return (
-                        <Marker
-                          key={index}
-                          position={[providerLat, providerLon]}>
-                          <Popup>
-                            {provider.provider_last_name},{' '}
-                            {provider.provider_first_name}
-                          </Popup>
-                        </Marker>
-                      );
+          {coordsReady && (
+            <div className="map-container">
+              <MapContainer
+                className="map"
+                center={[centerLat, centerLon]}
+                zoom={6}>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {providers &&
+                  //if user is logged in show all pins on map, if not only show first 6
+                  (user.id ? providers : providers.slice(0, 6)).map(
+                    (provider, index) => {
+                      // Ensure provider latitude and longitude are defined before rendering the marker
+                      if (provider.provider_lat && provider.provider_long) {
+                        const providerLat = parseFloat(provider.provider_lat);
+                        const providerLon = parseFloat(provider.provider_long);
+                        return (
+                          <Marker
+                            key={index}
+                            position={[providerLat, providerLon]}>
+                            <Popup>
+                              {provider.provider_last_name},{' '}
+                              {provider.provider_first_name}
+                            </Popup>
+                          </Marker>
+                        );
+                      }
+                      return null;
                     }
-                    return null;
-                  }
-                )}
-            </MapContainer>
-          </div>
+                  )}
+              </MapContainer>
+            </div>
+          )}
         </div>
         <div className="result-button-container">
           <Button
