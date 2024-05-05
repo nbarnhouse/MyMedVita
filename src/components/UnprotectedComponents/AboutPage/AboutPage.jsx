@@ -10,10 +10,11 @@ function AboutPage() {
   return (
     <div>
       <NavBar />
+      <h1 className="AboutPageHeader">About</h1>
+
       <div className="AboutPageMainDiv">
-        {/* Div for Page Title and Image */}
-        <div className="AboutPageHeaderAndImageDiv">
-          <h1 className="AboutPageHeader">About</h1>
+        {/* Div for= Image */}
+        <div className="AboutPageImageDiv">
           <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />
         </div>
         {/* Div for written contents */}
