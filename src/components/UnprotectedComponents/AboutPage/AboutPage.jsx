@@ -11,6 +11,7 @@ function AboutPage() {
     <div>
       <NavBar />
       <div className="AboutPageMainDiv">
+        {/* Div for Page Title and Image */}
         <div className="AboutPageHeaderAndImageDiv">
           <h1 className="AboutPageHeader">About</h1>
           <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />

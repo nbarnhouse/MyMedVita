@@ -1,3 +1,8 @@
+.AboutPageMainDiv {
+  display: flex;
+  flex-direction: row;
+}
+
 .AboutPageHeaderAndImageDiv {
   display: flex;
   flex-direction: column;
@@ -11,7 +16,7 @@
 
 .AboutPageMainImage {
   border-radius: 25px;
-  width: 60%;
+  width: 500px;
 }
 
 .AboutPageMainDiv {
@@ -21,9 +26,7 @@
 }
 
 .AboutPageWrittenSection {
-  text-align: center;
+  text-align: left;
   align-items: center;
-  margin-right: 20%;
-  margin-left: 20%;
   line-height: 1.5;
 }
