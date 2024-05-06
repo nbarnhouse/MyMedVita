@@ -45,6 +45,7 @@ function SavedSearchesPage() {
     const distance = event.target.dataset.distance;
     const procedureSearchCode = event.target.dataset.code;
     const mask = event.target.dataset.mask;
+    const procedureDescription = event.target.dataset.description;
 
     if (zip.length !== 5 || isNaN(Number(zip))) {
       alert('Please enter a valid 5-digit zip code.');
@@ -60,10 +61,12 @@ function SavedSearchesPage() {
       );
       const data = await response.data; //all data for providers that offer searched for procedure
       console.log('DATA:', data);
+
       dispatch({
         type: 'SUBMIT_DISTANCE_DATA',
         payload: {
           procedureCode: procedureSearchCode,
+          procedureDescription,
           zip,
           insuranceMask: mask,
           distance,
@@ -150,6 +153,7 @@ function SavedSearchesPage() {
                             data-zip={item.zip}
                             data-distance={item.distance}
                             data-mask={item.insurance_mask}
+                            data-description={item.procedure}
                             size="small"
                             sx={{
                               backgroundColor: '#782CF6',
