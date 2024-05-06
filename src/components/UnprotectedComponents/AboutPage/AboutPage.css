@@ -1,4 +1,11 @@
-.AboutPageHeaderAndImageDiv {
+.AboutPageMainDiv {
+  display: flex;
+  flex-direction: row;
+  margin-left: 250px;
+  margin-right: 250px;
+}
+
+.AboutPageImageDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,19 +18,12 @@
 
 .AboutPageMainImage {
   border-radius: 25px;
-  width: 60%;
-}
-
-.AboutPageMainDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 500px;
+  margin-right: 150px;
 }
 
 .AboutPageWrittenSection {
-  text-align: center;
+  text-align: left;
   align-items: center;
-  margin-right: 20%;
-  margin-left: 20%;
   line-height: 1.5;
 }
