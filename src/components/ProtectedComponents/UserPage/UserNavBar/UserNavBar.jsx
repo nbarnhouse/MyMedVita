@@ -10,7 +10,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  InputAdornment,
 } from '@mui/material';
 
 function UserNavBar() {
@@ -29,25 +28,25 @@ function UserNavBar() {
     <Box
       sx={{
         width: 300,
-        height: '100vh',
         borderRight: 'solid 1px black',
         overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center', // Center items horizontally
       }}
       role="presentation">
-      <List>
+      <List sx={{ textAlign: 'center' }}>
         {/* User Profile */}
         <ListItem
           button
           component={RouterLink}
-          to="/userEdit"
+          to="/profile"
           selected={isActive('/userEdit')}
           sx={{
             display: 'flex',
             alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/userEdit') ? '#782cf6' : 'transparent',
-            marginLeft: '10px',
-            marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
           <AccountCircleIcon sx={{ marginRight: '5px' }} />
@@ -64,8 +63,6 @@ function UserNavBar() {
             alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/savedSearches') ? '#782cf6' : 'transparent',
-            marginLeft: '10px',
-            marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
           <SavedSearchIcon sx={{ marginRight: '5px' }} />
@@ -82,11 +79,9 @@ function UserNavBar() {
             alignItems: 'center',
             color: 'black',
             backgroundColor: isActive('/home') ? '#782cf6' : 'transparent',
-            marginLeft: '10px',
-            marginTop: '5px',
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
-          <LogOutButton sx={{ marginRight: '5px', textAlign: 'left' }} />
+          <LogOutButton sx={{ marginRight: '5px', textAlign: 'left'}} />
           <ListItemText primary="Logout" />
         </ListItem>
       </List>
