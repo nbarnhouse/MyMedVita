@@ -1,10 +1,23 @@
+/* Main Container */
 .AboutPageMainDiv {
+  width: 70%;
   display: flex;
-  flex-direction: row;
-  margin-left: 250px;
-  margin-right: 250px;
+  margin: 3rem auto;
 }
 
+/* Written and Image Container */
+.AboutPageWrittenSection,
+.AboutPageImageDiv {
+  flex: 1;
+}
+
+/* Written Section */
+.AboutPageWrittenSection {
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Image Section */
 .AboutPageImageDiv {
   display: flex;
   flex-direction: column;
@@ -20,10 +33,4 @@
   border-radius: 25px;
   width: 500px;
   margin-right: 150px;
-}
-
-.AboutPageWrittenSection {
-  text-align: left;
-  align-items: center;
-  line-height: 1.5;
 }
