@@ -1,29 +1,46 @@
-.AboutPageMainDiv {
-  display: flex;
-  flex-direction: row;
-  margin-left: 250px;
-  margin-right: 250px;
-}
-
-.AboutPageImageDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Main Header */
 .AboutPageHeader {
   text-align: center;
+  margin: 3rem auto;
+}
+
+/* Main Container */
+.AboutPageMainDiv {
+  width: 80%;
+  height: 50vh;
+  display: flex;
+  gap: 5rem;
+  margin: 3rem auto;
+}
+
+/* Written and Image Container */
+.AboutPageWrittenSection,
+.AboutPageImageDiv {
+  flex: 1;
+}
+
+/* Written Section */
+.AboutPageWrittenSection {
+  width: 100%;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Image Section */
+.AboutPageImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  object-fit: contain;
 }
 
 .AboutPageMainImage {
   border-radius: 25px;
   width: 500px;
   margin-right: 150px;
-}
-
-.AboutPageWrittenSection {
-  text-align: left;
-  align-items: center;
-  line-height: 1.5;
 }
