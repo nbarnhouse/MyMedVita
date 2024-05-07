@@ -14,7 +14,6 @@ function AboutPage() {
     <div>
       <NavBar />
       <h1 className="AboutPageHeader">About</h1>
-
       <div className="AboutPageMainDiv">
         {/* Div for written contents */}
         <div className="AboutPageWrittenSection">
