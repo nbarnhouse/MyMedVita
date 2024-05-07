@@ -20,7 +20,6 @@ function AboutPage() {
         <div className="AboutPageWrittenSection">
           {/* Div for Founders */}
           <div>
-            <h2>Founders</h2>
             <p>
               <span style={{ color: '#782CF6', textWeight: 'bold' }}>
                 <b>MyMedVita </b>
