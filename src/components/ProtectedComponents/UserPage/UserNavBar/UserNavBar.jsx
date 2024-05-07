@@ -26,7 +26,7 @@ function UserNavBar() {
       icon: <SavedSearchIcon />,
     },
     {
-      text: 'Logout',
+      //text: 'Logout',
       path: '/home',
       icon: <LogOutButton sx={{ textAlign: 'left' }} />,
     },
