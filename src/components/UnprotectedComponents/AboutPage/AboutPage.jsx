@@ -16,10 +16,6 @@ function AboutPage() {
       <h1 className="AboutPageHeader">About</h1>
 
       <div className="AboutPageMainDiv">
-        {/* Div for= Image */}
-        <div className="AboutPageImageDiv">
-          <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />
-        </div>
         {/* Div for written contents */}
         <div className="AboutPageWrittenSection">
           {/* Div for Founders */}
@@ -29,45 +25,19 @@ function AboutPage() {
               <span style={{ color: '#782CF6', textWeight: 'bold' }}>
                 <b>MyMedVita </b>
               </span>
-              was founded by a medical doctor, health economist, and an
-              engineer. With over
+              was founded by a physician, health economist, and an engineer.
+              With nearly{' '}
               <span style={{ color: '#782CF6', textWeight: 'bold' }}>
                 <b> 100 years of combine experience </b>
               </span>
-              in the healthcare industry, they teamed up to empower consumers to
-              navigate healthcare through price transparency.
+              , they teamed up to help empower consumers navigate their
+              healthcare choices by knowing the prices upfront.
             </p>
           </div>
-          {/* Div for Mission */}
-          <div>
-            <h2>Mission</h2>
-            <p>
-              <span style={{ color: '#782CF6', textWeight: 'bold' }}>
-                <b>MyMedVita </b>
-              </span>
-              allows any insured or uninsured consumer to
-              <span style={{ color: '#782CF6', textWeight: 'bold' }}>
-                <b> search, sort, and select </b>
-              </span>
-              their healthcare by price, provider, and distance so they know
-              before they go.
-            </p>
-          </div>
-          {/* Div for Vision */}
-          <div>
-            <h2>Vision</h2>
-            <p>
-              <span style={{ color: '#782CF6', textWeight: 'bold' }}>
-                <b>MyMedVita </b>
-              </span>
-              aspires to be the United States
-              <span style={{ color: '#782CF6', textWeight: 'bold' }}>
-                <b> most trusted and independent </b>
-              </span>
-              healthcare marketplace where millions of consumers depend on its
-              transparent information to empower their healthcare decisions.
-            </p>
-          </div>
+        </div>
+        {/* Div for= Image */}
+        <div className="AboutPageImageDiv">
+          <img className="AboutPageMainImage" src="AboutPage_Image.jpg" />
         </div>
       </div>
       <Footer />
