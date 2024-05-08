@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Button } from '@mui/material';
-import UserNavBar from '../UserNavBar/UserNavBar';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+
+import NavBar from '../../../AccessoryComponents/Nav/Nav';
+import UserNavBar from '../UserNavBar/UserNavBar';
 import './UserEditPage.css';
 
 import TextField from '@mui/material/TextField';
@@ -60,6 +62,7 @@ function UserEditPage() {
 
   return (
     <div className="saved-container">
+      <NavBar />
       <div className="saved-bottom-container">
         <UserNavBar />
         <div className="saved-right-container">
