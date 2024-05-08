@@ -82,7 +82,6 @@ function UserNavBar() {
             '&:hover': { backgroundColor: '#782cf6', color: 'white' },
           }}>
           <LogOutButton sx={{ marginRight: '5px', textAlign: 'left'}} />
-          <ListItemText primary="Logout" />
         </ListItem>
       </List>
     </Box>
