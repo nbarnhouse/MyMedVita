@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import UserNavBar from '../UserNavBar/UserNavBar';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import TextField from '@mui/material/TextField';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
@@ -97,77 +98,77 @@ function UserEditPage() {
           )}
           {updating && (
             <>
-              <p>
-                First Name:{' '}
-                <input
+              <div>
+                <TextField
                   value={firstNameValue}
                   onChange={(e) => setFirstNameValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Last Name:{' '}
-                <input
+                  label="First Name"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={lastNameValue}
                   onChange={(e) => setLastNameValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Email:{' '}
-                <input
+                  label="Last Name"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={emailValue}
                   onChange={(e) => setEmailValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Street Address:
-                <input
+                  label="Email"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={streetAddressValue}
                   onChange={(e) => setStreetAddressValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                City:
-                <input
+                  label="Street Address"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={cityValue}
                   onChange={(e) => setCityValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                State:
-                <input
+                  label="City"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={stateValue}
                   onChange={(e) => setStateValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Zip:
-                <input
+                  label="State"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={zipCodeValue}
                   onChange={(e) => setZipCodeValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Gender:
-                <input
+                  label="Zipcode"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={genderValue}
                   onChange={(e) => setGenderValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Date of Birth:
-                <input
+                  label="Gender"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   type="date"
                   value={dobValue}
                   onChange={(e) => setDobValue(e.target.value)}
-                ></input>
-              </p>
-              <p>
-                Phone:
-                <input
+                  label="Date of Birth"
+                ></TextField>
+              </div>
+              <div>
+                <TextField
                   value={phoneValue}
                   onChange={(e) => setPhoneValue(e.target.value)}
-                ></input>
-              </p>
+                  label="Phone"
+                ></TextField>
+              </div>
 
               <button
                 onClick={() => {
@@ -180,17 +181,6 @@ function UserEditPage() {
               </button>
             </>
           )}
-
-          <LogOutButton
-            className="btn"
-            style={{
-              whiteSpace: 'pre-line',
-              wordWrap: 'break-word',
-              maxWidth: '200px',
-              transition: 'font-size 0.3s ease', // Add transition for smooth effect
-              fontSize: '1rem', // Set initial font size
-            }}
-          />
         </div>
       </div>
     </div>
