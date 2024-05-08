@@ -59,117 +59,139 @@ function UserEditPage() {
   return (
     <div className="saved-container">
       <div className="saved-bottom-container">
-      <UserNavBar />
-      <div className="saved-right-container">
-      <h2>Hello, {user.first_name}!</h2>
-      <p>Account Details:</p>
-      <p>Name: {firstNameValue + ' ' + lastNameValue}</p>
-      {!updating && (
-        <>
-          <p>Email: {emailValue}</p>
-          <p>
-            Address:{' '}
-            {streetAddressValue +
-              ', ' +
-              cityValue +
-              ', ' +
-              stateValue +
-              ' ' +
-              zipCodeValue}
-          </p>
-          <Button
-            onClick={changeUpdating}
-            variant="contained"
-            color="primary"
+        <UserNavBar />
+        <div className="saved-right-container">
+          <h2>Hello, {user.first_name}!</h2>
+          <p>Account Details:</p>
+          {!updating && (
+            <>
+              <p>Email: {emailValue}</p>
+              <p>
+                Address:{' '}
+                {streetAddressValue +
+                  ', ' +
+                  cityValue +
+                  ', ' +
+                  stateValue +
+                  ' ' +
+                  zipCodeValue}
+              </p>
+              <Button
+                onClick={changeUpdating}
+                variant="contained"
+                color="primary"
+                style={{
+                  whiteSpace: 'pre-line',
+                  wordWrap: 'break-word',
+                  maxWidth: '200px',
+                  backgroundColor: '#24496b',
+                  transition: 'font-size 0.3s ease', // Add transition for smooth effect
+                  fontSize: '1rem', // Set initial font size
+                }}
+                onMouseEnter={(e) => (e.target.style.fontSize = '1.1rem')} // Increase font size on hover
+                onMouseLeave={(e) => (e.target.style.fontSize = '1rem')} // Reset font size on mouse leave
+              >
+                Update Info
+              </Button>
+            </>
+          )}
+          {updating && (
+            <>
+              <p>
+                First Name:{' '}
+                <input
+                  value={firstNameValue}
+                  onChange={(e) => setFirstNameValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Last Name:{' '}
+                <input
+                  value={lastNameValue}
+                  onChange={(e) => setLastNameValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Email:{' '}
+                <input
+                  value={emailValue}
+                  onChange={(e) => setEmailValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Street Address:
+                <input
+                  value={streetAddressValue}
+                  onChange={(e) => setStreetAddressValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                City:
+                <input
+                  value={cityValue}
+                  onChange={(e) => setCityValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                State:
+                <input
+                  value={stateValue}
+                  onChange={(e) => setStateValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Zip:
+                <input
+                  value={zipCodeValue}
+                  onChange={(e) => setZipCodeValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Gender:
+                <input
+                  value={genderValue}
+                  onChange={(e) => setGenderValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Date of Birth:
+                <input
+                  type="date"
+                  value={dobValue}
+                  onChange={(e) => setDobValue(e.target.value)}
+                ></input>
+              </p>
+              <p>
+                Phone:
+                <input
+                  value={phoneValue}
+                  onChange={(e) => setPhoneValue(e.target.value)}
+                ></input>
+              </p>
+
+              <button
+                onClick={() => {
+                  changeUpdating();
+                  updateUserInfo();
+                  history.push('/profile');
+                }}
+              >
+                Save
+              </button>
+            </>
+          )}
+
+          <LogOutButton
+            className="btn"
             style={{
               whiteSpace: 'pre-line',
               wordWrap: 'break-word',
               maxWidth: '200px',
-              backgroundColor: '#24496b',
               transition: 'font-size 0.3s ease', // Add transition for smooth effect
               fontSize: '1rem', // Set initial font size
             }}
-            onMouseEnter={(e) => (e.target.style.fontSize = '1.1rem')} // Increase font size on hover
-            onMouseLeave={(e) => (e.target.style.fontSize = '1rem')} // Reset font size on mouse leave
-          >
-            Update Info
-          </Button>
-        </>
-      )}
-      {updating && (
-        <>
-          <p>
-            Email:{' '}
-            <input
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}></input>
-          </p>
-          <p>
-            Street Address:
-            <input
-              value={streetAddressValue}
-              onChange={(e) => setStreetAddressValue(e.target.value)}></input>
-          </p>
-          <p>
-            City:
-            <input
-              value={cityValue}
-              onChange={(e) => setCityValue(e.target.value)}></input>
-          </p>
-          <p>
-            State:
-            <input
-              value={stateValue}
-              onChange={(e) => setStateValue(e.target.value)}></input>
-          </p>
-          <p>
-            Zip:
-            <input
-              value={zipCodeValue}
-              onChange={(e) => setZipCodeValue(e.target.value)}></input>
-          </p>
-          <p>
-            Gender:
-            <input
-              value={genderValue}
-              onChange={(e) => setGenderValue(e.target.value)}></input>
-          </p>
-          <p>
-            Date of Birth:
-            <input
-              type="date"
-              value={dobValue}
-              onChange={(e) => setDobValue(e.target.value)}></input>
-          </p>
-          <p>
-            Phone:
-            <input
-              value={phoneValue}
-              onChange={(e) => setPhoneValue(e.target.value)}></input>
-          </p>
-
-          <button
-            onClick={() => {
-              changeUpdating();
-              updateUserInfo();
-              history.push('/profile');
-            }}>
-            Save
-          </button>
-        </>
-      )}
-
-      <LogOutButton
-        className="btn"
-        style={{
-          whiteSpace: 'pre-line',
-          wordWrap: 'break-word',
-          maxWidth: '200px',
-          transition: 'font-size 0.3s ease', // Add transition for smooth effect
-          fontSize: '1rem', // Set initial font size
-        }}
-      />
-      </div>
+          />
+        </div>
       </div>
     </div>
   );
