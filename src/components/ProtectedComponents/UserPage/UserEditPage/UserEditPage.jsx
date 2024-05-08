@@ -1,12 +1,13 @@
 //Page was set up just to test routes, feel free to change set up
 
 import React, { useState } from 'react';
-import LogOutButton from '../../../AccessoryComponents/LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import UserNavBar from '../UserNavBar/UserNavBar';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import './UserEditPage.css';
+
 import TextField from '@mui/material/TextField';
 
 function UserEditPage() {
@@ -98,63 +99,63 @@ function UserEditPage() {
           )}
           {updating && (
             <>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={firstNameValue}
                   onChange={(e) => setFirstNameValue(e.target.value)}
                   label="First Name"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={lastNameValue}
                   onChange={(e) => setLastNameValue(e.target.value)}
                   label="Last Name"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={emailValue}
                   onChange={(e) => setEmailValue(e.target.value)}
                   label="Email"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={streetAddressValue}
                   onChange={(e) => setStreetAddressValue(e.target.value)}
                   label="Street Address"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={cityValue}
                   onChange={(e) => setCityValue(e.target.value)}
                   label="City"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={stateValue}
                   onChange={(e) => setStateValue(e.target.value)}
                   label="State"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={zipCodeValue}
                   onChange={(e) => setZipCodeValue(e.target.value)}
                   label="Zipcode"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={genderValue}
                   onChange={(e) => setGenderValue(e.target.value)}
                   label="Gender"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   type="date"
                   value={dobValue}
@@ -162,7 +163,7 @@ function UserEditPage() {
                   label="Date of Birth"
                 ></TextField>
               </div>
-              <div>
+              <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={phoneValue}
                   onChange={(e) => setPhoneValue(e.target.value)}
