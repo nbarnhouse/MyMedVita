@@ -203,7 +203,13 @@ function UserEditPage() {
                 </div>
               </div>
 
-              <button
+              <Button
+                variant="contained"
+                size="large"
+                style={{
+                  backgroundColor: '#782cf6',
+                  color: 'white',
+                }}
                 onClick={() => {
                   changeUpdating();
                   updateUserInfo();
@@ -211,7 +217,7 @@ function UserEditPage() {
                 }}
               >
                 Save
-              </button>
+              </Button>
             </>
           )}
         </div>
