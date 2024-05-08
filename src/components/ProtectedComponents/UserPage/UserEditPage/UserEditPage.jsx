@@ -63,7 +63,7 @@ function UserEditPage() {
       <div className="saved-bottom-container">
         <UserNavBar />
         <div className="saved-right-container">
-          <h3>Edit Profile</h3>
+          <h2>Edit Profile</h2>
           {!updating && (
             <>
               <p>Email: {emailValue}</p>
