@@ -10,7 +10,9 @@ import NavBar from '../../../AccessoryComponents/Nav/Nav';
 import UserNavBar from '../UserNavBar/UserNavBar';
 import './UserEditPage.css';
 
+// Material UI Imports:
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
