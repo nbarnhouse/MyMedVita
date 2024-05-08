@@ -100,26 +100,45 @@ function UserEditPage() {
           {updating && (
             <>
               <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={firstNameValue}
-                  onChange={(e) => setFirstNameValue(e.target.value)}
-                  label="First Name"
-                ></TextField>
+                {/* Div for the First and Last Name Input Fields */}
+                <div className="userEditPageSideBySideInput">
+                  <div className="firstInputField">
+                    <TextField
+                      value={firstNameValue}
+                      onChange={(e) => setFirstNameValue(e.target.value)}
+                      label="First Name"
+                    ></TextField>
+                  </div>
+                  <div>
+                    <TextField
+                      value={lastNameValue}
+                      onChange={(e) => setLastNameValue(e.target.value)}
+                      label="Last Name"
+                    ></TextField>
+                  </div>
+                </div>
               </div>
+
+              {/* Div for the Email address and the phone number */}
               <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={lastNameValue}
-                  onChange={(e) => setLastNameValue(e.target.value)}
-                  label="Last Name"
-                ></TextField>
+                <div className="userEditPageSideBySideInput">
+                  <div className="firstInputField">
+                    <TextField
+                      value={emailValue}
+                      onChange={(e) => setEmailValue(e.target.value)}
+                      label="Email"
+                    ></TextField>
+                  </div>
+                  <div>
+                    <TextField
+                      value={phoneValue}
+                      onChange={(e) => setPhoneValue(e.target.value)}
+                      label="Phone"
+                    ></TextField>
+                  </div>
+                </div>
               </div>
-              <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={emailValue}
-                  onChange={(e) => setEmailValue(e.target.value)}
-                  label="Email"
-                ></TextField>
-              </div>
+
               <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={streetAddressValue}
@@ -127,6 +146,7 @@ function UserEditPage() {
                   label="Street Address"
                 ></TextField>
               </div>
+              {/* Div for the DOB and Gender */}
               <div className="userEditPageIndependentInputTextDivs">
                 <TextField
                   value={cityValue}
@@ -161,13 +181,6 @@ function UserEditPage() {
                   value={dobValue}
                   onChange={(e) => setDobValue(e.target.value)}
                   label="Date of Birth"
-                ></TextField>
-              </div>
-              <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={phoneValue}
-                  onChange={(e) => setPhoneValue(e.target.value)}
-                  label="Phone"
                 ></TextField>
               </div>
 
