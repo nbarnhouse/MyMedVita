@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET Insurance list from database
 router.get('/', (req, res) => {
-  const queryText = `SELECT * FROM "insurance_providers" ORDER BY "insurer_name";`;
+  const queryText = `SELECT * FROM "insurance_providers" ORDER BY "insurer_code";`;
 
   pool
     .query(queryText)
