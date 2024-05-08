@@ -1,18 +1,17 @@
-//Page was set up just to test routes, feel free to change set up
-
+// imports:
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
+// imports that we created:
 import NavBar from '../../../AccessoryComponents/Nav/Nav';
 import UserNavBar from '../UserNavBar/UserNavBar';
 import './UserEditPage.css';
 
 // Material UI Imports:
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
