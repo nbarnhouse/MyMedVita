@@ -15,6 +15,7 @@ function ProviderDataPage() {
   const history = useHistory();
   const location = useLocation();
   const provider = location.state?.provider || {};
+  const distance = location.state?.distance
 
   const {procedureDescription} = useSelector((state) => state.distance);
 
@@ -84,7 +85,7 @@ function ProviderDataPage() {
                 label: 'Phone Number',
                 content: provider.provider_phone? provider.provider_phone.substring(0,3)+'-'+provider.provider_phone.substring(3,6)+'-'+provider.provider_phone.substring(6) : 'No Number Listed',
               },
-              { label: 'Distance', content: 'Need to Add Distance Here' },
+              { label: 'Distance', content: distance + ' Miles' },
             ].map((info, index) => (
               <div key={index} className="provider-info-div">
                 <h5 className="provider-info-header">{info.label}</h5>
