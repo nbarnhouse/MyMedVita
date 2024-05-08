@@ -139,49 +139,65 @@ function UserEditPage() {
                 </div>
               </div>
 
-              <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={streetAddressValue}
-                  onChange={(e) => setStreetAddressValue(e.target.value)}
-                  label="Street Address"
-                ></TextField>
-              </div>
               {/* Div for the DOB and Gender */}
               <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={cityValue}
-                  onChange={(e) => setCityValue(e.target.value)}
-                  label="City"
-                ></TextField>
+                <div className="userEditPageSideBySideInput">
+                  <div className="firstInputField">
+                    <TextField
+                      type="date"
+                      value={dobValue}
+                      onChange={(e) => setDobValue(e.target.value)}
+                      label="Date of Birth"
+                    ></TextField>
+                  </div>
+                  <div>
+                    <TextField
+                      value={genderValue}
+                      onChange={(e) => setGenderValue(e.target.value)}
+                      label="Gender"
+                    ></TextField>
+                  </div>
+                </div>
               </div>
+
+              {/* Div for the street and city */}
               <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={stateValue}
-                  onChange={(e) => setStateValue(e.target.value)}
-                  label="State"
-                ></TextField>
+                <div className="userEditPageSideBySideInput">
+                  <div className="firstInputField">
+                    <TextField
+                      value={streetAddressValue}
+                      onChange={(e) => setStreetAddressValue(e.target.value)}
+                      label="Street Address"
+                    ></TextField>
+                  </div>
+                  <div>
+                    <TextField
+                      value={cityValue}
+                      onChange={(e) => setCityValue(e.target.value)}
+                      label="City"
+                    ></TextField>
+                  </div>
+                </div>
               </div>
+
+              {/* Div for state and zipcode */}
               <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={zipCodeValue}
-                  onChange={(e) => setZipCodeValue(e.target.value)}
-                  label="Zipcode"
-                ></TextField>
-              </div>
-              <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  value={genderValue}
-                  onChange={(e) => setGenderValue(e.target.value)}
-                  label="Gender"
-                ></TextField>
-              </div>
-              <div className="userEditPageIndependentInputTextDivs">
-                <TextField
-                  type="date"
-                  value={dobValue}
-                  onChange={(e) => setDobValue(e.target.value)}
-                  label="Date of Birth"
-                ></TextField>
+                <div className="userEditPageSideBySideInput">
+                  <div className="firstInputField">
+                    <TextField
+                      value={stateValue}
+                      onChange={(e) => setStateValue(e.target.value)}
+                      label="State"
+                    ></TextField>
+                  </div>
+                  <div className="userEditPageIndependentInputTextDivs">
+                    <TextField
+                      value={zipCodeValue}
+                      onChange={(e) => setZipCodeValue(e.target.value)}
+                      label="Zipcode"
+                    ></TextField>
+                  </div>
+                </div>
               </div>
 
               <button
