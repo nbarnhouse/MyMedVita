@@ -39,7 +39,7 @@ function UserPage() {
           <p>First Name: {userDetails.first_name}</p>
           <p>Last Name: {userDetails.last_name}</p>
           <p>Email Address: {userDetails.email}</p>
-          <p>Phone Number: {userDetails.phone}</p>
+          <p>Phone Number: {userDetails.phone? userDetails.phone.substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6): 'No Phone Number Listed'}</p>
           <p>DOB: {formattedDate}</p>
           <p>Gender: {userDetails.gender}</p>
           <h4>Address:</h4>
@@ -47,9 +47,9 @@ function UserPage() {
           <p>City: {userDetails.city}</p>
           <p>State: {userDetails.state}</p>
           <p>Zip Code: {userDetails.zip}</p>
+      <button onClick={navBack}>Edit</button>
         </div>
       </div>
-      <button onClick={navBack}>Edit</button>
     </div>
   );
 }

@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import UserNavBar from '../UserNavBar/UserNavBar';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   //setting initial values
-  const [updating, setUpdating] = useState(false);
+  const [updating, setUpdating] = useState(true);
   const [firstNameValue, setFirstNameValue] = useState(user.first_name);
   const [lastNameValue, setLastNameValue] = useState(user.last_name);
   const [genderValue, setGenderValue] = useState(user.gender);
@@ -47,7 +49,7 @@ function UserEditPage() {
       await axios.put('/api/user/update', updatedUserInfo);
       window.location.reload();
 
-      changeUpdating();
+      //changeUpdating();
     } catch (error) {
       console.log('Error updating user information:', error);
       // Handle error
@@ -55,8 +57,10 @@ function UserEditPage() {
   }
 
   return (
-    <div className="container">
+    <div className="saved-container">
+      <div className="saved-bottom-container">
       <UserNavBar />
+      <div className="saved-right-container">
       <h2>Hello, {user.first_name}!</h2>
       <p>Account Details:</p>
       <p>Name: {firstNameValue + ' ' + lastNameValue}</p>
@@ -148,6 +152,7 @@ function UserEditPage() {
             onClick={() => {
               changeUpdating();
               updateUserInfo();
+              history.push('/profile');
             }}>
             Save
           </button>
@@ -164,6 +169,8 @@ function UserEditPage() {
           fontSize: '1rem', // Set initial font size
         }}
       />
+      </div>
+      </div>
     </div>
   );
 }
