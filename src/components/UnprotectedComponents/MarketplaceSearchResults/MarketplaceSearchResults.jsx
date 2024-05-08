@@ -245,6 +245,10 @@ export default function MarketplaceSearchResults() {
       });
   };
 
+  const saveSearchClickedNoUser = () => {
+    history.push('/register');
+  };
+
   // Function to close Snackbar
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {
@@ -279,18 +283,28 @@ export default function MarketplaceSearchResults() {
             MedVita Search Results
           </h1>
           <p className="result-header-paragraph">
-
-            <b>Procedure:</b> {procedureCode+" - "+procedureDescription} <b>Zip:</b> {zip} <b>Within </b>{distance} <b>Miles</b>
-             {user.id && (<span
-              className="save-search-span"
-              onClick={saveSearchClicked}
-              style={{ fontSize: '12px' }}>
-              {' '}
-              - <FavoriteIcon fontSize="18px" />
-              (Add to Saved Searches)
-            </span>
+            <b>Procedure:</b> {procedureCode + ' - ' + procedureDescription}{' '}
+            <b>Zip:</b> {zip} <b>Within </b>
+            {distance} <b>Miles</b>
+            {user.id ? (
+              <span
+                className="save-search-span"
+                onClick={saveSearchClicked}
+                style={{ fontSize: '12px' }}>
+                {' '}
+                - <FavoriteIcon fontSize="18px" />
+                (Add to Saved Searches)
+              </span>
+            ) : (
+              <span
+                className="save-search-span"
+                onClick={saveSearchClickedNoUser}
+                style={{ fontSize: '12px' }}>
+                {' '}
+                - <FavoriteIcon fontSize="18px" />
+                (Register to Save Search)
+              </span>
             )}
-
           </p>
         </div>
         <div className="result-container">
