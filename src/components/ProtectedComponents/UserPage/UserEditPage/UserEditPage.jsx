@@ -63,7 +63,6 @@ function UserEditPage() {
       <div className="saved-bottom-container">
         <UserNavBar />
         <div className="saved-right-container">
-          <h2>Hello, {user.first_name}!</h2>
           <h3>Edit Profile</h3>
           {!updating && (
             <>
