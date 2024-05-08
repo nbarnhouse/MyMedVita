@@ -11,6 +11,10 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
   FormGroup,
   Checkbox,
 } from '@mui/material';
@@ -26,7 +30,7 @@ function MarketplaceInsuranceSelect({
 
   const [searchByInsurance, setSearchByInsurance] = useState(false);
   const [insuranceReady, setInsuranceReady] = useState(false);
-  const [insuranceSelection, setInsuranceSelection] = useState(null);
+  const [insuranceSelection, setInsuranceSelection] = useState(0);
   const loading = useSelector((store) => store.insurance.loading);
   const insuranceList = useSelector((store) => store.insurance.insuranceList);
 
@@ -92,7 +96,7 @@ function MarketplaceInsuranceSelect({
     // }
     // setCheckboxState(initialCheckboxState);
     //
-  }, [!loading]);
+  }, [loading]);
 
   useEffect(() => {
     generateInsuranceSearchMask();
@@ -102,7 +106,30 @@ function MarketplaceInsuranceSelect({
     insuranceReady && (
       <div className="insurance-search">
         <p className="search-option-label">How do you want to search:</p>
-        <RadioGroup
+
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Provider:</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={insuranceSelection}
+            label="Provider"
+            onChange={insuranceProviderChange}
+            sx={{ marginBottom: '20px' }}>
+            {insuranceList.map((insurer) => {
+              return (
+                <MenuItem
+                  value={insurer.insurer_code}
+                  key={insurer.id}>
+                  {insurer.insurer_name}
+                </MenuItem>
+              );
+            })}
+            <MenuItem value={0}>All Insurance</MenuItem>
+          </Select>
+        </FormControl>
+
+        {/* <RadioGroup
           className="insurance-type-group"
           row
           value={searchByInsurance}
@@ -143,9 +170,9 @@ function MarketplaceInsuranceSelect({
                       value={insurer.insurer_code}
                       control={<Radio />}
                       label={insurer.insurer_name}
-                    />
+                    /> */}
 
-                    {/* 
+        {/* 
                     CHECKBOX SELECTION CODE
                     <FormControlLabel
                       label={insurer.insurer_name}
@@ -158,12 +185,12 @@ function MarketplaceInsuranceSelect({
                         />
                       }
                     /> */}
-                  </Grid>
+        {/* </Grid>
                 );
               })}
             </Grid>
           </RadioGroup>
-        )}
+        )} */}
         {/* <p>Control State: {JSON.stringify(checkboxState)}</p>
         <p>Insurance Search Mask: {insuranceSearchMask}</p> */}
       </div>
