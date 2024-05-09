@@ -5,7 +5,7 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 // CUSTOM COMPONENTS
 import NavBar from '../../AccessoryComponents/Nav/Nav';
 import Footer from '../../AccessoryComponents/Footer/Footer';
-import doctorImage from './images/multipleDoctors.avif';
+import homeImage from './images/homeImage.jpg';
 
 // Import Material UI
 import { Button, Typography } from '@mui/material';
@@ -74,7 +74,7 @@ function LandingPage() {
         </div>
         <div className="landing-right-container">
           <img
-            src={doctorImage}
+            src={homeImage}
             alt="picture of multiple doctors standing in a circle"
             className="landing-image"
           />
