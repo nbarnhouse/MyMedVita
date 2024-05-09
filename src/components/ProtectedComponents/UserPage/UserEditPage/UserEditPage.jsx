@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import moment from 'moment';
 
 // imports that we created:
 import NavBar from '../../../AccessoryComponents/Nav/Nav';
@@ -35,6 +36,11 @@ function UserEditPage() {
   function changeUpdating() {
     setUpdating(!updating);
   }
+
+  // change the date of birth so that it is the right form
+  // dobValue is the exact date from the database, this is is user friendly!
+  // DOB for the input field should be in the format YYYY-MM-DD
+  const formattedDate = moment(dobValue.dob).format('YYYY-MM-DD');
 
   async function updateUserInfo() {
     try {
@@ -152,7 +158,7 @@ function UserEditPage() {
                   <div className="firstInputField">
                     <TextField
                       type="date"
-                      value={dobValue}
+                      value={formattedDate}
                       onChange={(e) => setDobValue(e.target.value)}
                       label="Date of Birth"
                       className="userEditPageInput"
