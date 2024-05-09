@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { AppBar, Toolbar, Button, Typography } from '@mui/material';
 
 // Logo Image
-import logoImage from './images/logo_heart_only_MMV.png';
+import logoImage from './images/logoWhite.png';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -33,9 +33,8 @@ function Nav() {
             <img
               src={logoImage}
               alt="a picture of a heart - the logo for the company"
-              style={{ maxWidth: 60, maxHeight: '100%' }}
+              style={{ maxWidth: '150px', maxHeight: '100%' }}
             />
-            MyMedVita
           </Button>
         </Typography>
         {/* Rest of links from navButtonsList variable */}
