@@ -6,3 +6,19 @@
 .UserPageAddressSection {
   margin-bottom: 35px;
 }
+
+.userPageAddressContentDiv {
+  display: flex;
+}
+
+.userPageAddressStreetDiv {
+  margin-right: 30px;
+}
+
+.userPageAddressCityDiv {
+  margin-right: 30px;
+}
+
+.userPageAddressStateDiv {
+  margin-right: 30px;
+}
