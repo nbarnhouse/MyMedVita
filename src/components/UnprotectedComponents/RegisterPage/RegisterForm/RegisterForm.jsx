@@ -4,7 +4,16 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Link as RouterLink } from 'react-router-dom';
 
 // Import MaterialUI CSS
-import { TextField, Button, Grid, Typography } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({
@@ -119,15 +128,26 @@ function LoginForm() {
           ></TextField>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            label="Gender"
-            name="gender"
-            type="text"
+          <FormControl
             variant="outlined"
-            value={newUser.gender}
-            onChange={handleChange}
-            style={{ backgroundColor: 'white' }}
-          />
+            style={{ backgroundColor: 'white', width: '100%' }}
+          >
+            <InputLabel id="gender-label">Gender</InputLabel>
+            <Select
+              labelId="gender-label"
+              label="Gender"
+              name="gender"
+              value={newUser.gender}
+              onChange={handleChange}
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+              <MenuItem value="Prefer Not To Respond">
+                Prefer Not To Respond
+              </MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
