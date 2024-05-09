@@ -110,6 +110,7 @@ function UserEditPage() {
                       value={firstNameValue}
                       onChange={(e) => setFirstNameValue(e.target.value)}
                       label="First Name"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -117,6 +118,7 @@ function UserEditPage() {
                       value={lastNameValue}
                       onChange={(e) => setLastNameValue(e.target.value)}
                       label="Last Name"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -130,6 +132,7 @@ function UserEditPage() {
                       value={emailValue}
                       onChange={(e) => setEmailValue(e.target.value)}
                       label="Email"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -137,6 +140,7 @@ function UserEditPage() {
                       value={phoneValue}
                       onChange={(e) => setPhoneValue(e.target.value)}
                       label="Phone"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -151,6 +155,7 @@ function UserEditPage() {
                       value={dobValue}
                       onChange={(e) => setDobValue(e.target.value)}
                       label="Date of Birth"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -158,6 +163,7 @@ function UserEditPage() {
                       value={genderValue}
                       onChange={(e) => setGenderValue(e.target.value)}
                       label="Gender"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -171,6 +177,7 @@ function UserEditPage() {
                       value={streetAddressValue}
                       onChange={(e) => setStreetAddressValue(e.target.value)}
                       label="Street Address"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -178,6 +185,7 @@ function UserEditPage() {
                       value={cityValue}
                       onChange={(e) => setCityValue(e.target.value)}
                       label="City"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -191,6 +199,7 @@ function UserEditPage() {
                       value={stateValue}
                       onChange={(e) => setStateValue(e.target.value)}
                       label="State"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div className="userEditPageIndependentInputTextDivs">
@@ -198,6 +207,7 @@ function UserEditPage() {
                       value={zipCodeValue}
                       onChange={(e) => setZipCodeValue(e.target.value)}
                       label="Zipcode"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
