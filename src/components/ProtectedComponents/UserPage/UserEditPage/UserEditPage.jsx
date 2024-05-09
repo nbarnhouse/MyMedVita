@@ -147,7 +147,8 @@ function UserEditPage() {
                   <div>
                     <PhoneInput
                       value={phoneValue}
-                      onChange={(e) => setPhoneValue(e.target.value)}
+                      // you only have to pass the hook in for the onChange
+                      onChange={setPhoneValue}
                       label="Phone"
                       international
                       defaultCountry="US"
