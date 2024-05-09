@@ -56,3 +56,34 @@ router.get('/codes/', (req, res) => {
 });
 
 module.exports = router;
+
+/**
+ * @api {get} /api/categories Get Categories and Category IDs
+ * @apiName GetCategories
+ * @apiGroup Categories
+ *
+ * @apiSuccess {Number} id Category ID.
+ * @apiSuccess {String} category Category name.
+ */
+
+/**
+ * @api {get} /api/categories/codes/:id Get Codes and Descriptions by Category ID
+ * @apiName GetCodesByCategory
+ * @apiGroup Categories
+ *
+ * @apiParam {Number} id Category ID.
+ *
+ * @apiSuccess {String} primary_code Primary code.
+ * @apiSuccess {String} description Description of the code.
+ * @apiSuccess {String} category Category name.
+ */
+
+/**
+ * @api {get} /api/categories/codes Get All Codes, Descriptions, and Categories
+ * @apiName GetAllCodes
+ * @apiGroup Categories
+ *
+ * @apiSuccess {String} primary_code Primary code.
+ * @apiSuccess {String} description Description of the code.
+ * @apiSuccess {String} category Category name.
+ */

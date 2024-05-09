@@ -1,0 +1,11 @@
+{
+  "apidoc": {
+    "name": "MyMedVita",
+    "version": "1.0.0",
+    "description": "The MyMedVita web application is a website designed to make prices and options for medical procedures more accessible and transparent to patients.",
+    "apidoc": {
+      "title": "Route API Documentation",
+      "url": "http://localhost:5173"
+    }
+  }
+}
