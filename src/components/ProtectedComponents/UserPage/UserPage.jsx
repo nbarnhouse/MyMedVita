@@ -50,7 +50,7 @@ function UserPage() {
           {/* .substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6) */}
           <p>DOB: {formattedDate}</p>
           <p>Gender: {userDetails.gender}</p>
-          <div>
+          <div className="UserPageAddressSection">
             <h2>Address:</h2>
             <p>Street: {userDetails.street_address}</p>{' '}
             <p>City: {userDetails.city}</p>
