@@ -11,6 +11,9 @@ import Navbar from '../../AccessoryComponents/Nav/Nav';
 import UserNavBar from './UserNavBar/UserNavBar';
 import './UserPage.css';
 
+// Material UI
+import { Button } from '@mui/material';
+
 function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -54,7 +57,17 @@ function UserPage() {
             <p>State: {userDetails.state}</p>
             <p>Zip Code: {userDetails.zip}</p>
           </div>
-          <button onClick={navBack}>Edit</button>
+          <Button
+            variant="contained"
+            size="large"
+            style={{
+              backgroundColor: '#782cf6',
+              color: 'white',
+            }}
+            onClick={navBack}
+          >
+            Edit
+          </Button>
         </div>
       </div>
     </div>
