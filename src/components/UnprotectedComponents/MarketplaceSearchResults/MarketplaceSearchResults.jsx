@@ -150,10 +150,17 @@ export default function MarketplaceSearchResults() {
 
   // Function to route user to Provider Details Page
   const handleDetailsClick = (provider) => {
-    console.log('PROVIDER:', provider);
+    const providerDistance = Math.floor(
+      haversine(
+        centerLat,
+        centerLon,
+        parseFloat(provider.provider_lat),
+        parseFloat(provider.provider_long)
+      )
+    );
     history.push({
       pathname: '/details',
-      state: { provider: provider },
+      state: { provider: provider, distance: providerDistance },
     });
   };
 
