@@ -13,6 +13,9 @@ import './UserEditPage.css';
 // Material UI Imports:
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
@@ -142,12 +145,15 @@ function UserEditPage() {
                     ></TextField>
                   </div>
                   <div>
-                    <TextField
+                    <PhoneInput
                       value={phoneValue}
                       onChange={(e) => setPhoneValue(e.target.value)}
                       label="Phone"
-                      className="userEditPageInput"
-                    ></TextField>
+                      international
+                      defaultCountry="US"
+                      className="PhoneInput"
+                      inputClassName="PhoneInputInput"
+                    ></PhoneInput>
                   </div>
                 </div>
               </div>
