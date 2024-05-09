@@ -1,16 +1,21 @@
-//Page was set up just to test routes, feel free to change set up
-
+// imports:
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import moment from 'moment';
 
+// imports that we created:
 import NavBar from '../../../AccessoryComponents/Nav/Nav';
 import UserNavBar from '../UserNavBar/UserNavBar';
 import './UserEditPage.css';
 
+// Material UI Imports:
 import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 function UserEditPage() {
   const user = useSelector((store) => store.user);
@@ -34,6 +39,11 @@ function UserEditPage() {
   function changeUpdating() {
     setUpdating(!updating);
   }
+
+  // change the date of birth so that it is the right form
+  // dobValue is the exact date from the database, this is is user friendly!
+  // DOB for the input field should be in the format YYYY-MM-DD
+  const formattedDate = moment(dobValue).format('YYYY-MM-DD');
 
   async function updateUserInfo() {
     try {
@@ -109,6 +119,7 @@ function UserEditPage() {
                       value={firstNameValue}
                       onChange={(e) => setFirstNameValue(e.target.value)}
                       label="First Name"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -116,6 +127,7 @@ function UserEditPage() {
                       value={lastNameValue}
                       onChange={(e) => setLastNameValue(e.target.value)}
                       label="Last Name"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -129,14 +141,19 @@ function UserEditPage() {
                       value={emailValue}
                       onChange={(e) => setEmailValue(e.target.value)}
                       label="Email"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
-                    <TextField
+                    <PhoneInput
                       value={phoneValue}
                       onChange={(e) => setPhoneValue(e.target.value)}
                       label="Phone"
-                    ></TextField>
+                      international
+                      defaultCountry="US"
+                      className="PhoneInput"
+                      inputClassName="PhoneInputInput"
+                    ></PhoneInput>
                   </div>
                 </div>
               </div>
@@ -147,9 +164,10 @@ function UserEditPage() {
                   <div className="firstInputField">
                     <TextField
                       type="date"
-                      value={dobValue}
+                      value={formattedDate}
                       onChange={(e) => setDobValue(e.target.value)}
                       label="Date of Birth"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -157,6 +175,7 @@ function UserEditPage() {
                       value={genderValue}
                       onChange={(e) => setGenderValue(e.target.value)}
                       label="Gender"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -170,6 +189,7 @@ function UserEditPage() {
                       value={streetAddressValue}
                       onChange={(e) => setStreetAddressValue(e.target.value)}
                       label="Street Address"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div>
@@ -177,6 +197,7 @@ function UserEditPage() {
                       value={cityValue}
                       onChange={(e) => setCityValue(e.target.value)}
                       label="City"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
@@ -190,6 +211,7 @@ function UserEditPage() {
                       value={stateValue}
                       onChange={(e) => setStateValue(e.target.value)}
                       label="State"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                   <div className="userEditPageIndependentInputTextDivs">
@@ -197,12 +219,19 @@ function UserEditPage() {
                       value={zipCodeValue}
                       onChange={(e) => setZipCodeValue(e.target.value)}
                       label="Zipcode"
+                      className="userEditPageInput"
                     ></TextField>
                   </div>
                 </div>
               </div>
 
-              <button
+              <Button
+                variant="contained"
+                size="large"
+                style={{
+                  backgroundColor: '#782cf6',
+                  color: 'white',
+                }}
                 onClick={() => {
                   changeUpdating();
                   updateUserInfo();
@@ -210,7 +239,7 @@ function UserEditPage() {
                 }}
               >
                 Save
-              </button>
+              </Button>
             </>
           )}
         </div>

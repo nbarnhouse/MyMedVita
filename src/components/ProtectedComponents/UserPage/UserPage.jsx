@@ -9,6 +9,10 @@ import moment from 'moment';
 // CUSTOM COMPONENTS
 import Navbar from '../../AccessoryComponents/Nav/Nav';
 import UserNavBar from './UserNavBar/UserNavBar';
+import './UserPage.css';
+
+// Material UI
+import { Button } from '@mui/material';
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -34,20 +38,36 @@ function UserPage() {
       <div className="saved-bottom-container">
         <UserNavBar />
         {/* <h1>User Navbar Placeholder</h1> */}
-        <div className="saved-right-container">
-          <h4>Personal Details:</h4>
+        <div className="UserPageDetail">
+          <h2>Personal Details:</h2>
           <p>First Name: {userDetails.first_name}</p>
           <p>Last Name: {userDetails.last_name}</p>
           <p>Email Address: {userDetails.email}</p>
-          <p>Phone Number: {userDetails.phone? userDetails.phone.substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6): 'No Phone Number Listed'}</p>
+          <p>
+            Phone Number:{' '}
+            {userDetails.phone ? userDetails.phone : 'No Phone Number Listed'}
+          </p>
+          {/* .substring(0,3)+"-"+userDetails.phone.substring(3,6)+"-"+userDetails.phone.substring(6) */}
           <p>DOB: {formattedDate}</p>
           <p>Gender: {userDetails.gender}</p>
-          <h4>Address:</h4>
-          <p>Street: {userDetails.street_address}</p>{' '}
-          <p>City: {userDetails.city}</p>
-          <p>State: {userDetails.state}</p>
-          <p>Zip Code: {userDetails.zip}</p>
-      <button onClick={navBack}>Edit</button>
+          <div className="UserPageAddressSection">
+            <h2>Address:</h2>
+            <p>Street: {userDetails.street_address}</p>{' '}
+            <p>City: {userDetails.city}</p>
+            <p>State: {userDetails.state}</p>
+            <p>Zip Code: {userDetails.zip}</p>
+          </div>
+          <Button
+            variant="contained"
+            size="large"
+            style={{
+              backgroundColor: '#782cf6',
+              color: 'white',
+            }}
+            onClick={navBack}
+          >
+            Edit
+          </Button>
         </div>
       </div>
     </div>
