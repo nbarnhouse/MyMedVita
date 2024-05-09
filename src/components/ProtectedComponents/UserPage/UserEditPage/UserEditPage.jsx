@@ -40,7 +40,7 @@ function UserEditPage() {
   // change the date of birth so that it is the right form
   // dobValue is the exact date from the database, this is is user friendly!
   // DOB for the input field should be in the format YYYY-MM-DD
-  const formattedDate = moment(dobValue.dob).format('YYYY-MM-DD');
+  const formattedDate = moment(dobValue).format('YYYY-MM-DD');
 
   async function updateUserInfo() {
     try {
