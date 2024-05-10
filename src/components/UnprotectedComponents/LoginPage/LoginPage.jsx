@@ -22,6 +22,18 @@ function LoginPage() {
 
   const dispatch = useDispatch();
 
+  // Prevent screen from scrolling on the y axis
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    dispatch({ type: 'FETCH_OUTPATIENT' });
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [dispatch]);
+
+  // Submit user login request
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('User: ', user);
@@ -35,6 +47,7 @@ function LoginPage() {
     });
   };
 
+  // Handle User Input Changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
