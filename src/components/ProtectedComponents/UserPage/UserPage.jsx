@@ -52,10 +52,20 @@ function UserPage() {
           <p>Gender: {userDetails.gender}</p>
           <div className="UserPageAddressSection">
             <h2>Address:</h2>
-            <p>Street: {userDetails.street_address}</p>{' '}
-            <p>City: {userDetails.city}</p>
-            <p>State: {userDetails.state}</p>
-            <p>Zip Code: {userDetails.zip}</p>
+            <div className="userPageAddressContentDiv">
+              <div className="userPageAddressStreetDiv">
+                <p>Street: {userDetails.street_address}</p>{' '}
+              </div>
+              <div className="userPageAddressCityDiv ">
+                <p>City: {userDetails.city}</p>
+              </div>
+              <div className="userPageAddressStateDiv">
+                <p>State: {userDetails.state}</p>
+              </div>
+              <div>
+                <p>Zip Code: {userDetails.zip}</p>
+              </div>
+            </div>
           </div>
           <Button
             variant="contained"
