@@ -5,7 +5,7 @@ import { useHistory, Link as RouterLink } from 'react-router-dom';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 // Import Custom Components
-import logoImage from './images/MMV - Final Logo White.png';
+import logoImage from './images/whiteLogo.png';
 
 // Import Material UI
 import { TextField, Button, Grid, Typography } from '@mui/material';

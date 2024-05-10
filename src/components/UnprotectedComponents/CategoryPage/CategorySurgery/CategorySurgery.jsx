@@ -28,6 +28,16 @@ function CategorySurgery() {
     dispatch({ type: 'FETCH_SURGERY' });
   }, [dispatch]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    dispatch({ type: 'FETCH_OUTPATIENT' });
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [dispatch]);
+
   return (
     <div className="category-container">
       <Navbar />

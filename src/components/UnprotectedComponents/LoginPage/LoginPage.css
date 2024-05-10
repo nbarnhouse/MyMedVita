@@ -24,11 +24,14 @@
   background-color: #782cf6;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
+  object-fit: contain;
+  padding-top: 5px;
 }
 
 .login-left-container img {
-  height: 60%;
-  width: auto;
+  margin-top: 0px;
+  width: 90%;
+  height: auto;
 }
 
 /* Right Form Container */
