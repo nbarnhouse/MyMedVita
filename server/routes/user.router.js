@@ -1,3 +1,10 @@
+// Comments to generate api doc:
+/**
+ * @api {get} /api/user Get user login details
+ * @apiName Get User Login Details
+ * @apiGroup userLogIn
+ */
+
 const express = require('express');
 const {
   rejectUnauthenticated,
