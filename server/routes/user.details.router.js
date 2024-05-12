@@ -72,4 +72,26 @@ module.exports = router;
  * @apiSuccess {String} zip User's zip code.
  * @apiSuccess {Number} id ID of the User.
  *
+ * @apiSuccessExample Success-Response:
+ *    HTTP:/1.1 200 OK
+ *    {
+ *       "first_name": "John",
+ *       "last_name": "Doe",
+ *       "email": "johndoe@gmail.com"
+ *       "phone": "1234567890",
+ *       "dob": "01-01-1980",
+ *       "gender": "Male",
+ *       "street_address": "1234 Rogers Street NE",
+ *       "city": "Saint Paul",
+ *       "state": "Minnesota",
+ *       "zip": "55106",
+ *       "id": 1
+ *     }
+ * @apiError (500) error Error information.
+ */
+
+/**
+ * @api {put} /api/userDetails/:userId Update User Details
+ * @apiName updateUser
+ * @apiGroup UserDetails
  */
