@@ -91,7 +91,38 @@ module.exports = router;
  */
 
 /**
- * @api {put} /api/userDetails/:userId Update User Details
- * @apiName updateUser
+ * @api {put} /api/userDetails/:id Update User Details.
+ * @apiName PutUserDetails
  * @apiGroup UserDetails
+ *
+ * @apiParam {Number} id User's unique ID.
+ *
+ * @apiParam (Body) {String} first_name First name of the User.
+ * @apiParam (Body) {String} last_name Last name of the User.
+ * @apiParam (Body) {String} email User's email.
+ * @apiParam (Body) {String} phone User's phone number.
+ * @apiParam (Body) {Date} dob User's date of birth.
+ * @apiParam (Body) {String} gender User's gender.
+ * @apiParam (Body) {String} street_address User's street address.
+ * @apiParam (Body) {String} city User's city.
+ * @apiParam (Body) {String} state User's state.
+ * @apiParam (Body) {String} zip User's zip code.
+ * @apiParam (Body) {Number} id ID of the User.
+ *
+ * @apiSuccess {String} first_name First name of the User.
+ * @apiSuccess {String} last_name Last name of the User.
+ * @apiSuccess {String} email User's email.
+ * @apiSuccess {String} phone User's phone number.
+ * @apiSuccess {Date} dob User's date of birth.
+ * @apiSuccess {String} gender User's gender.
+ * @apiSuccess {String} street_address User's street address.
+ * @apiSuccess {String} city User's city.
+ * @apiSuccess {String} state User's state.
+ * @apiSuccess {String} zip User's zip code.
+ * @apiSuccess {Number} id ID of the User.
+ *
+ * @apiSuccessExample Success-Response"
+ *    HTTP/1.1 200 OK
+ *
+ * @apiError (500) error Error information.
  */
