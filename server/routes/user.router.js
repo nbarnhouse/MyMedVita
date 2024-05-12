@@ -2,7 +2,32 @@
 /**
  * @api {get} /api/user Get user login details
  * @apiName Get User Login Details
- * @apiGroup userLogIn
+ * @apiGroup User
+ *
+ * @apiSuccess {String} email User's email.
+ * @apiSuccess {String} password User's password.
+ *
+ * @apiError (500) error Error information.
+ */
+
+/**
+ * @api {post} /api/user Create New User
+ * @apiName Create new user in database.
+ * @apiGroup User
+ *
+ * @apiSuccess {String} first_name First name of the User.
+ * @apiSuccess {String} last_name Last name of the User.
+ * @apiSuccess {String} email User's email.
+ * @apiSuccess {String} phone User's phone number.
+ * @apiSuccess {Date} dob User's date of birth.
+ * @apiSuccess {String} gender User's gender.
+ * @apiSuccess {String} street_address User's street address.
+ * @apiSuccess {String} city User's city.
+ * @apiSuccess {String} state User's state.
+ * @apiSuccess {String} zip User's zip code.
+ * @apiSuccess {Number} id ID of the User.
+ *
+ * @apiError (500) error Error information.
  */
 
 const express = require('express');
