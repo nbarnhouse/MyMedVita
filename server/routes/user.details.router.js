@@ -53,3 +53,15 @@ router.put('/:id', (req, res) => {
 });
 
 module.exports = router;
+
+// api documentation
+/**
+ * @api {get} /api/userDetails Get User Details
+ * @apiName GetUserDetails
+ * @apiGroup UserDetails
+ *
+ * @apiSuccess {String} first_name First name of the User
+ * @apiSuccess {String} last_name Last name of the User
+ * @apiSuccess {String} email User's email.
+ * @apiSuccess {String} phone User's phone number.
+ */
