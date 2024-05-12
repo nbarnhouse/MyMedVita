@@ -97,18 +97,6 @@ module.exports = router;
  *
  * @apiParam {Number} id User's unique ID.
  *
- * @apiParam (Body) {String} first_name First name of the User.
- * @apiParam (Body) {String} last_name Last name of the User.
- * @apiParam (Body) {String} email User's email.
- * @apiParam (Body) {String} phone User's phone number.
- * @apiParam (Body) {Date} dob User's date of birth.
- * @apiParam (Body) {String} gender User's gender.
- * @apiParam (Body) {String} street_address User's street address.
- * @apiParam (Body) {String} city User's city.
- * @apiParam (Body) {String} state User's state.
- * @apiParam (Body) {String} zip User's zip code.
- * @apiParam (Body) {Number} id ID of the User.
- *
  * @apiSuccess {String} first_name First name of the User.
  * @apiSuccess {String} last_name Last name of the User.
  * @apiSuccess {String} email User's email.
