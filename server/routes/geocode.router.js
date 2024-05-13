@@ -4,7 +4,7 @@
  * @apiGroup GeoCode API
  * @apiVersion 1.0.0
  *
- * @apiParam {String} zip code.
+ * @apiParam {String} zip zipcode.
 
  *
  * @apiSuccess (200) {String} zip The zip code of provider.
@@ -13,7 +13,7 @@
  *
  * @apiError (500) {Object} error Error information.
  *
- * @apiDescription This route allows users to search zip codes
+ * @apiDescription This route allows users to search zip codes & store search from endpoint URL
  */
 
 const express = require('express');
