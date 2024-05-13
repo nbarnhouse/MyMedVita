@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"phone" text,
 	"first_name" text,
 	"last_name" text,
-	"email" text,
+	"email" text UNIQUE,
 	"dob" date,
 	"gender" text,
 	"street_address" text,
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS "geo_zip" (
 
 --CSV Import Order
 -- 1. service_types (import id column)
--- 2. service_codes
--- 3. insurance_providers
--- 4. account_types
--- 5. rates
--- 6. geo_zip
+-- 2. service_codes (Do NOT import id column)
+-- 3. insurance_providers (Do NOT import id column)
+-- 4. account_types (Do NOT import id column)
+-- 5. rates (Do NOT import id column)
+-- 6. geo_zip (Do NOT import id column)
