@@ -108,7 +108,7 @@ function MarketplaceInsuranceSelect({
         <p className="search-option-label">How do you want to search:</p>
 
         <FormControl>
-          <InputLabel id="demo-simple-select-label">Provider:</InputLabel>
+          <InputLabel id="demo-simple-select-label">Insurer:</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
