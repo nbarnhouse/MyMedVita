@@ -106,15 +106,16 @@ function SavedSearchesPage() {
 
         <div className="saved-right-container">
           <h1 className="saved-header">Saved Searches </h1>
+          {savedList.length === 0 && (
+            <h2 className="no-saved">
+              I'm sorry, {user.first_name}, but you have no saved searches.
+            </h2>
+          )}
           {searchDataReady && (
             <TableContainer
               component={Paper}
               sx={{ margin: '20px auto' }}>
-              {savedList.length === 0 ? (
-                <h2>
-                  I'm sorry, {user.first_name}, but you have no saved searches.
-                </h2>
-              ) : (
+              {savedList.length !== 0 && (
                 <Table>
                   <TableHead>
                     <TableRow>
