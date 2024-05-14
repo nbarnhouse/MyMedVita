@@ -30,7 +30,8 @@ function MarketplacePage() {
     distance: 25,
   });
   const [procedureSearchCode, setProcedureSearchCode] = useState('');
-  const [procedureSearchDescription, setProcedureSearchDescription] = useState('');
+  const [procedureSearchDescription, setProcedureSearchDescription] =
+    useState('');
   const [insuranceSearchMask, setInsuranceSearchMask] = useState(0);
 
   const dispatch = useDispatch();
@@ -82,8 +83,10 @@ function MarketplacePage() {
       0,
       searchQuery.indexOf('-') - 1
     );
-    const procedureDescription = searchQuery.substring(searchQuery.indexOf('-')+2);
-    console.log("PROCEDURE DESCRIPTION", procedureDescription);
+    const procedureDescription = searchQuery.substring(
+      searchQuery.indexOf('-') + 2
+    );
+    console.log('PROCEDURE DESCRIPTION', procedureDescription);
     console.log(procedureCode);
     setProcedureSearchCode(procedureCode); // Set procedureSearchCode in state
     setProcedureSearchDescription(procedureDescription); //Set procedureSearchDescription in state
@@ -123,6 +126,7 @@ function MarketplacePage() {
               xs={12}>
               <ProcedureSearchBar
                 onSearchQueryChange={handleSearchQueryChange}
+                required
               />
             </Grid>
             <Grid
@@ -161,7 +165,8 @@ function MarketplacePage() {
                       <MapIcon />
                     </InputAdornment>
                   ),
-                }}>
+                }}
+                required>
                 <MenuItem value="5">5</MenuItem>
                 <MenuItem value="10">10</MenuItem>
                 <MenuItem value="25">25</MenuItem>

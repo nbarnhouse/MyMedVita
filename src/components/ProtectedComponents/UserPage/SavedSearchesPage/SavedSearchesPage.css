@@ -24,3 +24,7 @@
 .saved-search-clickable {
   cursor: pointer;
 }
+
+h2.no-saved {
+  justify-self: center;
+}
