@@ -1,3 +1,21 @@
+/**
+ * @api {get} /api/location/:zip GET geocode API
+ * @apiName GeoCode
+ * @apiGroup GeoCode API
+ * @apiVersion 1.0.0
+ *
+ * @apiParam {String} zip zipcode.
+
+ *
+ * @apiSuccess (200) {String} zip The zip code of provider.
+ * @apiSuccess (200) {String} lat The latitude of provider.
+ * @apiSuccess (200) {String} long The longitude of provider.
+ *
+ * @apiError (500) {Object} error Error information.
+ *
+ * @apiDescription This route allows users to search zip codes & store search from endpoint URL
+ */
+
 const express = require('express');
 require('dotenv').config();
 const axios = require('axios');
