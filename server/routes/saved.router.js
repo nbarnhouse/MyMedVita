@@ -2,6 +2,23 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+/**
+ * @api {get} /api/saved/:user_id Get list of saved searches by user
+ * @apiName GetSavedSearches
+ * @apiGroup Saved Searches
+ *
+ * @apiParam {Number} user_id User ID.
+ *
+ * @apiSuccess {Object[]} searches  Array of Saved Searches by User ID.
+ * @apiSuccess {Number} obj.CPT_Code CPT Code of procedure.
+ * @apiSuccess {String} obj.procedure Description of Procedure.
+ * @apiSuccess {String} obj.zip Originating zip code of search.
+ * @apiSuccess {Number} obj.distance Search radius in miles.
+ * @apiSuccess {Number} obj.insurance_mask Insurance Provider search mask of search.
+ * @apiSuccess {Number} obj.id ID of search.
+ *
+ * @apiError (500) {Object} error Error information.
+ */
 // Saved search routes
 // get saved searches by user
 router.get('/:user_id', (req, res) => {
@@ -26,6 +43,21 @@ router.get('/:user_id', (req, res) => {
     });
 });
 
+/**
+ * @api {post} /api/saved Create New Saved Search Record
+ * @apiName PostSavedSearch
+ * @apiGroup Saved Searches
+ *
+ * @apiBody {Number} user_id  Users ID.
+ * @apiBody {Number} CPT_Code CPT Code of procedure.
+ * @apiBody {String} zip Originating zip code of search.
+ * @apiBody {Number} distance Search radius in miles.
+ * @apiBody {Number} insurance_mask=0 Insurance Provider search mask of search.
+ *
+ * @apiSuccess (200) {String} success-A Search Results Already Exist ID:user_id
+ * @apiSuccess (200) {String} success-B Search successully saved
+ *
+ */
 // post new saved search
 router.post('/', async (req, res) => {
   // Assemble Data
@@ -67,6 +99,15 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * @api {delete} /api/saved/:id Delete saved search by ID (individual record delete)
+ * @apiName DeleteSavedSearch
+ * @apiGroup Saved Searches
+ *
+ * @apiParam {Number} id  ID of Saved Search Record
+ *
+ */
+
 // delete saved search by id (individual record delete)
 router.delete('/:id', (req, res) => {
   const queryArgs = [+req.params.id];
@@ -83,6 +124,15 @@ router.delete('/:id', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+/**
+ * @api {delete} /api/saved/all/:user_id Delete all saved searches by User ID
+ * @apiName DeleteSavedSearchByUser
+ * @apiGroup Saved Searches
+ *
+ * @apiParam {Number} user_id  User ID of user whose records will be deleted
+ *
+ */
 
 // delete all saved searches by user_id (multiple record delete record delete)
 router.delete('/all/:user_id', (req, res) => {
