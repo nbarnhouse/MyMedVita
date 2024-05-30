@@ -234,6 +234,6 @@ If you have suggestions or issues, please email at:
 [Kevin](ksieracke@gmail.com)
 [Jessica](jessiyang1996@gmail.com)
 [Alvin](grah0071@gmail.com)
-[Ryan] (cadium828@gmail.com)
+[Ryan](cadium828@gmail.com)
 [Sarith](Sarithseang82pro@gmail.com)
 [Scott](gpak86@gmail.com)
